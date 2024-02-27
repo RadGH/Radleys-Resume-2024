@@ -313,6 +313,10 @@ span.btn-text {
 	text-align: center;
 	text-shadow: var(--_ink-shadow);
 	user-select: none;
+
+	--fa-primary-color: var(--text-1);
+	--fa-secondary-color: var(--text-2);
+	--fa-secondary-opacity: 0.5;
 }
 
 /*
@@ -440,10 +444,12 @@ ul.github-list li.github-item {
 	}
 }
 
-ul.project-list li,
-ul.github-list li.github-item {
-	border: 1px solid var(--color-primary);
-	border-radius: var(--radius-3);
-	padding: var(--spacing--medium);
+@media screen {
+	ul.list-cards > li {
+		overflow: hidden;
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-3);
+		padding: var(--spacing--medium);
+	}
 }
 /* End: Github repos list */

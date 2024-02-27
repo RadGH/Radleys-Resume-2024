@@ -24,6 +24,19 @@
 		font-size: 10px;
 		line-height: 1.25em;
 	}
+
+	.github-list .github-item,
+	.job-list .job,
+	.testimonial-list .testimonial,
+	.project-list .project {
+		page-break-inside: avoid;
+	}
+
+	section.testimonials-section,
+	section.projects-section,
+	section.github-section {
+		page-break-inside: avoid;
+	}
 }
 /* End: Only when actually printing the page */
 

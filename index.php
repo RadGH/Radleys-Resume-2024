@@ -69,7 +69,7 @@ function get_formatted_tooltip( $text, $tooltip ) {
 
 // Format as plural or singular and inserts the number as %1$d
 function _n( $singular, $plural, $number ) {
-	$str = $number === 1 ? $singular : $plural;
+	$str = intval($number) === 1 ? $singular : $plural;
 	return sprintf( $str, $number );
 }
 
@@ -95,6 +95,13 @@ function years_since( $time, $precision = 0 ) {
 	}else{
 		return round( ( time() - $time ) / 31556952, $precision );
 	}
+}
+
+function years_ago( $time, $ago = true ) {
+	$years = years_since( $time );
+	$years = _n('%d Year', '%d Years', $years);
+	if ( $ago ) $years .= ' ago';
+	return $years;
 }
 
 function get_github_repos() {
@@ -289,8 +296,7 @@ function get_display_url( $url ) {
 										$category = $t['category'];
 										if ( $category !== $current_category ) continue;
 										
-										$years = years_since( $start );
-										$years = _n('%d year', '%d years', $years);
+										$years = years_ago( $start );
 										$tip = $label . ' experience since ' . date( 'Y', $start );
 										$years_tooltip = get_formatted_tooltip( $years, $tip );
 										?>
@@ -327,9 +333,8 @@ function get_display_url( $url ) {
 							$end = $e['end'];
 							$description = $e['description'];
 							
-							$years = years_since( $start );
-							$years = _n('%d year', '%d years', $years);
 							$tip = 'From ' . date( 'Y', $start ) . ' to ' . ( $end ? date( 'Y', $end ) : 'Present' );
+							$years = strtolower( years_ago( $start, '' ) );
 							$years_tooltip = get_formatted_tooltip( $years, $tip );
 							?>
 							<li class="job">
@@ -399,7 +404,7 @@ function get_display_url( $url ) {
 				
 				<div class="section-content">
 					
-					<ul class="project-list">
+					<ul class="project-list list-cards">
 						<?php
 						foreach( get_projects() as $e ) {
 							$title = $e['title'];
@@ -409,7 +414,6 @@ function get_display_url( $url ) {
 							$credits = $e['credits'];
 							$years = years_since($e['date']);
 							$years = _n('%d year', '%d years', $years);
-							
 							?>
 							<li class="project">
 								<?php if ( $image_url ) { ?>
@@ -417,15 +421,23 @@ function get_display_url( $url ) {
 								<?php } ?>
 								
 								<div class="heading">
-									<h3 class="name"><?php echo $title; ?></h3>
+									<h3 class="h2b name"><?php echo $title; ?></h3>
 									
-									<?php if ( $url ) { ?>
+									<?php
+									/*
+									if ( $url ) {
+										?>
 										<h4 class="company"><a href="<?php echo $url; ?>"><?php echo get_display_url($url); ?></a></h4>
-									<?php } ?>
+										<?php
+									}
 									
-									<?php if ( $years ) { ?>
+									if ( $years ) {
+										?>
 										<h4 class="year"><?php echo $years; ?> ago</h4>
-									<?php } ?>
+										<?php
+									}
+									*/
+									?>
 								</div>
 								
 								<?php if ( $description || $credits ) { ?>
@@ -440,6 +452,18 @@ function get_display_url( $url ) {
 										<div class="credits"><?php echo $credits; ?></div>
 									<?php } ?>
 									</div>
+								<?php } ?>
+								
+								<?php if ( $url || $years ) { ?>
+									<ul class="stats">
+										<?php if ( $url ) { ?>
+											<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
+										<?php } ?>
+										
+										<?php if ( $years ) { ?>
+											<li><span class="btn-text"><i class="fad fa-calendar"></i> <?php echo $years; ?> ago</span></li>
+										<?php } ?>
+									</ul>
 								<?php } ?>
 							</li>
 							<?php
@@ -523,7 +547,7 @@ function get_display_url( $url ) {
 							</ul>
 						</div>
 						
-						<ul class="github-list">
+						<ul class="github-list list-cards">
 							<?php
 							$i = 0;
 							
@@ -543,6 +567,8 @@ function get_display_url( $url ) {
 								
 								$date_created = date( 'F Y', $created_at );
 								$date_updated = date( 'F Y', $updated_at );
+								
+								$years = years_ago( $created_at );
 								
 								// Convert hyphens into spaces in the title
 								$title = ucwords( str_replace( '-', ' ', $title ) );
@@ -571,7 +597,7 @@ function get_display_url( $url ) {
 									
 									<ul class="stats">
 										<li><a href="<?php echo $repo_url; ?>" class="btn"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $date_created; ?></span></li>
+										<li><span class="btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
 										<li><span class="btn-text"><i class="fad fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
 										<li><span class="btn-text"><i class="fad fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>

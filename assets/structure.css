@@ -518,10 +518,9 @@ ul.github-list {
 	align-items: flex-start;
 }
 
-ul.github-list li.github-item {
+ul.github-list li {
 	margin: 0;
 	list-style: none;
-	padding: 0;
 }
 
 .github-item .date {
@@ -530,11 +529,6 @@ ul.github-list li.github-item {
 
 .github-item .content {
 	margin: var(--spacing--small) 0 var(--spacing--medium);
-}
-
-.github-item ul.stats {
-	font-size: var(--font-size-0);
-	align-items: center;
 }
 
 ul.github-list li.github-item {
@@ -562,7 +556,9 @@ ul.stats {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	align-items: center;
 	gap: var(--spacing--medium);
+	font-size: var(--font-size-0);
 }
 
 ul.stats li {
@@ -609,16 +605,24 @@ ul.project-list .image img {
 
 @media ( min-width: 320.1px ) {
 	ul.project-list li {
-		grid-template-columns: 1fr 2fr;
+		grid-template-columns: 1fr ;
+	}
+
+	ul.project-list .image {
+		margin: calc(-1.1 * var(--spacing--medium)) calc(-1 * var(--spacing--medium)) 0;
+	}
+
+	ul.project-list .heading {
+		/*grid-column: 1 / 3;*/
+		align-content: center;
+		display: grid;
 	}
 
 	ul.project-list .content {
-		grid-column: 1 / 3;
+		/*grid-column: 1 / 3;*/
 	}
 
 	.project-list .heading {
-		align-content: center;
-		display: grid;
 	}
 }
 /* End: Projects */

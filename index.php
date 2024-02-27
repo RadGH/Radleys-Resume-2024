@@ -175,32 +175,18 @@ function get_display_url( $url ) {
 </head>
 
 <body>
-<div class="site">
-	
-	<div class="controls">
-		<a href="#" class="print-mode-toggle btn">
-			<span class="icon"><i class="fas fa-print"></i></span>
-			<span class="print-text">Print</span>
-		</a>
-		
-		<a href="#" class="color-mode-toggle btn">
-			<span class="icon"><i class="fas fa-adjust"></i></span>
-			<span class="show-if-dark">Dark</span>
-			<span class="show-if-light">Light</span>
-		</a>
-	</div>
-	
-	<nav class="main-nav">
+<nav class="main-nav">
+	<div class="inside">
 		<a href="#" class="nav-menu-toggle">
-			
-			<span class="show-if-menu-open">
-				<i class="fas fa-times"></i>
-				<span class="text">Close</span>
-			</span>
+				
+				<span class="show-if-menu-open">
+					<i class="fas fa-times"></i>
+					<span class="text">Close</span>
+				</span>
 			<span class="show-if-menu-closed">
-				<i class="fas fa-bars"></i>
-				<span class="text">Navigation</span>
-			</span>
+					<i class="fas fa-bars"></i>
+					<span class="text">Navigation</span>
+				</span>
 		</a>
 		
 		<ul class="nav-menu">
@@ -215,8 +201,10 @@ function get_display_url( $url ) {
 			<?php } ?>
 			<li><a href="#contact">Contact</a></li>
 		</ul>
-	</nav>
+	</div>
+</nav>
 
+<div class="site">
 	<header class="site-header" id="home">
 		
 		<div class="image">
@@ -229,8 +217,6 @@ function get_display_url( $url ) {
 				<h2><?php echo get_job_title(); ?></h2>
 			</div>
 		</div>
-		
-		<!-- <div class="separator"></div> -->
 		
 		<div class="links">
 			<ul class="link-list">
@@ -246,6 +232,19 @@ function get_display_url( $url ) {
 			}
 			?>
 			</ul>
+		</div>
+		
+		<div class="controls">
+			<a href="#" class="print-mode-toggle btn">
+				<span class="icon"><i class="fas fa-print"></i></span>
+				<span class="print-text">Print</span>
+			</a>
+			
+			<a href="#" class="color-mode-toggle btn">
+				<span class="icon"><i class="fas fa-adjust"></i></span>
+				<span class="show-if-dark">Dark</span>
+				<span class="show-if-light">Light</span>
+			</a>
 		</div>
 		
 	</header>
@@ -572,10 +571,10 @@ function get_display_url( $url ) {
 									
 									<ul class="stats">
 										<li><a href="<?php echo $repo_url; ?>" class="btn"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $date_created; ?></span></li>
-										<li><span class="btn btn-text"><i class="fad fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
+										<li><span class="btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $date_created; ?></span></li>
+										<li><span class="btn-text"><i class="fad fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
-										<li><span class="btn btn-text"><i class="fad fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+										<li><span class="btn-text"><i class="fad fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
 										<?php } ?>
 									</ul>
 									

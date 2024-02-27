@@ -13,7 +13,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 	function set_color_mode( dark = null ) {
 		// Default to browser preference
-		if ( dark === null ) dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+		if ( dark === null ) {
+			dark = window.matchMedia && ! window.matchMedia('(prefers-color-scheme: light)').matches;
+		}
 		HTML.setAttribute( 'data-theme', dark ? 'dark' : 'light' );
 	}
 

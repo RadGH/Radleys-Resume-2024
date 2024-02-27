@@ -24,16 +24,19 @@ Global variables
 	--spacing--xxxx-large: clamp(100px, 20vw, 200px);
 
 	--gradient-rad-light: linear-gradient(to bottom right, #f39060, #e16b5c, #ca485c, #ac255e, #870160);
+
+	--_ink-shadow-light: 0 1px 0 var(--gray-3);
+	--_ink-shadow-dark: 0 1px 0 var(--surface-1);
 }
 
 /* Light mode */
 html {
 	color-scheme: light;
 
-	--fa-primary-color: var(--red-3);
+	--fa-primary-color: var(--red-6);
 	--fa-primary-opacity: 1;
 
-	--fa-secondary-color: var(--red-6);
+	--fa-secondary-color: var(--red-3);
 	--fa-secondary-opacity: 1;
 
 	--color-primary: var(--red-8);
@@ -43,14 +46,14 @@ html {
 	--github-gradient: var( --gradient-13 );
 
 	--link: var(--red-8);
-	--link-hover: var(--pink-5);
+	--link-hover: var(--red-5);
 	--link-visited: var(--color-primary);
 
 	--text-1: var(--gray-12);
 	--text-2: var(--gray-7);
 
 	--surface-0: var(--red-0);
-	--surface-1: var(--red-0);
+	--surface-1: var(--brown-0);
 	--surface-2: var(--red-4);
 	--surface-3: var(--red-5);
 	--surface-4: var(--red-6);
@@ -65,6 +68,21 @@ html {
 	--heading-6--color: var(--red-3);
 
 	--scrollthumb-color: var(--gray-7);
+
+	--_ink-shadow: var(--_ink-shadow-light);
+
+	/* Used for buttons, mostly */
+	--_bg-light: var(--surface-0);
+	--_bg-dark: var(--surface-3);
+	--_bg: var(--_bg-light);
+
+	--button-border-color: var(--red-7);
+	--button-background-color: var(--red-7);
+	--button-text-color: var(--red-0);
+	--button-text-shadow-color: var(--gray-12);
+
+	--button-hover-border-color: var(--red-8);
+	--button-hover-background-color: var(--red-6);
 }
 
 html[data-theme="light"] .show-if-dark { display: none; }
@@ -81,9 +99,6 @@ html[data-theme="dark"] {
 
 	--color-primary: var(--red-6);
 	--color-secondary: var(--red-3);
-
-	--link-visited: var(--color-primary);
-	--link-underline-color: var(--color-secondary);
 
 	--text-1: var(--gray-1);
 	--text-2: var(--gray-4);
@@ -110,9 +125,40 @@ html[data-theme="dark"] {
 	--scrollthumb-color: var(--gray-6);
 	--shadow-strength: 10%;
 	--shadow-color: 220 40% 2%;
+
+	--_ink-shadow: var(--_ink-shadow-dark);
+
+	/* Used for buttons, mostly */
+	--_bg-light: var(--surface-3);
+	--_bg-dark: var(--surface-0);
+	--_bg: var(--_bg-light);
+
+	--button-border-color: var(--red-7);
+	--button-background-color: var(--red-7);
+	--button-text-color: var(--gray-1);
+	--button-text-shadow-color: var(--gray-12);
+
+	--button-hover-border-color: var(--red-8);
+	--button-hover-background-color: var(--red-6);
 }
 
 html[data-theme="dark"] .show-if-light { display: none; }
+
+:where(.btn,button,input:is([type=button],[type=submit],[type=reset])),
+:where(input[type=file]),::-webkit-file-upload-button,
+:where(input[type=file]),::file-selector-button {
+	border-color: var(--button-border-color, var(--color-primary));
+	background: var(--button-background-color, var(--_bg));
+	color: var(--button-text-color, initial);
+	text-shadow: 0 1px 0 var(--button-text-shadow-color, var(--_ink-shadow));
+}
+
+:where(.btn,button,input:is([type=button],[type=submit],[type=reset])):where(:hover,:focus-visible),
+:where(input[type=file]):where(:hover,:focus-visible),::-webkit-file-upload-button,
+:where(input[type=file]):where(:hover,:focus-visible),::file-selector-button {
+	border-color: var(--button-hover-border-color, var(--_bg));
+	background: var(--button-hover-background-color, var(--_bg));
+}
 
 /* Print mode */
 
@@ -180,11 +226,11 @@ a.btn {
 
 .site .controls {
 	font-size: 14px;
-	z-index: 20;
+	z-index: 5;
 }
 
 /* Menu */
-@media ( min-width: 600.1px ) {
+@media ( min-width: 768.1px ) {
 	ul.nav-menu {
 		text-transform: uppercase;
 		font-weight: 400;
@@ -228,15 +274,45 @@ h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); color: var(--heading-6--color); }
 .h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); color: var(--heading-5--color); }
 .h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); color: var(--heading-6--color); }
 
-.btn.btn-text:where(:not(:focus,:hover,:active)) {
+.btn-text:where(:not(:focus,:hover,:active)) {
+	color: var(--text-1);
 	border-color: transparent;
 	outline: none;
 	background: transparent;
 	box-shadow: none;
+	text-shadow: none;
+	--fa-primary-color: var(--text-1);
+	--fa-secondary-color: var(--text-2);
+	--fa-secondary-opacity: 0.5;
 }
 
-.btn.btn-text {
+.btn-text:where(:focus,:hover,:active) {
+	--fa-primary-color: var(--surface-0);
+	--fa-secondary-color: var(--surface-0);
+	--fa-secondary-opacity: 1;
+}
+
+.btn-text {
 	padding-inline: var(--size-relative-3);
+}
+
+span.btn-text {
+	/* Same formatting as a button but without any hover/focus effects or background/borders */
+	--_size: initial;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	align-items: center;
+	color: var(--text-1);
+	display: inline-flex;
+	font-size: var(--_size);
+	font-weight: var(--font-weight-7);
+	gap: var(--size-2);
+	justify-content: center;
+	padding-block: 0.75ch;
+	padding-inline: var(--size-relative-6);
+	text-align: center;
+	text-shadow: var(--_ink-shadow);
+	user-select: none;
 }
 
 /*
@@ -271,17 +347,6 @@ a.tooltip {
 	text-decoration-skip-ink: auto;
 }
 
-/* Header */
-.site-header .title {
-	width: fit-content;
-}
-
-.site-header .separator {
-	display: block;
-	border-bottom: 5px solid var(--color-primary);
-	border-bottom-style: dashed;
-}
-
 /* Header - Image */
 .site-header .image {
 	filter: drop-shadow(5px 7px var(--color-primary));
@@ -293,7 +358,7 @@ a.tooltip {
 
 /* Header link list */
 .link-list a > .icon {
-	margin-right: 5px;
+	margin-right: var(--spacing--small);
 }
 
 /* Skill Categories */
@@ -365,7 +430,7 @@ ul.github-list li.github-item .number {
 ul.github-list li.github-item {
 }
 
-@media ( max-width: 600px ) {
+@media ( max-width: 640px ) {
 	ul.github-list  {
 		padding: var(--spacing--large) 0;
 		gap: var(--spacing--xx-large);

@@ -26,7 +26,7 @@ textarea:not([rows]) {
 }
 
 :target {
-	scroll-margin-block: 5ex;
+	scroll-margin-block: 10ex;
 }
 
 .screen-reader-text {
@@ -38,6 +38,10 @@ textarea:not([rows]) {
 	white-space: nowrap;
 	width: 1px;
 	height: 1px;
+}
+
+ul li {
+	max-inline-size: none;
 }
 
 /*
@@ -52,12 +56,11 @@ html {
 body {
 	margin: 0;
 	min-height: 100vh;
-	line-height: 1.5;
 }
 
 /* Site */
 .site {
-	padding: var( --spacing--large );
+	padding: 0 var( --spacing--large ) var( --spacing--large );
 	max-width: 1200px;
 	margin: 0 auto;
 
@@ -66,15 +69,21 @@ body {
 }
 
 .site .controls {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	right: 0;
-	margin: var(--spacing--medium) var(--spacing--medium) 0 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--spacing--medium);
+	margin: 120px var(--spacing--large) 0 0;
 }
 
 @media ( max-width: 600px ) {
 	.site .controls {
-		position: absolute;
+		max-width: 50vh;
+		margin: 80px var(--spacing--medium) 0 0;
 	}
 }
 
@@ -84,9 +93,21 @@ body {
 	gap: var( --spacing--large );
 }
 
+.site-header .image {
+	max-width: 50vw;
+	margin: 0 auto;
+}
+
+@media ( max-width: 600px ) {
+	.site-header .image {
+		max-width: 50vw;
+		margin-left: 0;
+	}
+}
+
 @media ( min-width: 600.1px ) {
 	.site-header {
-		grid-template-columns: 1fr 4fr;
+		grid-template-columns: 1fr 4fr 60px;
 		gap: var( --spacing--small ) var( --spacing--large );
 	}
 
@@ -106,39 +127,38 @@ body {
 		grid-row: 2 / 3;
 		grid-column: 2 / 3;
 		max-width: 200px;
-		height: 0.8em;
+		margin-bottom: 5px;
 	}
 
 	.site-header .links {
 		grid-row: 3 / 4;
-		grid-column: 2 / 4;
+		grid-column: 2 / 3;
 	}
 }
 
 @media ( max-width: 600px ) and ( min-width: 450px ) {
 	.site-header {
-		grid-template-columns: 2fr 4fr;
+		grid-template-columns: 1fr;
 		gap: var( --spacing--large );
 	}
 
 	.site-header .image {
-		grid-column: 1 / 2;
 	}
 
 	.site-header .title {
-		grid-column: 2 / 3;
+	}
+
+	.site-header .separator {
 	}
 
 	.site-header .links {
-		grid-column: 1 / 4;
-		grid-row: 2;
 	}
 }
 
 /* Header - Title */
 .site-header .title {
 	display: grid;
-	align-items: end;
+	align-items: center;
 }
 
 /* Header - Links */
@@ -159,6 +179,97 @@ body {
 	padding: 0;
 }
 
+.site-header .link-list li a {
+	white-space: nowrap;
+}
+
+@media ( max-width: 600px ) {
+	.site-header .link-list {
+		flex-direction: column;
+	}
+}
+
+/* Menu */
+html:not(.nav-menu-open) .show-if-menu-open { display: none; }
+html.nav-menu-open .show-if-menu-closed { display: none; }
+
+ul.nav-menu,
+ul.nav-menu li {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+ul.nav-menu li a {
+	display: block;
+	padding: 10px;
+}
+
+nav.main-nav {
+	position: sticky;
+	z-index: 10;
+	top: 0;
+	background: var( --surface-1 );
+}
+
+@media ( min-width: 600.1px ) {
+	a.nav-menu-toggle {
+		display: none;
+	}
+
+	nav.main-nav {
+	}
+
+	ul.nav-menu {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	ul.nav-menu li:has(a[href="#skills"]) {
+		display: none;
+	}
+}
+
+@media ( max-width: 600px ) {
+	.nav-menu:not(.open) {
+		display: none;
+	}
+
+	.nav-menu-toggle {
+		display: block;
+		text-align: center;
+		margin: 2px 0;
+		padding: 10px;
+		text-decoration: none;
+	}
+
+	ul.nav-menu {
+		position: absolute;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		background: var( --surface-1 );
+		padding-bottom: 10px;
+	}
+
+	html.nav-menu-open a[href].nav-menu-toggle {
+		color: #fff;
+	}
+
+
+	html.nav-menu-open nav.main-nav {
+		background: var( --surface-2 );
+		/*position: fixed;*/
+		/*top: 0;*/
+		/*left: 0;*/
+		/*right: 0;*/
+		/*bottom: 0;*/
+		/*z-index: 5;*/
+	}
+}
 
 /* Site body */
 .site-body {
@@ -175,7 +286,7 @@ body {
 
 @media ( min-width: 600.1px ) {
 	.site-body {
-		grid-template-columns: 2fr 3fr;
+		grid-template-columns: 2fr 1fr;
 	}
 
 	.site-body .wide-area {
@@ -185,10 +296,6 @@ body {
 	.site-body .wide-area p {
 		max-inline-size: none;
 	}
-}
-
-.section {
-	break-inside: avoid;
 }
 
 .section-heading {
@@ -291,8 +398,12 @@ li.testimonial .content {
 }
 
 @media ( max-width: 600px ) {
+	.testimonial-list {
+		gap: var( --spacing--xx-large );
+	}
+
 	li.testimonial {
-		grid-template-columns: 2fr 3fr;
+		grid-template-columns: 1fr 4fr;
 	}
 }
 
@@ -301,3 +412,191 @@ li.testimonial .animated-heading {
 	grid-template-columns: 1fr;
 	align-content: center;
 }
+
+/* Github - Profile */
+.github-profile {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var( --spacing--large );
+	margin: 0 0 var( --spacing--large );
+
+	background: var(--surface-2);
+	border-radius: var(--radius-3);
+	padding: var(--spacing--medium);
+}
+
+.github-profile .image {
+	position: relative;
+	filter: drop-shadow( 5px 5px var(--color-primary));
+}
+
+.github-profile .image img {
+	border-radius: var( --radius-blob-4 );
+}
+
+.github-profile .image .icon {
+	position: absolute;
+	background: var(--surface-2);
+	width: 25%;
+	height: 25%;
+	display: grid;
+	place-content: center;
+	border-radius: var(--radius-4);
+	font-size: 30px;
+	bottom: 7%;
+	right: 7%;
+}
+
+.github-profile .image .icon a {
+	color: var( --text-1 );
+}
+
+.github-profile .details {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing--medium);
+}
+
+.github-profile .details .profile-name {
+	font-weight: 700;
+}
+
+.github-profile .details .profile-name small {
+	display: block;
+	line-height: 1.25;
+}
+
+.github-profile .details .bio {}
+
+.github-profile .github-button {
+	margin-top: var(--spacing--medium);
+}
+
+@media ( min-width: 600.1px ) {
+	.github-profile {
+		grid-template-columns: 1fr 4fr;
+	}
+}
+/* End: Github - Profile */
+
+/* Github links */
+.github-links {
+	margin: var(--spacing--medium) 0 var(--spacing--large);
+}
+/* End: Github links */
+
+/* Github - Repository List */
+ul.github-list {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--spacing--large);
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	align-items: flex-start;
+}
+
+ul.github-list li.github-item {
+	margin: 0;
+	list-style: none;
+	padding: 0;
+}
+
+.github-item .date {
+	margin: var(--spacing--small) 0;
+}
+
+.github-item .content {
+	margin: var(--spacing--small) 0 var(--spacing--medium);
+}
+
+.github-item ul.stats {
+	font-size: var(--font-size-0);
+	align-items: center;
+}
+
+ul.github-list li.github-item {
+	max-inline-size: none;
+}
+
+@media ( min-width: 600.1px ) {
+	ul.github-list {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	ul.github-list li.github-item > * {
+		position: relative;
+		z-index: 2;
+	}
+}
+/* End: Github - Repository List */
+
+/* Stats List */
+ul.stats {
+	padding-left: 0;
+	margin-left: 0;
+	list-style: none;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: var(--spacing--medium);
+}
+
+ul.stats li {
+	margin-left: 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+ul.stats li a,
+ul.stats li .btn {
+	white-space: nowrap;
+}
+/* End: Stats List */
+
+/* Projects */
+ul.project-list,
+ul.project-list li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.project-list {
+	display: grid;
+	gap: var( --spacing--x-large ) var( --spacing--large );
+	align-items: flex-start;
+}
+
+ul.project-list li {
+	display: grid;
+	gap: var( --spacing--medium );
+}
+
+ul.project-list .image img {
+	width: 100%;
+	height: auto;
+}
+
+@media ( min-width: 600.1px ) {
+	ul.project-list {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media ( min-width: 320.1px ) {
+	ul.project-list li {
+		grid-template-columns: 1fr 2fr;
+	}
+
+	ul.project-list .content {
+		grid-column: 1 / 3;
+	}
+
+	.project-list .animated-heading {
+		align-content: center;
+		display: grid;
+	}
+}
+/* End: Projects */

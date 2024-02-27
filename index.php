@@ -6,6 +6,8 @@
 define( 'RESUME_PATH', __DIR__ );
 define( 'RESUME_URL', '/resume' );
 
+require_once( RESUME_PATH . '/github.php' );
+
 // Get the version based on the last modified date of the files
 function get_version() {
 	return max(
@@ -13,7 +15,9 @@ function get_version() {
 		filemtime( RESUME_PATH . '/content.php' ),
 		filemtime( RESUME_PATH . '/assets/style.css' ),
 		filemtime( RESUME_PATH . '/assets/structure.css' ),
-		filemtime( RESUME_PATH . '/assets/animations.css' )
+		filemtime( RESUME_PATH . '/assets/print.css' ),
+		filemtime( RESUME_PATH . '/assets/animations.css' ),
+		filemtime( RESUME_PATH . '/assets/main.js' )
 	);
 }
 
@@ -56,9 +60,9 @@ function get_links() { return load_content( 'links' ); }
 function get_categories() { return load_content( 'categories' ); }
 function get_skills() { return load_content( 'skills' ); }
 function get_profile() { return load_formatted_content( 'profile' ); }
-function get_hobbies() { return load_formatted_content( 'hobbies' ); }
 function get_employment() { return load_content( 'employment' ); }
 function get_testimonials() { return load_content( 'testimonials' ); }
+function get_projects() { return load_content( 'projects' ); }
 
 function get_formatted_tooltip( $text, $tooltip ) {
 	return '<a href="#" class="tooltip" title="' . $tooltip . '">' . $text . '</a>';
@@ -102,13 +106,39 @@ function split_spans( $str ) {
 	return $str;
 }
 
+function get_github_repos() {
+	return GitHubAPI::load_repos();
+}
+
+function get_github_profile() {
+	return GitHubAPI::load_profile();
+}
+
+function get_site_title() {
+	return load_content('site_title');
+}
+
+function get_site_description() {
+	return load_content('site_description');
+}
+
+function get_display_url( $url ) {
+	return parse_url($url, PHP_URL_HOST);
+}
+
 ?>
 <!doctype html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width">
-	<title><?php echo get_name(); ?>'s Resume – <?php echo get_job_title(); ?></title>
+	<title><?php echo get_site_title(); ?></title>
+	<meta name="description" content="<?php echo get_site_description(); ?>">
+	<meta name="author" content="Radley Sustaire">
+	
+	<link rel="preconnect" href="//unpkg.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	
 	<!-- Open Props: https://open-props.style/#getting-started -->
 	<link rel="stylesheet" href="//unpkg.com/open-props"/>
@@ -116,12 +146,23 @@ function split_spans( $str ) {
 	<link rel="stylesheet" href="//unpkg.com/open-props/buttons.min.css"/>
 	<!-- see PropPacks for the full list -->
 	
+	<!-- Font: Noto Sans -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--font-family--base: 'Noto Sans', sans-serif;
+			--letter-spacing--base: 0.0125em;
+		}
+	</style>
+	<!-- End Font -->
+	
 	<link href="<?php echo RESUME_URL . '/assets/structure.css?v=' . get_version(); ?>" rel="stylesheet">
 	<link href="<?php echo RESUME_URL . '/assets/style.css?v=' . get_version(); ?>" rel="stylesheet">
-	<link href="<?php echo RESUME_URL . '/assets/animations.css?v=' . get_version(); ?>" rel="stylesheet">
+	<link href="<?php echo RESUME_URL . '/assets/animations.css?v=' . get_version(); ?>" rel="stylesheet" media="screen">
+	<link href="<?php echo RESUME_URL . '/assets/print.css?v=' . get_version(); ?>" rel="stylesheet" media="print" id="print-css">
 	<link href="<?php echo RESUME_URL . '/assets/font-awesome/all.min.css'; ?>" rel="stylesheet">
 	
-<?php include( RESUME_PATH . '/fonts/noto-sans.php' ); ?>
+	<script src="<?php echo RESUME_URL . '/assets/main.js?v=' . get_version(); ?>"></script>
 	
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LR5M0YVTS"></script>
@@ -133,46 +174,6 @@ function split_spans( $str ) {
 		gtag('config', 'G-3LR5M0YVTS');
 	</script>
 	<!-- End Google tag -->
-	
-	<script>
-	document.addEventListener( 'DOMContentLoaded', function() {
-
-		const HTML = document.documentElement;
-		const BODY = document.body;
-		
-		// When changing color mode, change the HTML element "data-theme" attribute between "light" and "dark"
-		function set_color_mode( dark = null ) {
-			// Default to browser preference
-			if ( dark === null ) dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-			HTML.setAttribute( 'data-theme', dark ? 'dark' : 'light' );
-		}
-		
-		// Toggle between light and dark mode
-		function toggle_color_mode() {
-			set_color_mode( HTML.getAttribute('data-theme') !== 'dark' );
-		}
-		
-		// When clicking ".tooltip", show the "title" in an alert
-		document.body.addEventListener( 'click', function( e ) {
-			if ( e.target.classList.contains( 'tooltip' ) ) {
-				alert( e.target.title );
-				e.preventDefault();
-				e.stopPropagation();
-			}
-		});
-		
-		// When clicking ".color-mode-toggle", toggle the color mode
-		document.querySelector( '.color-mode-toggle' ).addEventListener( 'click', function( e ) {
-			toggle_color_mode();
-			e.preventDefault();
-		});
-		
-		// Set default color mode
-		set_color_mode();
-		
-	});
-	</script>
-	
 </head>
 
 <body>
@@ -184,9 +185,41 @@ function split_spans( $str ) {
 			<span class="show-if-dark">Dark</span>
 			<span class="show-if-light">Light</span>
 		</a>
+		
+		<a href="#" class="print-mode-toggle btn">
+			<span class="icon"><i class="fas fa-print"></i></span>
+			<span class="print-text">Print</span>
+		</a>
 	</div>
+	
+	<nav class="main-nav">
+		<a href="#" class="nav-menu-toggle">
+			
+			<span class="show-if-menu-open">
+				<i class="fas fa-times"></i>
+				<span class="text">Close</span>
+			</span>
+			<span class="show-if-menu-closed">
+				<i class="fas fa-bars"></i>
+				<span class="text">Navigation</span>
+			</span>
+		</a>
+		
+		<ul class="nav-menu">
+			<li><a href="#home">Home</a></li>
+			<li><a href="#profile">Profile</a></li>
+			<li><a href="#skills">Skills</a></li>
+			<li><a href="#experience">Experience</a></li>
+			<li><a href="#testimonials">Testimonials</a></li>
+			<li><a href="#projects">Projects</a></li>
+			<?php if ( get_github_profile() && get_github_repos() ) { ?>
+				<li><a href="#github">GitHub</a></li>
+			<?php } ?>
+			<li><a href="#contact">Contact</a></li>
+		</ul>
+	</nav>
 
-	<header class="site-header">
+	<header class="site-header" id="home">
 		
 		<div class="image">
 			<img src="<?php echo RESUME_URL . get_image_url(); ?>" alt="Portrait photo of Radley">
@@ -199,7 +232,7 @@ function split_spans( $str ) {
 			</div>
 		</div>
 		
-		<div class="separator"></div>
+		<!-- <div class="separator"></div> -->
 		
 		<div class="links">
 			<ul class="link-list">
@@ -222,7 +255,8 @@ function split_spans( $str ) {
 	<main class="site-body">
 	
 		<div class="area left-area">
-			<section class="section profile-section">
+			
+			<section class="section profile-section" id="profile">
 				<div class="section-heading animated-heading">
 					<h2 class="heading"><span>Profile</span></h2>
 				</div>
@@ -232,7 +266,11 @@ function split_spans( $str ) {
 				</div>
 			</section>
 			
-			<section class="section skills-section">
+		</div>
+		
+		<div class="area right-area">
+			
+			<section class="section skills-section" id="skills">
 				<div class="section-heading animated-heading">
 					<h2 class="heading"><span>Skills</span></h2>
 				</div>
@@ -247,24 +285,24 @@ function split_spans( $str ) {
 								<span class="category-name"><?php echo $current_category; ?></span>
 								
 								<ul class="skill-list">
-								<?php
-								foreach( get_skills() as $t ) {
-									$label = $t['title'];
-									$start = $t['start'];
-									$category = $t['category'];
-									if ( $category !== $current_category ) continue;
-									
-									$years = years_since( $start );
-									$years = _n('%d year', '%d years', $years);
-									$tip = $label . ' experience since ' . date( 'Y', $start );
-									$years_tooltip = get_formatted_tooltip( $years, $tip );
-									?>
-									<li class="skill"><?php echo $label; ?>: <?php echo $years_tooltip; ?></li>
 									<?php
-								}
-								?>
+									foreach( get_skills() as $t ) {
+										$label = $t['title'];
+										$start = $t['start'];
+										$category = $t['category'];
+										if ( $category !== $current_category ) continue;
+										
+										$years = years_since( $start );
+										$years = _n('%d year', '%d years', $years);
+										$tip = $label . ' experience since ' . date( 'Y', $start );
+										$years_tooltip = get_formatted_tooltip( $years, $tip );
+										?>
+										<li class="skill"><?php echo $label; ?>: <?php echo $years_tooltip; ?></li>
+										<?php
+									}
+									?>
 								</ul>
-								
+							
 							</li>
 							<?php
 						}
@@ -273,19 +311,11 @@ function split_spans( $str ) {
 				</div>
 			</section>
 			
-			<section class="section hobbies-section">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Hobbies</span></h2>
-				</div>
-				
-				<div class="section-content">
-					<div class="content"><?php echo get_hobbies(); ?></div>
-				</div>
-			</section>
 		</div>
 		
-		<div class="area right-area">
-			<section class="section experience-section">
+		<div class="area wide-area">
+			
+			<section class="section experience-section" id="experience">
 				<div class="section-heading animated-heading">
 					<h2 class="heading"><span>Experience</span></h2>
 				</div>
@@ -314,11 +344,11 @@ function split_spans( $str ) {
 								</div>
 								
 								<div class="date"><?php echo date( 'Y', $start ); ?> - <?php echo $end ? date( 'Y', $end ) : 'Present'; ?></div>
-									
+								
 								<?php if ( $description ) { ?>
-								<div class="content">
-									<?php echo $description; ?>
-								</div>
+									<div class="content">
+										<?php echo $description; ?>
+									</div>
 								<?php } ?>
 							</li>
 							<?php
@@ -327,15 +357,14 @@ function split_spans( $str ) {
 					</ul>
 				</div>
 			</section>
-		</div>
-		
-		<div class="area wide-area">
-			<section class="section testimonials-section">
+			
+			<section class="section testimonials-section" id="testimonials">
 				<div class="section-heading animated-heading">
 					<h2 class="heading"><span>Testimonials</span></h2>
 				</div>
 				
 				<div class="section-content">
+					
 					<ul class="testimonial-list">
 						<?php
 						foreach( get_testimonials() as $e ) {
@@ -366,7 +395,204 @@ function split_spans( $str ) {
 				</div>
 			</section>
 			
-			<section class="section footer-section">
+			<section class="section projects-section" id="projects">
+				<div class="section-heading animated-heading">
+					<h2 class="heading"><span>Projects</span></h2>
+				</div>
+				
+				<div class="section-content">
+					
+					<ul class="project-list">
+						<?php
+						foreach( get_projects() as $e ) {
+							$title = $e['title'];
+							$url = $e['url'];
+							$image_url = $e['image_url'];
+							$description = $e['description'];
+							$credits = $e['credits'];
+							$years = years_since($e['date']);
+							$years = _n('%d year', '%d years', $years);
+							
+							?>
+							<li class="project">
+								<?php if ( $image_url ) { ?>
+									<div class="image"><img src="<?php echo RESUME_URL . '/' . $image_url; ?>" alt=""></div>
+								<?php } ?>
+								
+								<div class="animated-heading">
+									<h3 class="heading name"><?php echo split_spans($title); ?></h3>
+									
+									<?php if ( $url ) { ?>
+										<h4 class="heading company"><a href="<?php echo $url; ?>"><?php echo get_display_url($url); ?></a></h4>
+									<?php } ?>
+									
+									<?php if ( $years ) { ?>
+										<h4 class="heading year"><span><?php echo $years; ?> ago</span></h4>
+									<?php } ?>
+								</div>
+								
+								<?php if ( $description || $credits ) { ?>
+									<div class="content">
+									<?php if ( $description ) { ?>
+										<div class="description">
+											<p><?php echo $description; ?></p>
+										</div>
+									<?php } ?>
+									
+									<?php if ( $credits ) { ?>
+										<div class="credits"><?php echo $credits; ?></div>
+									<?php } ?>
+									</div>
+								<?php } ?>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+				</div>
+			</section>
+			
+			<?php
+			$profile = get_github_profile();
+			$repos = get_github_repos();
+			
+			if ( $profile && $repos ) {
+				$count = count($repos);
+				?>
+				<section class="section github-section" id="github">
+					<div class="section-heading animated-heading">
+						<h2 class="heading"><span><i class="fab fa-github"></i></span> <span>GitHub</span></h2>
+					</div>
+					
+					<div class="section-content">
+						
+						<div class="content">
+							<p>Here are some of my projects on GitHub. These are mostly WordPress plugins, with an occasional side project thrown in.</p>
+						</div>
+						
+						<?php
+						$login = '@' . $profile['login'];
+						$name = $profile['name'];
+						$avatar_url = $profile['avatar_url'];
+						$profile_url = $profile['html_url'];
+						$bio = $profile['bio'];
+						$public_repos = $profile['public_repos'];
+						$public_gists = $profile['public_gists'];
+						$followers = $profile['followers'];
+						
+						$gists_url = $profile['gists_url'];
+						$repos_url = $profile['repos_url'];
+						$followers_url = $profile['followers_url'];
+						
+						/*
+						?>
+						<div class="github-profile">
+							<div class="image">
+								<img src="<?php echo $avatar_url; ?>" alt="">
+								<span class="icon">
+									<a href="<?php echo $profile_url; ?>"><i class="fab fa-github"></i></a>
+								</span>
+							</div>
+							
+							<div class="details">
+								<div class="profile-name animated-heading">
+									<span class="h2 heading"><?php echo split_spans($name) ?> <small><?php echo $login; ?></small></span>
+								</div>
+								
+								<?php if ( $bio ) { ?>
+								<div class="content">
+									<p><?php echo $bio; ?></p>
+								</div>
+								<?php } ?>
+								
+								<ul class="stats">
+									<li><a href="<?php echo $profile_url; ?>" class="btn">View Profile</a></li>
+									<li><a href="<?php echo $gists_url; ?>" class="btn btn-text"><i class="fad fa-book-spells"></i> <span class="value"><?php echo $public_repos; ?></span> <span class="label">Repositories</span></a></li>
+									<li><a href="<?php echo $repos_url; ?>" class="btn btn-text"><i class="fad fa-edit"></i> <span class="value"><?php echo $public_gists; ?></span> <span class="label">Gists</span></a></li>
+									<li><a href="<?php echo $followers_url; ?>" class="btn btn-text"><i class="fad fa-user-friends"></i> <span class="value"><?php echo $followers; ?></span> <span class="label">Followers</span></a></li>
+								</ul>
+								
+							</div>
+						</div>
+						*/
+						?>
+						
+						<div class="github-links">
+							<ul class="stats">
+								<li><a href="<?php echo $profile_url; ?>" class="btn">View Profile</a></li>
+								<li><a href="<?php echo $gists_url; ?>" class="btn btn-text"><i class="fad fa-book-spells"></i> <span class="value"><?php echo $public_repos; ?></span> <span class="label">Repositories</span></a></li>
+								<li><a href="<?php echo $repos_url; ?>" class="btn btn-text"><i class="fad fa-edit"></i> <span class="value"><?php echo $public_gists; ?></span> <span class="label">Gists</span></a></li>
+								<li><a href="<?php echo $followers_url; ?>" class="btn btn-text"><i class="fad fa-user-friends"></i> <span class="value"><?php echo $followers; ?></span> <span class="label">Followers</span></a></li>
+							</ul>
+						</div>
+						
+						<ul class="github-list">
+							<?php
+							$i = 0;
+							
+							foreach( $repos as $r ) {
+								$title        = $r['name'];
+								$language     = $r['language'];
+								$description  = $r['description'];
+								$repo_url     = $r['html_url'];
+								$stars        = $r['stargazers_count'];
+								$created_at   = strtotime($r['created_at']);
+								$updated_at   = strtotime($r['updated_at']);
+								
+								// Skip ones with empty description
+								if ( empty($description) ) continue;
+								
+								$i += 1;
+								
+								$date_created = date( 'F Y', $created_at );
+								$date_updated = date( 'F Y', $updated_at );
+								
+								// Convert hyphens into spaces in the title
+								$title = ucwords( str_replace( '-', ' ', $title ) );
+								$title = str_replace('Rs ', 'RS ', $title);
+								$title = str_replace('Zm ', 'ZM ', $title);
+								$title = str_replace('Aa ', 'AA ', $title);
+								
+								// Number of stars text
+								$stars_text = '';
+								if ( $stars === 1 ) $stars_text = '1 Star';
+								else if ( $stars > 0 ) $stars_text = number_format($stars) . ' Stars';
+								?>
+								<li class="github-item">
+									
+									<div class="number"><?php echo $i; ?></div>
+									
+									<div class="animated-heading">
+										<h3 class="h2b heading"><a href="<?php echo $repo_url; ?>"><?php echo $title; ?></a></h3>
+									</div>
+									
+									<?php if ( $description ) { ?>
+									<div class="content">
+										<p><?php echo $description; ?></p>
+									</div>
+									<?php } ?>
+									
+									<ul class="stats">
+										<li><a href="<?php echo $repo_url; ?>" class="btn"><i class="fab fa-github"></i> Repository</a></li>
+										<li><span class="btn btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $date_created; ?></span></li>
+										<li><span class="btn btn-text"><i class="fad fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
+										<?php if ( $stars_text ) { ?>
+										<li><span class="btn btn-text"><i class="fad fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+										<?php } ?>
+									</ul>
+									
+								</li>
+								<?php
+							}
+							?>
+						</ul>
+					</div>
+				</section>
+				<?php
+			}
+			?>
+			
+			<section class="section contact-section" id="contact">
 				<div class="section-heading animated-heading">
 					<h2 class="heading"><span>Work</span> <span>with</span> <span>Radley</span></h2>
 				</div>

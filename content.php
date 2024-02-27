@@ -8,6 +8,9 @@ return array(
 	'image_url' => '/assets/radley-sustaire.jpg',
 	'job_title' => 'WordPress Developer',
 	
+	'site_title' => 'Radley Sustaire\'s WordPress Developer Resume',
+	'site_description' => 'WordPress Developer with 18 years of experience building themes and plugins, hosting websites, and managing servers.',
+	
 	// Links
 	'links' => array(
 		array(
@@ -114,22 +117,20 @@ return array(
 	
 	// Content areas
 	'profile' => '
-		<p>I\'m a <strong>[job_title]</strong> with [dev_time_lower] of experience in web development. I\'m proficient in a range of web
-		development technologies, familiar with design and development tools, and capable of managing Unix servers.</p>
+		<p>I\'m a <strong>[job_title]</strong> with [dev_time_lower] of experience in web development. I\'m proficient with may design and
+		development tools, and capable of managing Unix servers.</p>
 		<p>My day-to-day work involves maintaining hosted websites for clients, developing custom themes and plugins, and
 		optimizing websites for speed and performance.</p>
-		<div class="animated-heading"><h3 class="heading">Preferred Software</h3></div>
-		<p>Most projects are built using PHPStorm, Git, and AI tools such as GitHub Copilot. For design work I prefer Figma for layout,
+		<div class="animated-heading"><h3 class="heading"><span>Preferred</span> <span>Software</span></h3></div>
+		<p>Most of my projects are built with PHPStorm using Git. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout,
 		Photoshop for graphic design, and Inkscape for vector graphics.</p>
-		<div class="animated-heading"><h3 class="heading">WordPress Specialist</h3></div>
-		<p>I have focused <em>exclusively</em> on WordPress development for several years. I\'m familiar with theme and plugin development, web hosting,
-		optimization, migrations, and third party integrations.</p>
-		<p>Recently I\'ve been focusing on building Full Site Editor themes and using <a href="https://developer.wordpress.org/block-editor/reference-guides/packages/packages-scripts/" rel="external">@wordpress/scripts</a>
-		for block development.</p>
+		<div class="animated-heading"><h3 class="heading"><span>WordPress</span> <span>Specialist</span></h3></div>
+		<p>I have focused <em>exclusively</em> on WordPress development since 2017. Recently I\'ve been working with Full Site Editor and the block themes.</p>
+		<div class="animated-heading"><h3 class="heading"><span>Hobbies</span></h3></div>
+		<p>I enjoy painting with acrylics and oils, riding my road bike, and playing all kinds of games. My favorite game is Dungeons &amp; Dragons where I prefer a spell-casting Wizard or Cleric, unless I\'m the DM.</p>
 		',
 	
 	'hobbies' => '
-	<p>I enjoy acrylic and oil painting, riding my road bike, playing video games, and playing all types of card games. I especially enjoy playing Dungeons &amp; Dragons where I prefer a spellcasting Wizard or Cleric, unless I\'m the DM.</p>
 	',
 	
 	
@@ -273,4 +274,98 @@ return array(
 		),
 	),
 	
+	
+	'projects' => array(
+		array(
+			'title' => 'Concealed Nation',
+			'date' => strtotime('2020-01-01'),
+			'url' => 'https://concealednation.org/',
+			'image_url' => '/assets/websites/concealed-nation-2.png',
+			'description' => 'Complete website rebuild optimized for thousands of concurrent visitors. Consolidated dozens of plugins into a small list of essentials.',
+			'credits' => '<p>Designed and built by Radley.</p>',
+		),
+		array(
+			'title' => 'ZingMap',
+			'date' => strtotime('2017-01-01'),
+			'url' => 'https://zingmap.com/',
+			'image_url' => '/assets/websites/zingmap.png',
+			'description' => 'Radley\'s hosting company website.',
+			'credits' => '<p>Designed and built by Radley.</p>',
+		),
+		array(
+			'title' => 'Peg Rodrigues',
+			'date' => strtotime('2018-01-01'),
+			'url' => 'https://pegrodrigues.com/',
+			'image_url' => '/assets/websites/peg-rodrigues.png',
+			'description' => 'Built for Alchemy + Aim, designed by Rachel Pesso.',
+			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
+<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+		),
+		array(
+			'title' => 'Kruggsmash',
+			'date' => strtotime('2018-01-01'),
+			'url' => 'https://kruggsmash.com/',
+			'image_url' => '/assets/websites/kruggsmash-2.png',
+			'description' => 'This website was donated to Kruggsmash. He\'s one of my favorite YouTubers and makes excellent Dwarf Fortress videos.',
+			'credits' => '<p>Designed and built by Radley.</p>',
+		),
+		array(
+			'title' => 'Tracy O\'Malley',
+			'date' => strtotime('2017-01-01'),
+			'url' => 'http://tracyomalley.com/',
+			'image_url' => '/assets/websites/tracy-omalley.png',
+			'description' => 'Website for Peg Rodrigues work and travel website.',
+			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
+<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+		),
+		array(
+			'title' => 'Willamalane Parks & Recreation District',
+			'date' => strtotime('2014-01-01'),
+			'url' => 'http://willamalane.org/',
+			'image_url' => '/assets/websites/willamalane.png',
+			'description' => 'Custom map locators for Parks, Facilities, and Bird trails. Custom post type for taking classes. Advanced navigation and mobile menus. ADA Section 503c Compliance.',
+			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
+<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+		),
+		array(
+			'title' => 'Gorilla Capital',
+			'date' => strtotime('2013-01-01'),
+			'url' => 'https://gorillacapital.com/',
+			'image_url' => '/assets/websites/gorilla-capital.png',
+			'description' => 'Custom built property locator, Custom advanced search tool, Custom Fix + Flip Calculator.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+		array(
+			'title' => 'Bowtech Archery',
+			'date' => strtotime('2014-01-01'),
+			'url' => 'https://bowtecharchery.com/',
+			'image_url' => '/assets/websites/bowtech.png',
+			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+		array(
+			'title' => 'The Adrienne St Clair Group',
+			'date' => strtotime('2015-01-01'),
+			'url' => 'https://www.thestclairs.com/',
+			'image_url' => '/assets/websites/st-clairs.png',
+			'description' => 'Property locator plugin (iHomeFinder), Unique day/night theme, Animated front page.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+		array(
+			'title' => 'Fight Club 2: Project Mayhem (Dark Horse Comics)',
+			'date' => strtotime('2015-01-01'),
+			'url' => 'https://joinprojectmayhem.com/',
+			'image_url' => '/assets/websites/project-mayhem.png',
+			'description' => 'Custom map-style interface. Many animations. Contribute & Sightings section managed by custom post types. User submitted content.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+		array(
+			'title' => 'Steelhead Brewing Company',
+			'date' => strtotime('2016-01-01'),
+			'url' => 'https://steelheadbrewery.com/',
+			'image_url' => '/assets/websites/steelhead.png',
+			'description' => 'Beer list and restaurant menu with two locations to choose from.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+	),
 );

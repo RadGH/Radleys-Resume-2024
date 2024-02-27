@@ -4,7 +4,7 @@ Global variables
 :where(html) {
 	--font-family--base: Helvetica, Arial, sans-serif;
 	--letter-spacing--base: 0;
-	--line-height--base: 1.25em;
+	--line-height--base: 1.5em;
 
 	--font-size--x-small: 14px;
 	--font-size--small: 16px;
@@ -27,7 +27,7 @@ Global variables
 }
 
 /* Light mode */
-html:not([data-theme="dark"]) {
+html[data-theme="light"] {
 	color-scheme: light;
 
 	--color-primary: var(--red-8);
@@ -39,20 +39,27 @@ html:not([data-theme="dark"]) {
 	--brand-bg-gradient-3: linear-gradient(to bottom right, #ca485c, #ac255e);
 	--brand-bg-gradient-4: linear-gradient(to bottom right, #ac255e, #870160);
 
+	--github-gradient: var( --gradient-13 );
+
 	--link: var(--red-8);
 	--link-hover: var(--violet-7);
 	--link-visited: var(--color-primary);
 
 	--text-1: var(--gray-12);
 	--text-2: var(--gray-7);
-	--surface-1: var(--violet-0);
-	--surface-2: var(--violet-1);
-	--surface-3: #fff;
+
+	--surface-0: var(--violet-0);
+	--surface-1: var(--violet-1);
+	--surface-2: var(--violet-3);
+	--surface-3: var(--violet-4);
 	--surface-4: var(--violet-5);
+	--surface-5: var(--violet-6);
+	--surface-6: var(--violet-7);
+
 	--scrollthumb-color: var(--gray-7);
 }
 
-html:not([data-theme="dark"]) .show-if-dark { display: none; }
+html[data-theme="light"] .show-if-dark { display: none; }
 
 /* Dark mode */
 html[data-theme="dark"] {
@@ -62,10 +69,12 @@ html[data-theme="dark"] {
 	--color-secondary: var(--color-primary);
 
 	--color-brand: var(--color-primary);
-	--brand-bg-gradient: linear-gradient(to bottom right,#00f5a0,#00d9f5);
-	--brand-bg-gradient-2: linear-gradient(to bottom right,#00d9f5,#00a9f5);
-	--brand-bg-gradient-3: linear-gradient(to bottom right,#00a9f5,#0079f5);
-	--brand-bg-gradient-4: linear-gradient(to bottom right,#0079f5,#0049f5);
+	--brand-bg-gradient: linear-gradient(to bottom right,#4dabf7,#00a9f5);
+	--brand-bg-gradient-2: linear-gradient(to bottom right,#00a9f5,#00a9f5);
+	--brand-bg-gradient-3: linear-gradient(to bottom right,#00a9f5,#0049f5);
+	--brand-bg-gradient-4: linear-gradient(to bottom right,#0049f5,#0019f5);
+
+	--github-gradient: radial-gradient(circle at 50% 200%, #0019f5,#0049f5,#00a9f5,#00a9f5,#4dabf7);
 
 	--link: var(--color-primary);
 	--link-hover: var(--blue-4);
@@ -74,16 +83,23 @@ html[data-theme="dark"] {
 
 	--text-1: var(--gray-1);
 	--text-2: var(--gray-4);
+
+	--surface-0: var(--gray-12);
 	--surface-1: var(--gray-9);
-	--surface-2: var(--gray-8);
-	--surface-3: var(--gray-7);
-	--surface-4: var(--gray-6);
+	--surface-2: var(--blue-8);
+	--surface-3: var(--blue-7);
+	--surface-4: var(--blue-6);
+	--surface-5: var(--blue-5);
+	--surface-6: var(--blue-4);
+
 	--scrollthumb-color: var(--gray-6);
 	--shadow-strength: 10%;
 	--shadow-color: 220 40% 2%;
 }
 
 html[data-theme="dark"] .show-if-light { display: none; }
+
+/* Print mode */
 
 /* Open Props Overrides */
 a {
@@ -94,7 +110,7 @@ a {
 	transition: all 0.07s linear;
 }
 
-a:hover:not(:focus-visible) {
+a:not(.btn):hover:not(:focus-visible) {
 	color: var(--link-hover);
 }
 
@@ -123,17 +139,6 @@ a.btn {
 	opacity: var( --fa-secondary-opacity );
 }
 
-a:where(:hover, :focus-visible) .fad::before,
-a:where(:hover, :focus-visible) .fad::after,
-a:where(:hover, :focus-visible) .fab::before,
-a:where(:hover, :focus-visible) .fab::after,
-a:where(:hover, :focus-visible) .fas::before,
-a:where(:hover, :focus-visible) .fas::after,
-a:where(:hover, :focus-visible) .fa-primary,
-a:where(:hover, :focus-visible) .fa-secondary {
-	color: var( --link-hover );
-}
-
 .fa-stack.fa-1x {
 	width: 1em;
 	height: var( --line-height--base );
@@ -143,19 +148,11 @@ a:where(:hover, :focus-visible) .fa-secondary {
 
 /* Gradient animated headings */
 .animated-heading .heading {
-	background: var(--brand-bg-gradient) fixed repeat;
+	background: none fixed repeat;
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	overflow: clip;
 	max-inline-size: none;
-}
-
-.animated-heading .heading > * {
-	display: inline-block;
-	background: inherit;
-	background-size: var(--size-relative-13) var(--size-relative-11);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
 }
 
 .animated-heading h1.heading {
@@ -163,19 +160,54 @@ a:where(:hover, :focus-visible) .fa-secondary {
 }
 
 .animated-heading h2.heading {
-	background-image: var(--brand-bg-gradient-2);
 	max-inline-size: var(--size-header-2);
 }
 
-.animated-heading h3.heading {
+.animated-heading .heading > * {
+	display: inline-block;
+	background: var(--brand-bg-gradient) fixed repeat;
+	background-size: var(--size-relative-13) var(--size-relative-11);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.animated-heading h2.heading > * {
+	background-image: var(--brand-bg-gradient-2);
+}
+
+.animated-heading h3.heading > * {
 	background-image: var(--brand-bg-gradient-3);
 }
 
-.animated-heading h4.heading {
+.animated-heading h4.heading > * {
 	background-image: var(--brand-bg-gradient-4);
+}
+
+.animated-heading .heading {
+	color: var(--color-primary);
 }
 /* End: Gradient animated headings */
 
+.site .controls {
+	font-size: 14px;
+	z-index: 20;
+}
+
+/* Menu */
+@media ( min-width: 600.1px ) {
+	ul.nav-menu {
+		text-transform: uppercase;
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 1.5;
+		padding: 10px 0;
+
+		background: radial-gradient(circle at bottom center, var(--color-primary), transparent);
+		background-size: 100% 4%;
+		background-repeat: no-repeat;
+		background-position: bottom center;
+	}
+}
 
 /*
 Global
@@ -191,12 +223,31 @@ button, input, label {
 	line-height: var( --line-height--base );
 }
 
-h1 { font-size: clamp( 2.5rem, 5vw, 3.5rem ); }
+h1 { font-size: clamp( 2rem, 4vw, 3rem ); }
 h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); }
 h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); }
 h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); }
 h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); }
 h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); }
+
+.h1 { font-size: clamp( 2rem, 4vw, 3rem ); }
+.h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); }
+.h2b { font-size: clamp( 1.25rem, 2.25vw, 1.75rem ); }
+.h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); }
+.h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); }
+.h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); }
+.h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); }
+
+.btn.btn-text:where(:not(:focus,:hover,:active)) {
+	border-color: transparent;
+	outline: none;
+	background: transparent;
+	box-shadow: none;
+}
+
+.btn.btn-text {
+	padding-inline: var(--size-relative-3);
+}
 
 /*
 Header
@@ -231,11 +282,6 @@ a.tooltip {
 }
 
 /* Header */
-.site-header .image {
-	max-width: 70vw;
-	margin: 0 auto;
-}
-
 .site-header .title {
 	width: fit-content;
 }
@@ -316,3 +362,35 @@ li.testimonial:nth-child(4n + 3) .image img {
 li.testimonial:nth-child(4n + 4) .image img {
 	border-radius: var(--radius-blob-4);
 }
+
+/* Github repos list */
+ul.github-list li.github-item {
+	position: relative;
+}
+
+ul.github-list li.github-item .number {
+	display: none;
+}
+
+ul.github-list li.github-item {
+}
+
+@media ( max-width: 600px ) {
+	ul.github-list  {
+		padding: var(--spacing--large) 0;
+		gap: var(--spacing--xx-large);
+	}
+
+	ul.github-list li.github-item {
+	}
+}
+
+@media ( min-width: 600px ) {
+	ul.project-list li,
+	ul.github-list li.github-item {
+		border: 1px solid var(--color-primary);
+		border-radius: var(--radius-3);
+		padding: var(--spacing--medium);
+	}
+}
+/* End: Github repos list */

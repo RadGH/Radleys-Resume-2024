@@ -14,10 +14,15 @@ return array(
 	// Links
 	'links' => array(
 		array(
+			'title' => 'Location',
+			'label' => 'Veneta, OR',
+			'url' => 'https://www.google.com/maps/place/Veneta,+OR+97487',
+			'icon_html' => '<i class="fad fa-map-marker-alt"></i>',
+		),
+		array(
 			'title' => 'Email',
 			'label' => 'radleygh@gmail.com',
 			'url' => 'mailto:radleygh@gmail.com',
-			'icon' => 'fad fa-envelope-open-text',
 			'icon_html' => '<i class="fad fa-envelope-open-text"></i>',
 		),
 		/*
@@ -25,22 +30,21 @@ return array(
 			'title' => 'Phone',
 			'label' => '+1 (541) 513-8145',
 			'url' => 'tel:1-541-513-8145',
-			'icon' => 'fad fa-phone-alt',
 			'icon_html' => '<i class="fad fa-phone-alt"></i>',
 		),
 		*/
+		/*
 		array(
 			'title' => 'Website',
 			'label' => 'radleysustaire.com',
 			'url' => 'https://radleysustaire.com/',
-			'icon' => 'fad fa-globe',
 			'icon_html' => '<i class="fad fa-globe"></i>',
 		),
+		*/
 		array(
 			'title' => 'Github',
 			'label' => 'github.com/RadGH',
 			'url' => 'https://github.com/RadGH/',
-			'icon' => 'fab fa-github',
 			'icon_html' => '
   <span class="fa-stack fa-1x">
     <i class="fas fa-circle fa-stack-1x fa-secondary"></i>
@@ -121,12 +125,12 @@ return array(
 		development tools, and capable of managing Unix servers.</p>
 		<p>My day-to-day work involves maintaining hosted websites for clients, developing custom themes and plugins, and
 		optimizing websites for speed and performance.</p>
-		<div class="animated-heading"><h3 class="heading"><span>Preferred</span> <span>Software</span></h3></div>
+		<div class="heading"><h3>Preferred Software</h3></div>
 		<p>Most of my projects are built with PHPStorm using Git. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout,
 		Photoshop for graphic design, and Inkscape for vector graphics.</p>
-		<div class="animated-heading"><h3 class="heading"><span>WordPress</span> <span>Specialist</span></h3></div>
+		<div class="heading"><h3>WordPress Specialist</h3></div>
 		<p>I have focused <em>exclusively</em> on WordPress development since 2017. Recently I\'ve been working with Full Site Editor and the block themes.</p>
-		<div class="animated-heading"><h3 class="heading"><span>Hobbies</span></h3></div>
+		<div class="heading"><h3>Hobbies</h3></div>
 		<p>I enjoy painting with acrylics and oils, riding my road bike, and playing all kinds of games. My favorite game is Dungeons &amp; Dragons where I prefer a spell-casting Wizard or Cleric, unless I\'m the DM.</p>
 		',
 	
@@ -285,14 +289,6 @@ return array(
 			'credits' => '<p>Designed and built by Radley.</p>',
 		),
 		array(
-			'title' => 'ZingMap',
-			'date' => strtotime('2017-01-01'),
-			'url' => 'https://zingmap.com/',
-			'image_url' => '/assets/websites/zingmap.png',
-			'description' => 'Radley\'s hosting company website.',
-			'credits' => '<p>Designed and built by Radley.</p>',
-		),
-		array(
 			'title' => 'Peg Rodrigues',
 			'date' => strtotime('2018-01-01'),
 			'url' => 'https://pegrodrigues.com/',
@@ -310,6 +306,14 @@ return array(
 			'credits' => '<p>Designed and built by Radley.</p>',
 		),
 		array(
+			'title' => 'ZingMap',
+			'date' => strtotime('2017-01-01'),
+			'url' => 'https://zingmap.com/',
+			'image_url' => '/assets/websites/zingmap.png',
+			'description' => 'Radley\'s hosting company website.',
+			'credits' => '<p>Designed and built by Radley.</p>',
+		),
+		array(
 			'title' => 'Tracy O\'Malley',
 			'date' => strtotime('2017-01-01'),
 			'url' => 'http://tracyomalley.com/',
@@ -319,28 +323,11 @@ return array(
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
 		),
 		array(
-			'title' => 'Willamalane Parks & Recreation District',
-			'date' => strtotime('2014-01-01'),
-			'url' => 'http://willamalane.org/',
-			'image_url' => '/assets/websites/willamalane.png',
-			'description' => 'Custom map locators for Parks, Facilities, and Bird trails. Custom post type for taking classes. Advanced navigation and mobile menus. ADA Section 503c Compliance.',
-			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
-<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
-		),
-		array(
-			'title' => 'Gorilla Capital',
-			'date' => strtotime('2013-01-01'),
-			'url' => 'https://gorillacapital.com/',
-			'image_url' => '/assets/websites/gorilla-capital.png',
-			'description' => 'Custom built property locator, Custom advanced search tool, Custom Fix + Flip Calculator.',
-			'credits' => '<p><em>Built for Limelight Department.</em></p>',
-		),
-		array(
-			'title' => 'Bowtech Archery',
-			'date' => strtotime('2014-01-01'),
-			'url' => 'https://bowtecharchery.com/',
-			'image_url' => '/assets/websites/bowtech.png',
-			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
+			'title' => 'Steelhead Brewing Company',
+			'date' => strtotime('2016-01-01'),
+			'url' => 'https://steelheadbrewery.com/',
+			'image_url' => '/assets/websites/steelhead.png',
+			'description' => 'Beer list and restaurant menu with two locations to choose from.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
 		),
 		array(
@@ -360,11 +347,28 @@ return array(
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
 		),
 		array(
-			'title' => 'Steelhead Brewing Company',
-			'date' => strtotime('2016-01-01'),
-			'url' => 'https://steelheadbrewery.com/',
-			'image_url' => '/assets/websites/steelhead.png',
-			'description' => 'Beer list and restaurant menu with two locations to choose from.',
+			'title' => 'Willamalane Parks & Recreation District',
+			'date' => strtotime('2014-01-01'),
+			'url' => 'http://willamalane.org/',
+			'image_url' => '/assets/websites/willamalane.png',
+			'description' => 'Custom map locators for Parks, Facilities, and Bird trails. Custom post type for taking classes. Advanced navigation and mobile menus. ADA Section 503c Compliance.',
+			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
+<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+		),
+		array(
+			'title' => 'Bowtech Archery',
+			'date' => strtotime('2014-01-01'),
+			'url' => 'https://bowtecharchery.com/',
+			'image_url' => '/assets/websites/bowtech.png',
+			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
+			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+		),
+		array(
+			'title' => 'Gorilla Capital',
+			'date' => strtotime('2013-01-01'),
+			'url' => 'https://gorillacapital.com/',
+			'image_url' => '/assets/websites/gorilla-capital.png',
+			'description' => 'Custom built property locator, Custom advanced search tool, Custom Fix + Flip Calculator.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
 		),
 	),

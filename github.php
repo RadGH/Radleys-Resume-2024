@@ -1,5 +1,4 @@
 <?php
-// curl -L -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <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>" -H "X-GitHub-Api-Version: 2022-11-28" https://api.github.com/users/radgh
 
 class GitHubAPI {
 	
@@ -8,7 +7,8 @@ class GitHubAPI {
 	
 	// Get a token here: https://github.com/settings/tokens?type=beta
 	private static function get_token() {
-		return file_get_contents( __DIR__ . '/github_token.txt' );
+		$token = file_get_contents( __DIR__ . '/github_token.txt' );
+		return $token;
 	}
 	
 	/**
@@ -179,7 +179,10 @@ class GitHubAPI {
 	}
 	
 	private static function load_profile_from_cache($cache_file) {
-		return json_decode(file_get_contents($cache_file), true);
+		$data = json_decode(file_get_contents($cache_file), true);
+		// If error or message returned, do not use the cached value
+		if ( ! $data || isset($data['message']) ) return false;
+		return $data;
 	}
 	
 	private static function load_profile_from_api() {

@@ -4,7 +4,7 @@
 // Last updated 2024-02-20
 
 define( 'RESUME_PATH', __DIR__ );
-define( 'RESUME_URL', '/resume' );
+define( 'RESUME_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/resume' );
 
 require_once( RESUME_PATH . '/github.php' );
 
@@ -16,7 +16,6 @@ function get_version() {
 		filemtime( RESUME_PATH . '/assets/style.css' ),
 		filemtime( RESUME_PATH . '/assets/structure.css' ),
 		filemtime( RESUME_PATH . '/assets/print.css' ),
-		filemtime( RESUME_PATH . '/assets/animations.css' ),
 		filemtime( RESUME_PATH . '/assets/main.js' )
 	);
 }
@@ -98,14 +97,6 @@ function years_since( $time, $precision = 0 ) {
 	}
 }
 
-// Separate a string into spans for each word
-function split_spans( $str ) {
-	if ( $str ) {
-		$str = '<span>'. str_replace(' ', '</span> <span>', $str ) . '</span>';
-	}
-	return $str;
-}
-
 function get_github_repos() {
 	return GitHubAPI::load_repos();
 }
@@ -158,11 +149,18 @@ function get_display_url( $url ) {
 	
 	<link href="<?php echo RESUME_URL . '/assets/structure.css?v=' . get_version(); ?>" rel="stylesheet">
 	<link href="<?php echo RESUME_URL . '/assets/style.css?v=' . get_version(); ?>" rel="stylesheet">
-	<link href="<?php echo RESUME_URL . '/assets/animations.css?v=' . get_version(); ?>" rel="stylesheet" media="screen">
 	<link href="<?php echo RESUME_URL . '/assets/print.css?v=' . get_version(); ?>" rel="stylesheet" media="print" id="print-css">
 	<link href="<?php echo RESUME_URL . '/assets/font-awesome/all.min.css'; ?>" rel="stylesheet">
 	
 	<script src="<?php echo RESUME_URL . '/assets/main.js?v=' . get_version(); ?>"></script>
+	
+	<!-- OG Image -->
+	<meta property="og:url" content="<?php echo RESUME_URL; ?>">
+	<meta property="og:title" content="<?php echo get_site_title(); ?>">
+	<meta property="og:description" content="<?php echo get_site_description(); ?>">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="<?php echo RESUME_URL . '/assets/resume-open-graph-image.png'; ?>">
+	<!-- End OG Image -->
 	
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LR5M0YVTS"></script>
@@ -180,15 +178,15 @@ function get_display_url( $url ) {
 <div class="site">
 	
 	<div class="controls">
+		<a href="#" class="print-mode-toggle btn">
+			<span class="icon"><i class="fas fa-print"></i></span>
+			<span class="print-text">Print</span>
+		</a>
+		
 		<a href="#" class="color-mode-toggle btn">
 			<span class="icon"><i class="fas fa-adjust"></i></span>
 			<span class="show-if-dark">Dark</span>
 			<span class="show-if-light">Light</span>
-		</a>
-		
-		<a href="#" class="print-mode-toggle btn">
-			<span class="icon"><i class="fas fa-print"></i></span>
-			<span class="print-text">Print</span>
 		</a>
 	</div>
 	
@@ -226,9 +224,9 @@ function get_display_url( $url ) {
 		</div>
 		
 		<div class="title">
-			<div class="animated-heading">
-				<h1 class="heading"><?php echo split_spans(get_name()); ?></h1>
-				<h2 class="heading"><?php echo split_spans(get_job_title()); ?></h2>
+			<div class="heading">
+				<h1><?php echo get_name(); ?></h1>
+				<h2><?php echo get_job_title(); ?></h2>
 			</div>
 		</div>
 		
@@ -257,8 +255,8 @@ function get_display_url( $url ) {
 		<div class="area left-area">
 			
 			<section class="section profile-section" id="profile">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Profile</span></h2>
+				<div class="section-heading heading">
+					<h2>Profile</h2>
 				</div>
 				
 				<div class="section-content">
@@ -271,8 +269,8 @@ function get_display_url( $url ) {
 		<div class="area right-area">
 			
 			<section class="section skills-section" id="skills">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Skills</span></h2>
+				<div class="section-heading heading">
+					<h2>Skills</h2>
 				</div>
 				
 				<div class="section-content">
@@ -316,8 +314,8 @@ function get_display_url( $url ) {
 		<div class="area wide-area">
 			
 			<section class="section experience-section" id="experience">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Experience</span></h2>
+				<div class="section-heading heading">
+					<h2>Experience</h2>
 				</div>
 				
 				<div class="section-content">
@@ -336,10 +334,10 @@ function get_display_url( $url ) {
 							$years_tooltip = get_formatted_tooltip( $years, $tip );
 							?>
 							<li class="job">
-								<div class="animated-heading">
-									<h3 class="heading"><?php echo split_spans($job_title); ?></h3>
+								<div class="heading">
+									<h3><?php echo $job_title; ?></h3>
 									<?php if ( $company_name ) { ?>
-										<h4 class="heading company"><?php echo split_spans($company_name); ?></h4>
+										<h4 class="company"><?php echo $company_name; ?></h4>
 									<?php } ?>
 								</div>
 								
@@ -359,8 +357,8 @@ function get_display_url( $url ) {
 			</section>
 			
 			<section class="section testimonials-section" id="testimonials">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Testimonials</span></h2>
+				<div class="section-heading heading">
+					<h2>Testimonials</h2>
 				</div>
 				
 				<div class="section-content">
@@ -378,11 +376,11 @@ function get_display_url( $url ) {
 									<div class="image"><img src="<?php echo RESUME_URL . '/images/' . $image; ?>" alt=""></div>
 								<?php } ?>
 								
-								<div class="animated-heading">
-									<h3 class="heading name"><?php echo split_spans($name); ?></h3>
+								<div class="heading">
+									<h3 class="name"><?php echo $name; ?></h3>
 									
 									<?php if ( $company_name ) { ?>
-										<h4 class="heading company"><?php echo split_spans($company_name); ?></h4>
+										<h4 class="company"><?php echo $company_name; ?></h4>
 									<?php } ?>
 								</div>
 								
@@ -396,8 +394,8 @@ function get_display_url( $url ) {
 			</section>
 			
 			<section class="section projects-section" id="projects">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Projects</span></h2>
+				<div class="section-heading heading">
+					<h2>Projects</h2>
 				</div>
 				
 				<div class="section-content">
@@ -419,15 +417,15 @@ function get_display_url( $url ) {
 									<div class="image"><img src="<?php echo RESUME_URL . '/' . $image_url; ?>" alt=""></div>
 								<?php } ?>
 								
-								<div class="animated-heading">
-									<h3 class="heading name"><?php echo split_spans($title); ?></h3>
+								<div class="heading">
+									<h3 class="name"><?php echo $title; ?></h3>
 									
 									<?php if ( $url ) { ?>
-										<h4 class="heading company"><a href="<?php echo $url; ?>"><?php echo get_display_url($url); ?></a></h4>
+										<h4 class="company"><a href="<?php echo $url; ?>"><?php echo get_display_url($url); ?></a></h4>
 									<?php } ?>
 									
 									<?php if ( $years ) { ?>
-										<h4 class="heading year"><span><?php echo $years; ?> ago</span></h4>
+										<h4 class="year"><?php echo $years; ?> ago</h4>
 									<?php } ?>
 								</div>
 								
@@ -460,8 +458,8 @@ function get_display_url( $url ) {
 				$count = count($repos);
 				?>
 				<section class="section github-section" id="github">
-					<div class="section-heading animated-heading">
-						<h2 class="heading"><span><i class="fab fa-github"></i></span> <span>GitHub</span></h2>
+					<div class="section-heading heading">
+						<h2><i class="fab fa-github"></i> GitHub</h2>
 					</div>
 					
 					<div class="section-content">
@@ -495,8 +493,8 @@ function get_display_url( $url ) {
 							</div>
 							
 							<div class="details">
-								<div class="profile-name animated-heading">
-									<span class="h2 heading"><?php echo split_spans($name) ?> <small><?php echo $login; ?></small></span>
+								<div class="profile-name heading">
+									<span class="h2 heading"><?php echo $name) ?> <small><?php echo $login; ?></small></span>
 								</div>
 								
 								<?php if ( $bio ) { ?>
@@ -562,7 +560,7 @@ function get_display_url( $url ) {
 									
 									<div class="number"><?php echo $i; ?></div>
 									
-									<div class="animated-heading">
+									<div class="heading">
 										<h3 class="h2b heading"><a href="<?php echo $repo_url; ?>"><?php echo $title; ?></a></h3>
 									</div>
 									
@@ -593,8 +591,8 @@ function get_display_url( $url ) {
 			?>
 			
 			<section class="section contact-section" id="contact">
-				<div class="section-heading animated-heading">
-					<h2 class="heading"><span>Work</span> <span>with</span> <span>Radley</span></h2>
+				<div class="section-heading heading">
+					<h2>Work with Radley</h2>
 				</div>
 				
 				<div class="section-content">

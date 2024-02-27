@@ -9,15 +9,27 @@
 		padding: 0;
 	}
 
-	html .site .controls {
+	html .site .controls,
+	html .nav-menu {
 		display: none !important;
+	}
+
+
+	html {
+		--spacing--x-small: 5px;
+		--spacing--small: 10px;
+		--spacing--medium: 20px;
+		--spacing--large: 30px;
+
+		font-size: 10px;
+		line-height: 1.25em;
 	}
 }
 /* End: Only when actually printing the page */
 
-html .animated-heading .heading,
-html .animated-heading .heading > *,
-html .animated-heading .heading > * > * {
+html .heading .h,
+html .heading .h > *,
+html .heading .h > * > * {
 	background: none !important;
 	-webkit-background-clip: unset !important;
 	-webkit-text-fill-color: unset !important;
@@ -27,13 +39,6 @@ html .animated-heading .heading > * > * {
 	animation: none !important;
 }
 
-html {
-	--spacing--x-small: 5px;
-	--spacing--small: 10px;
-	--spacing--medium: 20px;
-	--spacing--large: 30px;
-}
-
 html[data-theme] {
 	color-scheme: light;
 
@@ -41,11 +46,6 @@ html[data-theme] {
 	--color-secondary: var(--gray-8);
 
 	--color-brand: var(--color-primary);
-	--brand-bg-gradient: linear-gradient(to bottom right, var(--gray-8), var(--gray-6));
-	--brand-bg-gradient-2: linear-gradient(to bottom right, var(--gray-7), var(--gray-6));
-	--brand-bg-gradient-3: linear-gradient(to bottom right, var(--gray-7), var(--gray-5));
-	--brand-bg-gradient-4: linear-gradient(to bottom right, var(--gray-6), var(--gray-5));
-
 	--github-gradient: var( --gradient-13 );
 
 	--link: var(--indigo-8);
@@ -63,12 +63,14 @@ html[data-theme] {
 	--surface-5: var(--gray-9);
 	--surface-6: var(--gray-12);
 
-	--scrollthumb-color: var(--gray-7);
-}
+	--heading-1--color: var(--gray-8);
+	--heading-2--color: var(--gray-7);
+	--heading-3--color: var(--gray-6);
+	--heading-4--color: var(--gray-5);
+	--heading-5--color: var(--gray-4);
+	--heading-6--color: var(--gray-3);
 
-html {
-	font-size: 10px;
-	line-height: 1.25em;
+	--scrollthumb-color: var(--gray-7);
 }
 
 html a[href] {

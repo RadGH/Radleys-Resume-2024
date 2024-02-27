@@ -61,7 +61,12 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 			toggle_print_mode( active );
 
-			// window.print();
+			if ( active ) {
+				// Open print dialog after css is applied
+				setTimeout(function() {
+					window.print();
+				}, 250);
+			}
 
 			e.preventDefault();
 		});

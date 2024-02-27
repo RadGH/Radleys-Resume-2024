@@ -331,7 +331,7 @@ nav.main-nav {
 	gap: var( --spacing--medium ) var( --spacing--small );
 }
 
-.job-list li.job .animated-heading {
+.job-list li.job .heading {
 	grid-column: 1 / 2;
 	grid-row:  1;
 }
@@ -387,7 +387,7 @@ li.testimonial .image {
 	grid-column: 1 / 2;
 }
 
-li.testimonial .animated-heading {
+li.testimonial .heading {
 	grid-row: 1;
 	grid-column: 2 / 3;
 }
@@ -407,7 +407,7 @@ li.testimonial .content {
 	}
 }
 
-li.testimonial .animated-heading {
+li.testimonial .heading {
 	display: grid;
 	grid-template-columns: 1fr;
 	align-content: center;
@@ -594,7 +594,7 @@ ul.project-list .image img {
 		grid-column: 1 / 3;
 	}
 
-	.project-list .animated-heading {
+	.project-list .heading {
 		align-content: center;
 		display: grid;
 	}

@@ -27,34 +27,42 @@ Global variables
 }
 
 /* Light mode */
-html[data-theme="light"] {
+html {
 	color-scheme: light;
 
+	--fa-primary-color: var(--red-3);
+	--fa-primary-opacity: 1;
+
+	--fa-secondary-color: var(--red-6);
+	--fa-secondary-opacity: 1;
+
 	--color-primary: var(--red-8);
-	--color-secondary: var(--red-8);
+	--color-secondary: var(--red-3);
 
 	--color-brand: var(--color-primary);
-	--brand-bg-gradient: linear-gradient(to bottom right, #f39060, #e16b5c);
-	--brand-bg-gradient-2: linear-gradient(to bottom right, #e16b5c, #ca485c);
-	--brand-bg-gradient-3: linear-gradient(to bottom right, #ca485c, #ac255e);
-	--brand-bg-gradient-4: linear-gradient(to bottom right, #ac255e, #870160);
-
 	--github-gradient: var( --gradient-13 );
 
 	--link: var(--red-8);
-	--link-hover: var(--violet-7);
+	--link-hover: var(--pink-5);
 	--link-visited: var(--color-primary);
 
 	--text-1: var(--gray-12);
 	--text-2: var(--gray-7);
 
-	--surface-0: var(--violet-0);
-	--surface-1: var(--violet-1);
-	--surface-2: var(--violet-3);
-	--surface-3: var(--violet-4);
-	--surface-4: var(--violet-5);
-	--surface-5: var(--violet-6);
-	--surface-6: var(--violet-7);
+	--surface-0: var(--red-0);
+	--surface-1: var(--red-0);
+	--surface-2: var(--red-4);
+	--surface-3: var(--red-5);
+	--surface-4: var(--red-6);
+	--surface-5: var(--red-7);
+	--surface-6: var(--red-8);
+
+	--heading-1--color: var(--red-8);
+	--heading-2--color: var(--red-7);
+	--heading-3--color: var(--red-6);
+	--heading-4--color: var(--red-5);
+	--heading-5--color: var(--red-4);
+	--heading-6--color: var(--red-3);
 
 	--scrollthumb-color: var(--gray-7);
 }
@@ -65,19 +73,15 @@ html[data-theme="light"] .show-if-dark { display: none; }
 html[data-theme="dark"] {
 	color-scheme: dark;
 
-	--color-primary: var(--blue-4);
-	--color-secondary: var(--color-primary);
+	--fa-primary-color: var(--red-6);
+	--fa-primary-opacity: 1;
 
-	--color-brand: var(--color-primary);
-	--brand-bg-gradient: linear-gradient(to bottom right,#4dabf7,#00a9f5);
-	--brand-bg-gradient-2: linear-gradient(to bottom right,#00a9f5,#00a9f5);
-	--brand-bg-gradient-3: linear-gradient(to bottom right,#00a9f5,#0049f5);
-	--brand-bg-gradient-4: linear-gradient(to bottom right,#0049f5,#0019f5);
+	--fa-secondary-color: var(--red-2);
+	--fa-secondary-opacity: 1;
 
-	--github-gradient: radial-gradient(circle at 50% 200%, #0019f5,#0049f5,#00a9f5,#00a9f5,#4dabf7);
+	--color-primary: var(--red-6);
+	--color-secondary: var(--red-3);
 
-	--link: var(--color-primary);
-	--link-hover: var(--blue-4);
 	--link-visited: var(--color-primary);
 	--link-underline-color: var(--color-secondary);
 
@@ -86,11 +90,22 @@ html[data-theme="dark"] {
 
 	--surface-0: var(--gray-12);
 	--surface-1: var(--gray-9);
-	--surface-2: var(--blue-8);
-	--surface-3: var(--blue-7);
-	--surface-4: var(--blue-6);
-	--surface-5: var(--blue-5);
-	--surface-6: var(--blue-4);
+	--surface-2: var(--red-8);
+	--surface-3: var(--red-7);
+	--surface-4: var(--red-6);
+	--surface-5: var(--red-5);
+	--surface-6: var(--red-4);
+
+	--heading-1--color: var(--gray-0);
+	--heading-2--color: var(--gray-0);
+	--heading-3--color: var(--red-4);
+	--heading-4--color: var(--red-6);
+	--heading-5--color: var(--red-8);
+	--heading-6--color: var(--red-10);
+
+	--link: var(--color-primary);
+	--link-hover: var(--color-secondary);
+	--link-visited: var(--color-primary);
 
 	--scrollthumb-color: var(--gray-6);
 	--shadow-strength: 10%;
@@ -147,45 +162,20 @@ a.btn {
 /* End: Font Awesome 5 Overrides */
 
 /* Gradient animated headings */
-.animated-heading .heading {
-	background: none fixed repeat;
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+.heading .h {
 	overflow: clip;
 	max-inline-size: none;
+	color: var(--color-primary);
 }
 
-.animated-heading h1.heading {
+.heading h1.h {
 	max-inline-size: var(--size-header-1);
 }
 
-.animated-heading h2.heading {
+.heading h2.h {
 	max-inline-size: var(--size-header-2);
 }
 
-.animated-heading .heading > * {
-	display: inline-block;
-	background: var(--brand-bg-gradient) fixed repeat;
-	background-size: var(--size-relative-13) var(--size-relative-11);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
-
-.animated-heading h2.heading > * {
-	background-image: var(--brand-bg-gradient-2);
-}
-
-.animated-heading h3.heading > * {
-	background-image: var(--brand-bg-gradient-3);
-}
-
-.animated-heading h4.heading > * {
-	background-image: var(--brand-bg-gradient-4);
-}
-
-.animated-heading .heading {
-	color: var(--color-primary);
-}
 /* End: Gradient animated headings */
 
 .site .controls {
@@ -223,20 +213,20 @@ button, input, label {
 	line-height: var( --line-height--base );
 }
 
-h1 { font-size: clamp( 2rem, 4vw, 3rem ); }
-h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); }
-h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); }
-h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); }
-h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); }
-h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); }
+h1 { font-size: clamp( 2rem, 4vw, 3rem ); color: var(--heading-1--color); }
+h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); color: var(--heading-2--color); }
+h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); color: var(--heading-3--color); }
+h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); color: var(--heading-4--color); }
+h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); color: var(--heading-5--color); }
+h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); color: var(--heading-6--color); }
 
-.h1 { font-size: clamp( 2rem, 4vw, 3rem ); }
-.h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); }
-.h2b { font-size: clamp( 1.25rem, 2.25vw, 1.75rem ); }
-.h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); }
-.h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); }
-.h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); }
-.h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); }
+.h1 { font-size: clamp( 2rem, 4vw, 3rem ); color: var(--heading-1--color); }
+.h2 { font-size: clamp( 1.5rem, 3vw, 2.5rem ); color: var(--heading-2--color); }
+.h2b { font-size: clamp( 1.25rem, 2.25vw, 1.75rem ); color: var(--heading-2--color); }
+.h3 { font-size: clamp( 1rem, 1.75vw, 1.25rem ); color: var(--heading-3--color); }
+.h4 { font-size: clamp( 0.8rem, 1.5vw, 1rem ); color: var(--heading-4--color); }
+.h5 { font-size: clamp( 0.7rem, 1.25vw, 0.875rem ); color: var(--heading-5--color); }
+.h6 { font-size: clamp( 0.6rem, 1vw, 0.75rem ); color: var(--heading-6--color); }
 
 .btn.btn-text:where(:not(:focus,:hover,:active)) {
 	border-color: transparent;

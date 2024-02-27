@@ -385,12 +385,10 @@ ul.github-list li.github-item {
 	}
 }
 
-@media ( min-width: 600px ) {
-	ul.project-list li,
-	ul.github-list li.github-item {
-		border: 1px solid var(--color-primary);
-		border-radius: var(--radius-3);
-		padding: var(--spacing--medium);
-	}
+ul.project-list li,
+ul.github-list li.github-item {
+	border: 1px solid var(--color-primary);
+	border-radius: var(--radius-3);
+	padding: var(--spacing--medium);
 }
 /* End: Github repos list */

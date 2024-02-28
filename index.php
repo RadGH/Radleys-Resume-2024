@@ -241,7 +241,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 								<?php } ?>
 								
 								<?php if ( $url || $years ) { ?>
-									<ul class="stats">
+									<ul class="stats stats-minor">
 										<?php /* if ( $url ) { ?>
 										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
 									<?php } */ ?>
@@ -385,7 +385,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 										</div>
 									<?php } ?>
 									
-									<ul class="stats">
+									<ul class="stats stats-minor">
 										<li><a href="<?php echo $repo_url; ?>" class="btn btn-secondary"><i class="fab fa-github"></i> Repository</a></li>
 										<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
 										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>

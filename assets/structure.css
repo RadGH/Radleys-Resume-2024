@@ -563,6 +563,9 @@ ul.stats {
 	flex-wrap: wrap;
 	align-items: center;
 	gap: var(--spacing--medium);
+}
+
+ul.stats.stats-minor {
 	font-size: var(--font-size-0);
 }
 

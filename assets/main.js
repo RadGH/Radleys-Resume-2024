@@ -26,8 +26,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 	function toggle_print_mode( active = null ) {
 		HTML.classList.toggle( 'print', active );
-		COLOR_BUTTON.classList.toggle( 'disabled', active );
-		PRINT_STYLESHEET.media = active ? 'all' : 'print';
+		if ( COLOR_BUTTON ) COLOR_BUTTON.classList.toggle( 'disabled', active );
+		if ( PRINT_STYLESHEET ) PRINT_STYLESHEET.media = active ? 'all' : 'print';
 	}
 
 	// When changing color mode, change the HTML element "data-theme" attribute between "light" and "dark"
@@ -48,7 +48,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		});
 
 		// When clicking ".color-mode-toggle", toggle the color mode
-		COLOR_BUTTON.addEventListener( 'click', function( e ) {
+		if ( COLOR_BUTTON ) COLOR_BUTTON.addEventListener( 'click', function( e ) {
 			toggle_color_mode();
 			e.preventDefault();
 		});
@@ -60,7 +60,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	// When clicking ".print-mode-toggle", toggle the print mode
 	const setup_print_mode = function() {
 		// When clicking ".print-mode-toggle", toggle the print mode
-		PRINT_BUTTON.addEventListener( 'click', function( e ) {
+		if ( PRINT_BUTTON ) PRINT_BUTTON.addEventListener( 'click', function( e ) {
 			let	active = ! HTML.classList.contains('print');
 
 			toggle_print_mode( active );
@@ -78,10 +78,10 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 	// When clicking ".nav-menu-toggle", toggle the nav menu
 	const setup_nav_menu = function() {
-		NAV_MENU_TOGGLE.addEventListener( 'click', function( e ) {
+		if ( NAV_MENU_TOGGLE ) NAV_MENU_TOGGLE.addEventListener( 'click', function( e ) {
 			let active = ! HTML.classList.contains('nav-menu-open');
 			HTML.classList.toggle('nav-menu-open', active);
-			NAV_MENU.classList.toggle('open', active);
+			if ( NAV_MENU ) NAV_MENU.classList.toggle('open', active);
 			e.preventDefault();
 		});
 	}
@@ -94,6 +94,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		// Get each section and link and put them together in scroll_sections
 		// Also includes the top and bottom position of each section
 		function recalculate_sections() {
+			if ( ! NAV_MENU ) return;
+
 			let navLinks = NAV_MENU.querySelectorAll('a.nav-section');
 			scroll_sections = [];
 
@@ -271,7 +273,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		scroll_indicator.classList.add('scroll-indicator');
 
 		// Add to the nav.main-nav element
-		MAIN_NAV.appendChild( scroll_indicator );
+		if ( MAIN_NAV ) MAIN_NAV.appendChild( scroll_indicator );
 
 		// On scroll, activate the sections as they change
 		window.addEventListener( 'scroll', activate_sections);
@@ -283,7 +285,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		window.addEventListener( 'load', recalculate_sections );
 
 		// When clicking a section link, smooth scroll to the section without adding a hash to the URL
-		NAV_MENU.addEventListener( 'click', function( e ) {
+		if ( NAV_MENU ) NAV_MENU.addEventListener( 'click', function( e ) {
 			if ( e.target.classList.contains('nav-section') ) {
 				let section = get_section_from_id( e.target.hash.replace('#', '') );
 				if ( section ) {

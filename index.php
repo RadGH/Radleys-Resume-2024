@@ -1,245 +1,16 @@
 <?php
 // Radley Sustaire's resume
 // Created 2024-02-20
-// Last updated 2024-02-20
+// Last updated 2024-02-27
 
-define( 'RESUME_PATH', __DIR__ );
-define( 'RESUME_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/resume' );
+require_once( __DIR__ . '/utility.php' );
 
-require_once( RESUME_PATH . '/github.php' );
-
-// Get the version based on the last modified date of the files
-function get_version() {
-	return max(
-		filemtime( RESUME_PATH . '/index.php' ),
-		filemtime( RESUME_PATH . '/content.php' ),
-		filemtime( RESUME_PATH . '/assets/style.css' ),
-		filemtime( RESUME_PATH . '/assets/structure.css' ),
-		filemtime( RESUME_PATH . '/assets/print.css' ),
-		filemtime( RESUME_PATH . '/assets/main.js' )
-	);
-}
-
-// Load content from a specific key from content.php
-function load_content( $key ) {
-	static $content = null;
-	
-	if ( $content === null ) {
-		$content = require_once( RESUME_PATH . '/content.php' );
-	}
-	
-	return $content[ $key ] ?? null;
-}
-
-// Load and format content
-function load_formatted_content( $key ) {
-	return get_formatted_content( load_content( $key ) );
-}
-
-// Apply shortcodes to a string for display
-function get_formatted_content( $content ) {
-	$dev_years = _n( '%d Year', '%d Years', years_since( get_dev_start_time() ) );
-	$dev_years_tip = 'Developing websites since ' . get_year( get_dev_start_time() );
-	
-	$tags = array(
-		'[dev_time]' => get_formatted_tooltip( $dev_years, $dev_years_tip ),
-		'[dev_time_lower]' => get_formatted_tooltip( strtolower($dev_years), $dev_years_tip ),
-		'[job_title]' => get_job_title(),
-		'[job_title_lower]' => strtolower(get_job_title()),
-	);
-	
-	return strtr( $content, $tags );
-}
-
-function get_name() { return load_content( 'name' ); }
-function get_image_url() { return load_content( 'image_url' ); }
-function get_job_title() { return load_content( 'job_title' ); }
-function get_email() { return load_content( 'email' ); }
-function get_links() { return load_content( 'links' ); }
-function get_categories() { return load_content( 'categories' ); }
-function get_skills() { return load_content( 'skills' ); }
-function get_profile() { return load_formatted_content( 'profile' ); }
-function get_employment() { return load_content( 'employment' ); }
-function get_testimonials() { return load_content( 'testimonials' ); }
-function get_projects() { return load_content( 'projects' ); }
-
-function get_formatted_tooltip( $text, $tooltip ) {
-	return '<a href="#" class="tooltip" title="' . $tooltip . '">' . $text . '</a>';
-}
-
-// Format as plural or singular and inserts the number as %1$d
-function _n( $singular, $plural, $number ) {
-	$str = intval($number) === 1 ? $singular : $plural;
-	return sprintf( $str, $number );
-}
-
-// Developer start year is based on the earliest skill date.
-function get_dev_start_time() {
-	$skills = get_skills();
-	$times = array_map( function( $t ) {
-		return $t['start'];
-	}, $skills );
-	return min( $times );
-}
-
-// Get the year from a timestamp
-function get_year( $time ) {
-	return date( 'Y', $time );
-}
-
-// Get the number of years since the given timestamp.
-function years_since( $time, $precision = 0 ) {
-	// 31556952 is the number of seconds in a year
-	if ( $precision === 0 ) {
-		return ceil( ( time() - $time ) / 31556952 );
-	}else{
-		return round( ( time() - $time ) / 31556952, $precision );
-	}
-}
-
-function years_since_n( $time ) {
-	$years = years_since( $time );
-	return _n('%d Year', '%d Years', $years);
-}
-
-function years_ago( $time, $ago = true ) {
-	$years = years_since_n( $time );
-	if ( $ago ) $years .= ' ago';
-	return $years;
-}
-
-function get_github_repos() {
-	return GitHubAPI::load_repos();
-}
-
-function get_github_profile() {
-	return GitHubAPI::load_profile();
-}
-
-function get_site_title() {
-	return load_content('site_title');
-}
-
-function get_site_description() {
-	return load_content('site_description');
-}
-
-function get_display_url( $url ) {
-	return parse_url($url, PHP_URL_HOST);
-}
-
+require_once( __DIR__ . '/template/header.php' );
+require_once( __DIR__ . '/template/main-nav.php' );
 ?>
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width">
-	<title><?php echo get_site_title(); ?></title>
-	<meta name="description" content="<?php echo get_site_description(); ?>">
-	<meta name="author" content="Radley Sustaire">
-	
-	<link rel="preconnect" href="//unpkg.com">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	
-	<!-- Open Props: https://open-props.style/#getting-started -->
-	<link rel="stylesheet" href="//unpkg.com/open-props"/>
-	<link rel="stylesheet" href="//unpkg.com/open-props/normalize.min.css"/>
-	<link rel="stylesheet" href="//unpkg.com/open-props/buttons.min.css"/>
-	<!-- see PropPacks for the full list -->
-	
-	<!-- Font: Noto Sans -->
-	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-	<style>
-		:root {
-			--font-family--base: 'Noto Sans', sans-serif;
-			--letter-spacing--base: 0.0125em;
-		}
-	</style>
-	<!-- End Font -->
-	
-	<link href="<?php echo RESUME_URL . '/assets/structure.css?v=' . get_version(); ?>" rel="stylesheet">
-	<link href="<?php echo RESUME_URL . '/assets/style.css?v=' . get_version(); ?>" rel="stylesheet">
-	<link href="<?php echo RESUME_URL . '/assets/print.css?v=' . get_version(); ?>" rel="stylesheet" media="print" id="print-css">
-	<link href="<?php echo RESUME_URL . '/assets/font-awesome/all.min.css'; ?>" rel="stylesheet">
-	
-	<script src="<?php echo RESUME_URL . '/assets/main.js?v=' . get_version(); ?>"></script>
-	
-	<!-- OG Image -->
-	<meta property="og:url" content="<?php echo RESUME_URL; ?>">
-	<meta property="og:title" content="<?php echo get_site_title(); ?>">
-	<meta property="og:description" content="<?php echo get_site_description(); ?>">
-	<meta property="og:type" content="website">
-	<meta property="og:image" content="<?php echo RESUME_URL . '/assets/radley-og-image.png'; ?>">
-	<!-- End OG Image -->
-	
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-3LR5M0YVTS"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'G-3LR5M0YVTS');
-	</script>
-	<!-- End Google tag -->
-</head>
-
-<body>
-<nav class="main-nav">
-	<a href="#" class="nav-menu-toggle show-if-mobile">
-		<span class="show-if-menu-open">
-			<i class="fas fa-times"></i>
-			<span class="screen-reader-text">Close</span>
-		</span>
-		<span class="show-if-menu-closed">
-			<i class="fas fa-bars"></i>
-			<span class="screen-reader-text">Menu</span>
-		</span>
-		</span>
-	</a>
-	
-	<ul class="nav-menu">
-		<li><a href="#home" class="nav-section">Home</a></li>
-		<li><a href="#profile" class="nav-section">Profile</a></li>
-		<?php /* <li><a href="#skills">Skills</a></li> */ ?>
-		<li><a href="#experience" class="nav-section">Experience</a></li>
-		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
-		<li><a href="#projects" class="nav-section">Projects</a></li>
-		<?php if ( get_github_profile() && get_github_repos() ) { ?>
-			<li><a href="#github" class="nav-section">GitHub</a></li>
-		<?php } ?>
-		<li><a href="#contact" class="nav-section">Contact</a></li>
-		
-		<li class="first-control-button">
-			<a href="#" class="print-mode-toggle control-button">
-				<span class="show-if-print" title="Exit print view">
-					<i class="fas fa-times"></i>
-					<span class="text">Cancel</span>
-				</span>
-				
-				<span class="show-if-screen" title="Enable print view">
-					<i class="fas fa-print"></i>
-					<span class="text">Print</span>
-				</span>
-			</a>
-		</li>
-		<li>
-			<a href="#" class="color-mode-toggle control-button">
-				<span class="show-if-dark" title="Switch to Dark Mode">
-					<i class="far fa-moon"></i>
-					<span class="text">Dark Mode</span>
-				</span>
-				<span class="show-if-light" title="Switch to Light Mode">
-					<i class="far fa-sun" ></i>
-					<span class="text">Light Mode</span>
-				</span>
-			</a>
-		</li>
-	</ul>
-</nav>
 
 <div class="site">
+	
 	<header class="site-header" id="home">
 		
 		<div class="image">
@@ -255,24 +26,24 @@ function get_display_url( $url ) {
 		
 		<div class="links">
 			<ul class="link-list">
-			<?php
-			foreach( get_links() as $link ) {
-				$icon = trim($link['icon_html']);
-				if ( $icon ) $icon = '<span class="icon">' . $icon . '</span>';
-				?>
-				<li>
-					<a href="<?php echo $link['url']; ?>"><?php echo $icon; ?><span class="text"><?php echo $link['label']; ?></span></a>
-				</li>
 				<?php
-			}
-			?>
+				foreach( get_links() as $link ) {
+					$icon = trim($link['icon_html']);
+					if ( $icon ) $icon = '<span class="icon">' . $icon . '</span>';
+					?>
+					<li>
+						<a href="<?php echo $link['url']; ?>"><?php echo $icon; ?><span class="text"><?php echo $link['label']; ?></span></a>
+					</li>
+					<?php
+				}
+				?>
 			</ul>
 		</div>
-		
+	
 	</header>
 	
 	<main class="site-body">
-	
+		
 		<div class="area left-area">
 			
 			<section class="section profile-section" id="profile">
@@ -284,7 +55,7 @@ function get_display_url( $url ) {
 					<div class="content"><?php echo get_profile(); ?></div>
 				</div>
 			</section>
-			
+		
 		</div>
 		
 		<div class="area right-area">
@@ -327,7 +98,7 @@ function get_display_url( $url ) {
 					</div>
 				</div>
 			</section>
-			
+		
 		</div>
 		
 		<div class="area wide-area">
@@ -457,23 +228,23 @@ function get_display_url( $url ) {
 								
 								<?php if ( $description || $credits ) { ?>
 									<div class="content">
-									<?php if ( $description ) { ?>
-										<div class="description">
-											<p><?php echo $description; ?></p>
-										</div>
-									<?php } ?>
-									
-									<?php if ( $credits ) { ?>
-										<div class="credits"><?php echo $credits; ?></div>
-									<?php } ?>
+										<?php if ( $description ) { ?>
+											<div class="description">
+												<p><?php echo $description; ?></p>
+											</div>
+										<?php } ?>
+										
+										<?php if ( $credits ) { ?>
+											<div class="credits"><?php echo $credits; ?></div>
+										<?php } ?>
 									</div>
 								<?php } ?>
 								
 								<?php if ( $url || $years ) { ?>
 									<ul class="stats">
 										<?php /* if ( $url ) { ?>
-											<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
-										<?php } */ ?>
+										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
+									<?php } */ ?>
 										
 										<?php if ( $years ) { ?>
 											<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <?php echo $years; ?> ago</span></li>
@@ -605,9 +376,9 @@ function get_display_url( $url ) {
 									</div>
 									
 									<?php if ( $description ) { ?>
-									<div class="content">
-										<p><?php echo $description; ?></p>
-									</div>
+										<div class="content">
+											<p><?php echo $description; ?></p>
+										</div>
 									<?php } ?>
 									
 									<ul class="stats">
@@ -615,10 +386,10 @@ function get_display_url( $url ) {
 										<li><span class="btn-text"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
 										<li><span class="btn-text"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
-										<li><span class="btn-text"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+											<li><span class="btn-text"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
 										<?php } ?>
 									</ul>
-									
+								
 								</li>
 								<?php
 							}
@@ -642,9 +413,10 @@ function get_display_url( $url ) {
 				</div>
 			</section>
 		</div>
-		
-	</main>
 	
+	</main>
+
 </div> <!-- / .site -->
-</body>
-</html>
+
+<?php
+require_once( __DIR__ . '/template/footer.php' );

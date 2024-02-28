@@ -358,9 +358,13 @@ require_once( __DIR__ . '/template/main-nav.php' );
 								
 								// Convert hyphens into spaces in the title
 								$title = ucwords( str_replace( '-', ' ', $title ) );
-								$title = str_replace('Rs ', 'RS ', $title);
-								$title = str_replace('Zm ', 'ZM ', $title);
-								$title = str_replace('Aa ', 'AA ', $title);
+								
+								// Capitalize certain words
+								foreach( array('rs', 'zm', 'aa', 'gf') as $word ) {
+									$s = '/\b' . $word . '\b/i';
+									$r = strtoupper($word);
+									$title = preg_replace( $s, $r, $title );
+								}
 								
 								// Number of stars text
 								$stars_text = '';
@@ -382,11 +386,11 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									<?php } ?>
 									
 									<ul class="stats">
-										<li><a href="<?php echo $repo_url; ?>" class="btn"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn-text"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
-										<li><span class="btn-text"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
+										<li><a href="<?php echo $repo_url; ?>" class="btn btn-secondary"><i class="fab fa-github"></i> Repository</a></li>
+										<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
+										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
-											<li><span class="btn-text"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+											<li><span class="btn-text btn-narrow"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
 										<?php } ?>
 									</ul>
 								

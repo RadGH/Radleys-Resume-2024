@@ -61,7 +61,6 @@ html {
 	--fa-primary-opacity: 1;
 
 	--color-primary: var(--red-7);
-	--color-secondary: var(--red-3);
 
 	--color-brand: var(--color-primary);
 	--github-gradient: var( --gradient-13 );
@@ -94,11 +93,14 @@ html {
 
 	--_ink-shadow: var(--_ink-shadow-light);
 
+	--header-shadow--color: currentColor;
+
 	/* Used for buttons, mostly */
 	--_bg-light: var(--surface-0);
 	--_bg-dark: var(--surface-3);
 	--_bg: var(--_bg-light);
 
+	/* Button - primary */
 	--button-border-color: var(--red-7);
 	--button-background-color: var(--red-7);
 	--button-text-color: var(--red-0);
@@ -107,7 +109,14 @@ html {
 	--button-hover-border-color: var(--red-8);
 	--button-hover-background-color: var(--red-6);
 
-	--header-shadow--color: currentColor;
+	/* Button - secondary */
+	--button-secondary-border-color: var(--gray-4);
+	--button-secondary-background-color: var(--gray-4);
+	--button-secondary-text-color: var(--text-1);
+	--button-secondary-text-shadow-color: var(--surface-2);
+
+	--button-secondary-hover-border-color: var(--gray-4);
+	--button-secondary-hover-background-color: var(--gray-3);
 }
 
 html[data-theme="light"] .show-if-dark { display: none; }
@@ -120,7 +129,6 @@ html[data-theme="dark"] {
 	--fa-primary-opacity: 1;
 
 	--color-primary: var(--red-7);
-	--color-secondary: var(--red-3);
 
 	--text-1: var(--gray-1);
 	--text-2: var(--gray-4);
@@ -152,11 +160,14 @@ html[data-theme="dark"] {
 
 	--_ink-shadow: var(--_ink-shadow-dark);
 
+	--header-shadow--color: var(--red-6);
+
 	/* Used for buttons, mostly */
 	--_bg-light: var(--surface-3);
 	--_bg-dark: var(--surface-0);
 	--_bg: var(--_bg-light);
 
+	/* Button - primary */
 	--button-border-color: var(--red-7);
 	--button-background-color: var(--red-7);
 	--button-text-color: var(--gray-1);
@@ -165,7 +176,14 @@ html[data-theme="dark"] {
 	--button-hover-border-color: var(--red-8);
 	--button-hover-background-color: var(--red-6);
 
-	--header-shadow--color: var(--red-6);
+	/* Button - secondary */
+	--button-secondary-border-color: var(--gray-7);
+	--button-secondary-background-color: var(--gray-7);
+	--button-secondary-text-color: var(--text-1);
+	--button-secondary-text-shadow-color: var(--gray-12);
+
+	--button-secondary-hover-border-color: var(--gray-8);
+	--button-secondary-hover-background-color: var(--gray-6);
 }
 
 html[data-theme="dark"] .show-if-light { display: none; }
@@ -186,6 +204,16 @@ html[data-theme="dark"] .show-if-light { display: none; }
 	background: var(--button-hover-background-color, var(--_bg));
 }
 
+/* Secondary button styles */
+:where(.btn.btn-secondary,button,input:is([type=button],[type=submit],[type=reset])) {
+	--button-border-color: var(--button-secondary-border-color);
+	--button-background-color: var(--button-secondary-background-color);
+	--button-text-color: var(--button-secondary-text-color);
+	--button-text-shadow-color: var(--button-secondary-text-shadow-color);
+
+	--button-hover-border-color: var(--button-secondary-hover-border-color);
+	--button-hover-background-color: var(--button-secondary-hover-background-color);
+}
 
 /* Print selectors */
 html:where(.print)       .show-if-screen { display: none; }
@@ -308,11 +336,19 @@ ul.nav-menu li.active a {
 		margin: 0 auto;
 	}
 
+	.main-nav {
+		box-shadow:
+			0 0 40px 0 var(--surface-1),
+			0 0 30px 0 var(--surface-1),
+			0 0 20px 0 var(--surface-1);
+	}
+
 	nav.main-nav .scroll-indicator {
 		position: absolute;
-		bottom: 10px;
-		width: 25px;
-		height: 5px;
+		width: 20px;
+		transform: translateX(-50%);
+
+		/*
 		background-image:
 			radial-gradient(circle, var(--color-primary) 50%, transparent 50%),
 			radial-gradient(circle, var(--color-primary) 50%, transparent 50%),
@@ -320,8 +356,22 @@ ul.nav-menu li.active a {
 		background-size: 5px 5px;
 		background-position: left, center, right;
 		background-repeat: no-repeat;
-		transition: left 0.1s ease-out;
-		transform: translateX(-50%);
+		*/
+
+		transition: all 0.1s ease-out;
+
+		background: var(--text-1);
+		bottom: 0;
+		height: 2px;
+	}
+
+	ul.nav-menu li a:where(:hover,:focus-visible) {
+		text-decoration: none;
+	}
+
+	ul.nav-menu li:not(.active) a:where(:hover,:focus-visible) {
+		/*color: var(--color-primary);*/
+		font-weight: 700;
 	}
 }
 

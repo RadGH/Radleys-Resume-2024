@@ -56,7 +56,6 @@ html[data-theme] {
 	color-scheme: light;
 
 	--color-primary: var(--gray-8);
-	--color-secondary: var(--gray-8);
 
 	--color-brand: var(--color-primary);
 	--github-gradient: var( --gradient-13 );
@@ -91,6 +90,7 @@ html[data-theme] {
 
 	--scrollthumb-color: var(--gray-7);
 
+	/* Button - primary */
 	--button-border-color: var(--gray-6);
 	--button-background-color: var(--surface-1);
 	--button-text-color: var(--text-1);
@@ -98,6 +98,15 @@ html[data-theme] {
 
 	--button-hover-border-color: var(--gray-8);
 	--button-hover-background-color: var(--gray-6);
+
+	/* Button - secondary */
+	--button-secondary-border-color: var(--gray-6);
+	--button-secondary-background-color: var(--surface-1);
+	--button-secondary-text-color: var(--text-1);
+	--button-secondary-text-shadow-color: transparent;
+
+	--button-secondary-hover-border-color: var(--gray-8);
+	--button-secondary-hover-background-color: var(--gray-6);
 }
 
 html a[href]:not(.btn) {

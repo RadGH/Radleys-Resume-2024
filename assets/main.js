@@ -17,10 +17,22 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			toggle_print_mode(false);
 		}
 
-		// Default to browser preference
+		// Default to last used color mode from browser cookie, or fall back to browser preference
 		if ( dark === null ) {
-			dark = window.matchMedia && ! window.matchMedia('(prefers-color-scheme: light)').matches;
+			let mode = localStorage.getItem('color-mode');
+
+			if ( mode === 'dark' || mode === 'light' ) {
+				// Use stored value from previous visit
+				dark = (mode === 'dark');
+			}else{
+				// Use browser preference
+				dark = window.matchMedia && ! window.matchMedia('(prefers-color-scheme: light)').matches;
+			}
+		}else{
+			// Store the color mode in a cookie
+			localStorage.setItem('color-mode', dark ? 'dark' : 'light');
 		}
+
 		HTML.setAttribute( 'data-theme', dark ? 'dark' : 'light' );
 	}
 
@@ -160,6 +172,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			if ( active_section ) {
 				let center_px = Math.round( active_section.a.offsetLeft + active_section.a.offsetWidth / 2 );
 				scroll_indicator.style.left = center_px + 'px';
+
+				let width_px = Math.round( active_section.a.offsetWidth );
+				scroll_indicator.style.width = width_px + 'px';
 			}
 		}
 

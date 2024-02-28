@@ -97,9 +97,13 @@ function years_since( $time, $precision = 0 ) {
 	}
 }
 
-function years_ago( $time, $ago = true ) {
+function years_since_n( $time ) {
 	$years = years_since( $time );
-	$years = _n('%d Year', '%d Years', $years);
+	return _n('%d Year', '%d Years', $years);
+}
+
+function years_ago( $time, $ago = true ) {
+	$years = years_since_n( $time );
 	if ( $ago ) $years .= ' ago';
 	return $years;
 }
@@ -166,7 +170,7 @@ function get_display_url( $url ) {
 	<meta property="og:title" content="<?php echo get_site_title(); ?>">
 	<meta property="og:description" content="<?php echo get_site_description(); ?>">
 	<meta property="og:type" content="website">
-	<meta property="og:image" content="<?php echo RESUME_URL . '/assets/resume-open-graph-image.png'; ?>">
+	<meta property="og:image" content="<?php echo RESUME_URL . '/assets/radley-og-image.png'; ?>">
 	<!-- End OG Image -->
 	
 	<!-- Google tag (gtag.js) -->
@@ -183,32 +187,56 @@ function get_display_url( $url ) {
 
 <body>
 <nav class="main-nav">
-	<div class="inside">
-		<a href="#" class="nav-menu-toggle">
-				
-				<span class="show-if-menu-open">
-					<i class="fas fa-times"></i>
-					<span class="text">Close</span>
-				</span>
-			<span class="show-if-menu-closed">
-					<i class="fas fa-bars"></i>
-					<span class="text">Navigation</span>
-				</span>
-		</a>
+	<a href="#" class="nav-menu-toggle show-if-mobile">
+		<span class="show-if-menu-open">
+			<i class="fas fa-times"></i>
+			<span class="screen-reader-text">Close</span>
+		</span>
+		<span class="show-if-menu-closed">
+			<i class="fas fa-bars"></i>
+			<span class="screen-reader-text">Menu</span>
+		</span>
+		</span>
+	</a>
+	
+	<ul class="nav-menu">
+		<li><a href="#home" class="nav-section">Home</a></li>
+		<li><a href="#profile" class="nav-section">Profile</a></li>
+		<?php /* <li><a href="#skills">Skills</a></li> */ ?>
+		<li><a href="#experience" class="nav-section">Experience</a></li>
+		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
+		<li><a href="#projects" class="nav-section">Projects</a></li>
+		<?php if ( get_github_profile() && get_github_repos() ) { ?>
+			<li><a href="#github" class="nav-section">GitHub</a></li>
+		<?php } ?>
+		<li><a href="#contact" class="nav-section">Contact</a></li>
 		
-		<ul class="nav-menu">
-			<li><a href="#home">Home</a></li>
-			<li><a href="#profile">Profile</a></li>
-			<li><a href="#skills">Skills</a></li>
-			<li><a href="#experience">Experience</a></li>
-			<li><a href="#testimonials">Testimonials</a></li>
-			<li><a href="#projects">Projects</a></li>
-			<?php if ( get_github_profile() && get_github_repos() ) { ?>
-				<li><a href="#github">GitHub</a></li>
-			<?php } ?>
-			<li><a href="#contact">Contact</a></li>
-		</ul>
-	</div>
+		<li class="first-control-button">
+			<a href="#" class="print-mode-toggle control-button">
+				<span class="show-if-print" title="Exit print view">
+					<i class="fas fa-times"></i>
+					<span class="text">Cancel</span>
+				</span>
+				
+				<span class="show-if-screen" title="Enable print view">
+					<i class="fas fa-print"></i>
+					<span class="text">Print</span>
+				</span>
+			</a>
+		</li>
+		<li>
+			<a href="#" class="color-mode-toggle control-button">
+				<span class="show-if-dark" title="Switch to Dark Mode">
+					<i class="far fa-moon"></i>
+					<span class="text">Dark Mode</span>
+				</span>
+				<span class="show-if-light" title="Switch to Light Mode">
+					<i class="far fa-sun" ></i>
+					<span class="text">Light Mode</span>
+				</span>
+			</a>
+		</li>
+	</ul>
 </nav>
 
 <div class="site">
@@ -221,7 +249,7 @@ function get_display_url( $url ) {
 		<div class="title">
 			<div class="heading">
 				<h1><?php echo get_name(); ?></h1>
-				<h2><?php echo get_job_title(); ?></h2>
+				<h2 class="h-regular"><?php echo get_job_title(); ?></h2>
 			</div>
 		</div>
 		
@@ -241,19 +269,6 @@ function get_display_url( $url ) {
 			</ul>
 		</div>
 		
-		<div class="controls">
-			<a href="#" class="print-mode-toggle btn">
-				<span class="icon"><i class="fas fa-print"></i></span>
-				<span class="print-text">Print</span>
-			</a>
-			
-			<a href="#" class="color-mode-toggle btn">
-				<span class="icon"><i class="fas fa-adjust"></i></span>
-				<span class="show-if-dark">Dark</span>
-				<span class="show-if-light">Light</span>
-			</a>
-		</div>
-		
 	</header>
 	
 	<main class="site-body">
@@ -262,7 +277,7 @@ function get_display_url( $url ) {
 			
 			<section class="section profile-section" id="profile">
 				<div class="section-heading heading">
-					<h2>Profile</h2>
+					<h2>Resume &amp; Portfolio</h2>
 				</div>
 				
 				<div class="section-content">
@@ -280,37 +295,36 @@ function get_display_url( $url ) {
 				</div>
 				
 				<div class="section-content">
-					<ul class="category-list">
+					<div class="content">
 						<?php
 						foreach( get_categories() as $current_category ) {
 							?>
-							<li class="category">
-								
-								<span class="category-name"><?php echo $current_category; ?></span>
-								
-								<ul class="skill-list">
-									<?php
-									foreach( get_skills() as $t ) {
-										$label = $t['title'];
-										$start = $t['start'];
-										$category = $t['category'];
-										if ( $category !== $current_category ) continue;
-										
-										$years = years_ago( $start );
-										$tip = $label . ' experience since ' . date( 'Y', $start );
-										$years_tooltip = get_formatted_tooltip( $years, $tip );
-										?>
-										<li class="skill"><?php echo $label; ?>: <?php echo $years_tooltip; ?></li>
-										<?php
-									}
-									?>
-								</ul>
+							<h3><?php echo $current_category; ?></h3>
 							
-							</li>
+							<ul class="skill-list">
+								<?php
+								foreach( get_skills() as $t ) {
+									$label = $t['title'];
+									$start = $t['start'];
+									$category = $t['category'];
+									if ( $category !== $current_category ) continue;
+									
+									$years = years_since_n( $start );
+									$tip = $label . ' experience since ' . date( 'Y', $start );
+									$years_tooltip = get_formatted_tooltip( $years, $tip );
+									?>
+									<li class="skill">
+										<span class="label"><?php echo $label; ?><span class="colon">:</span></span>
+										<span class="years"><?php echo $years_tooltip; ?></span>
+									</li>
+									<?php
+								}
+								?>
+							</ul>
 							<?php
 						}
 						?>
-					</ul>
+					</div>
 				</div>
 			</section>
 			
@@ -333,19 +347,20 @@ function get_display_url( $url ) {
 							$end = $e['end'];
 							$description = $e['description'];
 							
-							$tip = 'From ' . date( 'Y', $start ) . ' to ' . ( $end ? date( 'Y', $end ) : 'Present' );
-							$years = strtolower( years_ago( $start, '' ) );
-							$years_tooltip = get_formatted_tooltip( $years, $tip );
+							$date_range = date( 'Y', $start ) . ' – ' . ($end ? date( 'Y', $end ) : 'Current');
+							if ( date('Y', $start) === date('Y', $end) ) {
+								$date_range = date( 'Y', $start );
+							}
 							?>
 							<li class="job">
 								<div class="heading">
-									<h3><?php echo $job_title; ?></h3>
+									<h3 class="job-title"><?php echo $job_title; ?></h3>
 									<?php if ( $company_name ) { ?>
-										<h4 class="company"><?php echo $company_name; ?></h4>
+										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
 									<?php } ?>
 								</div>
 								
-								<div class="date"><?php echo date( 'Y', $start ); ?> - <?php echo $end ? date( 'Y', $end ) : 'Present'; ?></div>
+								<div class="date"><?php echo $date_range; ?></div>
 								
 								<?php if ( $description ) { ?>
 									<div class="content">
@@ -384,7 +399,7 @@ function get_display_url( $url ) {
 									<h3 class="name"><?php echo $name; ?></h3>
 									
 									<?php if ( $company_name ) { ?>
-										<h4 class="company"><?php echo $company_name; ?></h4>
+										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
 									<?php } ?>
 								</div>
 								
@@ -456,12 +471,12 @@ function get_display_url( $url ) {
 								
 								<?php if ( $url || $years ) { ?>
 									<ul class="stats">
-										<?php if ( $url ) { ?>
+										<?php /* if ( $url ) { ?>
 											<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
-										<?php } ?>
+										<?php } */ ?>
 										
 										<?php if ( $years ) { ?>
-											<li><span class="btn-text"><i class="fad fa-calendar"></i> <?php echo $years; ?> ago</span></li>
+											<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <?php echo $years; ?> ago</span></li>
 										<?php } ?>
 									</ul>
 								<?php } ?>
@@ -597,10 +612,10 @@ function get_display_url( $url ) {
 									
 									<ul class="stats">
 										<li><a href="<?php echo $repo_url; ?>" class="btn"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn-text"><i class="fad fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
-										<li><span class="btn-text"><i class="fad fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
+										<li><span class="btn-text"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
+										<li><span class="btn-text"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
-										<li><span class="btn-text"><i class="fad fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+										<li><span class="btn-text"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
 										<?php } ?>
 									</ul>
 									

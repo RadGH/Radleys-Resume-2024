@@ -17,20 +17,20 @@ return array(
 			'title' => 'Location',
 			'label' => 'Veneta, OR',
 			'url' => 'https://www.google.com/maps/place/Veneta,+OR+97487',
-			'icon_html' => '<i class="fad fa-map-marker-alt"></i>',
+			'icon_html' => '<i class="fas fa-map-marker-alt"></i>',
 		),
 		array(
 			'title' => 'Email',
 			'label' => 'radleygh@gmail.com',
 			'url' => 'mailto:radleygh@gmail.com',
-			'icon_html' => '<i class="fad fa-envelope-open-text"></i>',
+			'icon_html' => '<i class="fas fa-envelope-open-text"></i>',
 		),
 		/*
 		array(
 			'title' => 'Phone',
 			'label' => '+1 (541) 513-8145',
 			'url' => 'tel:1-541-513-8145',
-			'icon_html' => '<i class="fad fa-phone-alt"></i>',
+			'icon_html' => '<i class="fas fa-phone-alt"></i>',
 		),
 		*/
 		/*
@@ -45,11 +45,7 @@ return array(
 			'title' => 'Github',
 			'label' => 'github.com/RadGH',
 			'url' => 'https://github.com/RadGH/',
-			'icon_html' => '
-  <span class="fa-stack fa-1x">
-    <i class="fas fa-circle fa-stack-1x fa-secondary"></i>
-    <i class="fab fa-github fa-stack-1x fa-primary"></i>
-  </span>',
+			'icon_html' => '<i class="fab fa-github"></i>',
 		),
 	),
 	
@@ -121,21 +117,15 @@ return array(
 	
 	// Content areas
 	'profile' => '
-		<p>I\'m a <strong>[job_title]</strong> with [dev_time_lower] of experience in web development. I\'m proficient with may design and
-		development tools, and capable of managing Unix servers.</p>
-		<p>My day-to-day work involves maintaining hosted websites for clients, developing custom themes and plugins, and
-		optimizing websites for speed and performance.</p>
-		<div class="heading"><h3>Preferred Software</h3></div>
-		<p>Most of my projects are built with PHPStorm using Git. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout,
-		Photoshop for graphic design, and Inkscape for vector graphics.</p>
-		<div class="heading"><h3>WordPress Specialist</h3></div>
+		<p>Hello and welcome to my online resume and portfolio. My name is Radley, and I\'m a <strong>[job_title]</strong> with [dev_time_lower] of experience in web development.</p>
+		<p>I\'m proficient with many design and development tools and maintain several Unix-based web servers. My day-to-day work involves maintaining hosted websites for clients, developing custom themes and plugins, and optimizing websites for speed and performance.</p>
+		<h3>Preferred Software</h3>
+		<p>Most of my projects are built with PHPStorm, along with Git for version control. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout, Photoshop for graphic design, and Inkscape for vector graphics. I also use ShareX for taking <a href="https://radleysustaire.com/s3/f63f60/chrome" target="_blank">screenshots</a>.</p>
+		<h3>WordPress Specialist</h3>
 		<p>I have focused <em>exclusively</em> on WordPress development since 2017. Recently I\'ve been working with Full Site Editor and the block themes.</p>
-		<div class="heading"><h3>Hobbies</h3></div>
+		<h3>Hobbies</h3>
 		<p>I enjoy painting with acrylics and oils, riding my road bike, and playing all kinds of games. My favorite game is Dungeons &amp; Dragons where I prefer a spell-casting Wizard or Cleric, unless I\'m the DM.</p>
 		',
-	
-	'hobbies' => '
-	',
 	
 	
 	// Employment History
@@ -182,7 +172,7 @@ return array(
 			',
 		),
 		array(
-			'job_title' => 'Freelance WordPress Developer',
+			'job_title' => 'WordPress Developer',
 			'company_name' => 'Bridge Town Home Buyers, LLC',
 			'start' => strtotime('2016-01-01'),
 			'end' => strtotime('2016-12-31'),
@@ -194,7 +184,7 @@ return array(
 			',
 		),
 		array(
-			'job_title' => 'Freelance WordPress Developer',
+			'job_title' => 'WordPress Developer',
 			'company_name' => 'CaseSwap',
 			'start' => strtotime('2015-01-01'),
 			'end' => strtotime('2015-12-31'),
@@ -220,13 +210,13 @@ return array(
 			',
 		),
 		array(
-			'job_title' => 'Freelance WordPress Developer',
+			'job_title' => 'Web Developer / IT',
 			'company_name' => 'oDesk',
 			'start' => strtotime('2007-01-01'),
 			'end' => strtotime('2011-12-31'),
 			'description' => '
 				<ul>
-					<li>Worked with a variety of clients on many web development projects, big and small.</li>
+					<li>Worked with a variety of clients on many web development projects.</li>
 					<li>Performed IT work, including Windows tutoring and building automation software.</li>
 				</ul>
 			',

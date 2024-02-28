@@ -82,12 +82,12 @@ html[data-theme] {
 	--surface-5: var(--gray-9);
 	--surface-6: var(--gray-12);
 
-	--heading-1--color: var(--gray-8);
-	--heading-2--color: var(--gray-7);
-	--heading-3--color: var(--gray-6);
-	--heading-4--color: var(--gray-5);
-	--heading-5--color: var(--gray-4);
-	--heading-6--color: var(--gray-3);
+	--heading-1--color: var(--gray-10);
+	--heading-2--color: var(--gray-10);
+	--heading-3--color: var(--gray-10);
+	--heading-4--color: var(--gray-10);
+	--heading-5--color: var(--gray-10);
+	--heading-6--color: var(--gray-10);
 
 	--scrollthumb-color: var(--gray-7);
 

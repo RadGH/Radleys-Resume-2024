@@ -332,6 +332,10 @@ ul.nav-menu li.active a {
 		padding: var(--spacing--x-large) var(--spacing--small);
 		text-align: right;
 		background: none;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
 	}
 
 	ul.nav-menu {

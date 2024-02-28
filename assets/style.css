@@ -323,6 +323,30 @@ ul.nav-menu li.active a {
 }
 
 
+@media ( min-width: 1500.1px ) {
+	nav.main-nav {
+		position: fixed;
+		right: calc(50% +  (var(--site-width) / 2));
+		top: 0;
+		bottom: 0;
+		padding: var(--spacing--x-large) var(--spacing--small);
+		text-align: right;
+		background: none;
+	}
+
+	ul.nav-menu {
+		flex-direction: column;
+	}
+
+	ul.nav-menu li.first-control-button {
+		margin-top: var(--spacing--medium);
+	}
+
+	nav.main-nav .scroll-indicator {
+		display: none;
+	}
+}
+
 @media ( min-width: 980.1px ) {
 	.show-if-mobile { display: none; }
 

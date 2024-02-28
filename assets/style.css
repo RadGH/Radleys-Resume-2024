@@ -646,13 +646,16 @@ ul.github-list li.github-item {
 	}
 }
 
+ul.list-cards > li {
+	overflow: hidden;
+	border: 1px solid var(--color-primary);
+	border-radius: var(--radius-3);
+	padding: var(--spacing--medium);
+	background: var(--surface-0);
+}
+
 @media screen {
 	ul.list-cards > li {
-		overflow: hidden;
-		border: 1px solid var(--color-primary);
-		border-radius: var(--radius-3);
-		padding: var(--spacing--medium);
-		background: var(--surface-0);
 	}
 }
 /* End: Github repos list */

@@ -40,11 +40,11 @@
 			<a href="#" class="color-mode-toggle control-button">
 				<span class="show-if-dark" title="Switch to Dark Mode">
 					<i class="far fa-moon"></i>
-					<span class="text">Dark Mode</span>
+					<span class="text">Dark</span>
 				</span>
 				<span class="show-if-light" title="Switch to Light Mode">
 					<i class="far fa-sun" ></i>
-					<span class="text">Light Mode</span>
+					<span class="text">Light</span>
 				</span>
 			</a>
 		</li>

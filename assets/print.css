@@ -113,13 +113,8 @@ html a[href]:not(.btn) {
 	color: var(--color-primary);
 }
 
-ul.github-list li.github-item {
+ul.list-cards > li {
 	background: none;
-	border: 1px solid var(--gray-3);
-}
-
-ul.github-list li.github-item::before {
-	display: none;
 }
 
 a.tooltip {

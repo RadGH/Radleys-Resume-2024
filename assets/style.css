@@ -528,6 +528,16 @@ a.tooltip {
 	text-decoration-skip-ink: auto;
 }
 
+/* Header */
+@media ( min-width: 1200.1px ) {
+	.site-header {
+		grid-template-columns: 2fr 4fr;
+		max-width: 950px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
 /* Header - Title */
 .site-header .title h1 {
 	line-height: 1.15;

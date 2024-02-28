@@ -192,7 +192,7 @@ body {
 /* Header - Title */
 .site-header .title {
 	display: grid;
-	align-items: center;
+	align-items: end;
 }
 
 /* Header - Links */

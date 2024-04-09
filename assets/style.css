@@ -224,9 +224,9 @@ html:where(:not(.print)) .show-if-print { display: none; }
 @media screen {
 	:where(h1, h2, h3, h4, h5, h6) {
 		text-shadow:
-			0 0.15vh var(--surface-2),
-			0 -0.15vh var(--surface-2),
-			0 0.25vh var(--header-shadow--color);
+			0 0.3vh var(--surface-1),
+			0 -0.3vh var(--surface-1),
+			0 0.5vh var(--header-shadow--color);
 	}
 }
 

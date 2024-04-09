@@ -84,6 +84,43 @@ function get_year( $time ) {
 	return date( 'Y', $time );
 }
 
+// Convert a date to a human-readable format such as "3 days ago"
+function time_since( $time ) {
+	$diff = time() - $time;
+	
+	if ( $diff < 60 ) {
+		return _n( '1 Second', '%d Seconds', $diff );
+	}
+	
+	$diff = round( $diff / 60 );
+	if ( $diff < 60 ) {
+		return _n( '1 Minute', '%d Minutes', $diff );
+	}
+	
+	$diff = round( $diff / 60 );
+	if ( $diff < 24 ) {
+		return _n( '1 Hour', '%d Hours', $diff );
+	}
+	
+	$diff = round( $diff / 24 );
+	if ( $diff < 7 ) {
+		return _n( '1 Day', '%d Days', $diff );
+	}
+	
+	$diff = round( $diff / 7 );
+	if ( $diff < 4 ) {
+		return _n( '1 Week', '%d Weeks', $diff );
+	}
+	
+	$diff = round( $diff / 4 );
+	if ( $diff < 12 ) {
+		return _n( '1 Month', '%d Months', $diff );
+	}
+	
+	$diff = round( $diff / 12 );
+	return _n( '1 Year', '%d Years', $diff );
+}
+
 // Get the number of years since the given timestamp.
 function years_since( $time, $precision = 0 ) {
 	// 31556952 is the number of seconds in a year

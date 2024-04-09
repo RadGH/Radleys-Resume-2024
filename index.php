@@ -351,10 +351,11 @@ require_once( __DIR__ . '/template/main-nav.php' );
 								
 								$i += 1;
 								
-								$date_created = date( 'F Y', $created_at );
-								$date_updated = date( 'F Y', $updated_at );
+								// $date_created = date( 'F Y', $created_at );
+								// $date_updated = date( 'F Y', $updated_at );
 								
-								$years = years_ago( $created_at );
+								$date_formatted = date( 'F j, Y', $created_at );
+								$time_since = time_since( $created_at ) . ' ago';
 								
 								// Convert hyphens into spaces in the title
 								$title = ucwords( str_replace( '-', ' ', $title ) );
@@ -387,7 +388,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									
 									<ul class="stats stats-minor">
 										<li><a href="<?php echo $repo_url; ?>" class="btn btn-secondary"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <span class="value"><?php echo $years; ?></span></li>
+										<li><span class="btn-text btn-narrow" title="Created <?php echo $date_formatted; ?>" onclick="alert(this.title); return false;"><i class="far fa-calendar"></i> <span class="value"><?php echo $time_since; ?></span></li>
 										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
 										<?php if ( $stars_text ) { ?>
 											<li><span class="btn-text btn-narrow"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>

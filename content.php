@@ -271,6 +271,14 @@ return array(
 	
 	'projects' => array(
 		array(
+			'title' => 'Great City Medical',
+			'date' => strtotime('2023-10-01'),
+			'url' => 'https://greatcitymedical.com/',
+			'image_url' => '/assets/websites/great-city-medical.jpg',
+			'description' => 'Complete website rebuild from a Figma design. Multilingual support with TranslatePress. Block theme with many customizable blocks to display icons, ratings, and testimonials.',
+			'credits' => '<p>Designed by Pavel. Built by Radley.</p>',
+		),
+		array(
 			'title' => 'Concealed Nation',
 			'date' => strtotime('2020-01-01'),
 			'url' => 'https://concealednation.org/',

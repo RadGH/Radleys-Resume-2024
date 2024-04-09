@@ -120,7 +120,7 @@ return array(
 		<p>Hello and welcome to my online resume and portfolio. My name is Radley, and I\'m a <strong>[job_title]</strong> with [dev_time_lower] of experience in web development.</p>
 		<p>I\'m proficient with many design and development tools and maintain several Unix-based web servers. My day-to-day work involves maintaining hosted websites for clients, developing custom themes and plugins, and optimizing websites for speed and performance.</p>
 		<h3>Preferred Software</h3>
-		<p>Most of my projects are built with PHPStorm, along with Git for version control. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout, Photoshop for graphic design, and Inkscape for vector graphics. I also use ShareX for taking <a href="https://radleysustaire.com/s3/f63f60/chrome" target="_blank">screenshots</a>.</p>
+		<p>Most of my projects are built with PHPStorm, along with Git for version control. My AI tool of choice is GitHub Copilot. For design I prefer using Figma for layout, Photoshop for graphic design, and Inkscape for vector graphics. I use ShareX for taking screenshots and OBS for recording videos.</p>
 		<h3>WordPress Specialist</h3>
 		<p>I have focused <em>exclusively</em> on WordPress development since 2017. Recently I\'ve been working with Full Site Editor and the block themes.</p>
 		<h3>Hobbies</h3>
@@ -271,12 +271,32 @@ return array(
 	
 	'projects' => array(
 		array(
+			'title' => 'SkillBridge Insight',
+			'date' => strtotime('2024-02-01'),
+			'url' => false, // not live yet
+			'not_available_message' => 'Project has not yet launched',
+			'image_url' => '/assets/websites/skillbridge.jpg',
+			'description' => 'Complete website build from a Figma design. Full Site Editor theme based on the Block Editor. Features company reviews with calculated star ratings and average scores based on review form questions. Companies can reply to reviews. All reviews require admin approval and send email notifications to all parties.',
+			'credits' => '<p>Designed by Phillip DeVita. Built by Radley.</p>',
+			'agency' => 'Alchemy + Aim',
+		),
+		array(
 			'title' => 'Great City Medical',
 			'date' => strtotime('2023-10-01'),
 			'url' => 'https://greatcitymedical.com/',
 			'image_url' => '/assets/websites/great-city-medical-3.jpg',
 			'description' => 'Complete website rebuild from a Figma design. Multilingual support with TranslatePress. Block theme with many customizable blocks to display icons, ratings, and testimonials.',
 			'credits' => '<p>Designed by Pavel. Built by Radley.</p>',
+			'agency' => false,
+		),
+		array(
+			'title' => 'Eugene Area Gleaners',
+			'date' => strtotime('2023-04-01'),
+			'url' => 'https://eugeneareagleaners.com/',
+			'image_url' => '/assets/websites/eugene-area-gleaners.jpg',
+			'description' => 'Website built with the Divi theme. I especially like the hover effects in the header area. I redesigned the logo, compare to the old version at the bottom of the <a href="https://eugeneareagleaners.com/branding/" target="_blank">Branding</a> page.',
+			'credits' => '<p>Designed and built by Radley.</p>',
+			'agency' => false,
 		),
 		array(
 			'title' => 'Concealed Nation',
@@ -285,6 +305,7 @@ return array(
 			'image_url' => '/assets/websites/concealed-nation-2.png',
 			'description' => 'Complete website rebuild optimized for thousands of concurrent visitors. Consolidated dozens of plugins into a small list of essentials.',
 			'credits' => '<p>Designed and built by Radley.</p>',
+			'agency' => false,
 		),
 		array(
 			'title' => 'Peg Rodrigues',
@@ -294,6 +315,7 @@ return array(
 			'description' => 'Built for Alchemy + Aim, designed by Rachel Pesso.',
 			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+			'agency' => 'Alchemy + Aim',
 		),
 		array(
 			'title' => 'Kruggsmash',
@@ -302,6 +324,7 @@ return array(
 			'image_url' => '/assets/websites/kruggsmash-2.png',
 			'description' => 'This website was donated to Kruggsmash. He\'s one of my favorite YouTubers and makes excellent Dwarf Fortress videos.',
 			'credits' => '<p>Designed and built by Radley.</p>',
+			'agency' => false,
 		),
 		array(
 			'title' => 'ZingMap',
@@ -310,56 +333,63 @@ return array(
 			'image_url' => '/assets/websites/zingmap.png',
 			'description' => 'Radley\'s hosting company website.',
 			'credits' => '<p>Designed and built by Radley.</p>',
+			'agency' => false,
 		),
 		array(
 			'title' => 'Tracy O\'Malley',
 			'date' => strtotime('2017-01-01'),
-			'url' => 'http://tracyomalley.com/',
+			// 'url' => 'https://tracyomalley.com/',
 			'image_url' => '/assets/websites/tracy-omalley.png',
 			'description' => 'Website for Peg Rodrigues work and travel website.',
 			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+			'agency' => 'Alchemy + Aim',
 		),
 		array(
 			'title' => 'Steelhead Brewing Company',
 			'date' => strtotime('2016-01-01'),
-			'url' => 'https://steelheadbrewery.com/',
+			// 'url' => 'https://steelheadbrewery.com/',
 			'image_url' => '/assets/websites/steelhead.png',
 			'description' => 'Beer list and restaurant menu with two locations to choose from.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 		array(
 			'title' => 'The Adrienne St Clair Group',
 			'date' => strtotime('2015-01-01'),
-			'url' => 'https://www.thestclairs.com/',
+			// 'url' => 'https://www.thestclairs.com/',
 			'image_url' => '/assets/websites/st-clairs.png',
 			'description' => 'Property locator plugin (iHomeFinder), Unique day/night theme, Animated front page.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 		array(
 			'title' => 'Fight Club 2: Project Mayhem (Dark Horse Comics)',
 			'date' => strtotime('2015-01-01'),
-			'url' => 'https://joinprojectmayhem.com/',
+			// 'url' => 'https://joinprojectmayhem.com/',
 			'image_url' => '/assets/websites/project-mayhem.png',
 			'description' => 'Custom map-style interface. Many animations. Contribute & Sightings section managed by custom post types. User submitted content.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 		array(
 			'title' => 'Willamalane Parks & Recreation District',
 			'date' => strtotime('2014-01-01'),
-			'url' => 'http://willamalane.org/',
+			// 'url' => 'http://willamalane.org/',
 			'image_url' => '/assets/websites/willamalane.png',
 			'description' => 'Custom map locators for Parks, Facilities, and Bird trails. Custom post type for taking classes. Advanced navigation and mobile menus. ADA Section 503c Compliance.',
 			'credits' => '<p><em>Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 		array(
 			'title' => 'Bowtech Archery',
 			'date' => strtotime('2014-01-01'),
-			'url' => 'https://bowtecharchery.com/',
+			// 'url' => 'https://bowtecharchery.com/',
 			'image_url' => '/assets/websites/bowtech.png',
 			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 		array(
 			'title' => 'Gorilla Capital',
@@ -368,6 +398,7 @@ return array(
 			'image_url' => '/assets/websites/gorilla-capital.png',
 			'description' => 'Custom built property locator, Custom advanced search tool, Custom Fix + Flip Calculator.',
 			'credits' => '<p><em>Built for Limelight Department.</em></p>',
+			'agency' => 'Limelight Department',
 		),
 	),
 );

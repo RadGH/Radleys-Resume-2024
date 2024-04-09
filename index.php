@@ -194,12 +194,15 @@ require_once( __DIR__ . '/template/main-nav.php' );
 						<?php
 						foreach( get_projects() as $e ) {
 							$title = $e['title'];
-							$url = $e['url'];
+							$url = $e['url'] ?? false;
+							$not_available_message = $e['not_available_message'] ?? 'No longer available';
 							$image_url = $e['image_url'];
 							$description = $e['description'];
 							$credits = $e['credits'];
-							$years = years_since($e['date']);
-							$years = _n('%d year', '%d years', $years);
+							// $years = years_since($e['date']);
+							// $years = _n('%d year', '%d years', $years);
+							$time_since = time_since($e['date']);
+							$date_formatted = date( 'F Y', $e['date'] );
 							?>
 							<li class="project">
 								<?php if ( $image_url ) { ?>
@@ -240,17 +243,17 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									</div>
 								<?php } ?>
 								
-								<?php if ( $url || $years ) { ?>
-									<ul class="stats stats-minor">
-										<?php /* if ( $url ) { ?>
-										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">View Project</a></li>
-									<?php } */ ?>
-										
-										<?php if ( $years ) { ?>
-											<li><span class="btn-text btn-narrow"><i class="far fa-calendar"></i> <?php echo $years; ?> ago</span></li>
-										<?php } ?>
-									</ul>
-								<?php } ?>
+								<ul class="stats stats-minor">
+									<?php if ( $url ) { ?>
+										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">Visit Website</a></li>
+									<?php }else{ ?>
+										<li><a href="#" class="btn btn-disabled tooltip" title="<?php echo $not_available_message; ?>">Not Available</a></li>
+									<?php } ?>
+									
+									<?php if ( $time_since ) { ?>
+										<li><a class="btn btn-text btn-narrow tooltip" title="Created in <?php echo $date_formatted; ?>"><i class="far fa-calendar"></i> <?php echo $time_since; ?> ago</a></li>
+									<?php } ?>
+								</ul>
 							</li>
 							<?php
 						}
@@ -388,10 +391,10 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									
 									<ul class="stats stats-minor">
 										<li><a href="<?php echo $repo_url; ?>" class="btn btn-secondary"><i class="fab fa-github"></i> Repository</a></li>
-										<li><span class="btn-text btn-narrow" title="Created <?php echo $date_formatted; ?>" onclick="alert(this.title); return false;"><i class="far fa-calendar"></i> <span class="value"><?php echo $time_since; ?></span></li>
-										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></li>
+										<li><a class="btn btn-text btn-narrow tooltip" title="Created <?php echo $date_formatted; ?>"><i class="far fa-calendar"></i> <span class="value"><?php echo $time_since; ?></span></a></li>
+										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></span></li>
 										<?php if ( $stars_text ) { ?>
-											<li><span class="btn-text btn-narrow"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></li>
+											<li><span class="btn-text btn-narrow"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></span></li>
 										<?php } ?>
 									</ul>
 								

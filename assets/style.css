@@ -117,6 +117,15 @@ html {
 
 	--button-secondary-hover-border-color: var(--gray-4);
 	--button-secondary-hover-background-color: var(--gray-3);
+
+	/* Button - disabled */
+	--button-disabled-border-color: var(--gray-7);
+	--button-disabled-background-color: var(--gray-7);
+	--button-disabled-text-color: var(--gray-4);
+	--button-disabled-text-shadow-color: var(--gray-9);
+
+	/* Message popup (toasts) */
+
 }
 
 html[data-theme="light"] .show-if-dark { display: none; }
@@ -215,6 +224,17 @@ html[data-theme="dark"] .show-if-light { display: none; }
 	--button-hover-background-color: var(--button-secondary-hover-background-color);
 }
 
+
+/* Disabled button styles */
+:where(.btn.btn-disabled,button,input:is([type=button],[type=submit],[type=reset])),
+:where(.btn.btn-disabled,button,input:is([type=button],[type=submit],[type=reset])):where(:hover,:focus-visible) {
+	border-color: var(--button-disabled-border-color);
+	background: var(--button-disabled-background-color);
+	color: var(--button-disabled-text-color);
+	text-shadow: 0 1px 0 var(--button-disabled-text-shadow-color, var(--_ink-shadow));
+	cursor: default;
+}
+
 /* Print selectors */
 html:where(.print)       .show-if-screen { display: none; }
 html:where(:not(.print)) .show-if-print { display: none; }
@@ -226,7 +246,7 @@ html:where(:not(.print)) .show-if-print { display: none; }
 		text-shadow:
 			0 0.3vh var(--surface-1),
 			0 -0.3vh var(--surface-1),
-			0 0.5vh var(--header-shadow--color);
+			0 0.4vh var(--header-shadow--color);
 	}
 }
 
@@ -477,7 +497,6 @@ html[data-theme="light"] {
 
 .btn-text:where(:not(:focus,:hover,:active)) {
 	color: var(--text-1);
-	border-color: transparent;
 	outline: none;
 	background: transparent;
 	box-shadow: none;
@@ -485,12 +504,19 @@ html[data-theme="light"] {
 	--fa-primary-color: var(--text-1);
 	--fa-secondary-color: var(--text-2);
 	--fa-secondary-opacity: 0.5;
+	border: none;
+	border-bottom: 2px solid transparent;
 }
 
 .btn-text:where(:focus,:hover,:active) {
 	--fa-primary-color: var(--surface-0);
 	--fa-secondary-color: var(--surface-0);
 	--fa-secondary-opacity: 1;
+	background: none;
+	box-shadow: none;
+	border-radius: 0;
+	border: none;
+	border-bottom: 2px solid currentColor;
 }
 
 .btn-text {
@@ -524,6 +550,13 @@ span.btn-text {
 	--fa-secondary-opacity: 0.5;
 }
 
+/* Buttons with icons */
+.btn:where(:hover, :focus-visible) .fad{
+	--fa-primary-color: var(--button-text-color);
+	--fa-secondary-color: var(--surface-5);
+}
+/* End: Buttons with icons */
+
 /*
 Header
 */
@@ -547,7 +580,8 @@ General
 	text-decoration: underline;
 }
 
-a.tooltip {
+.tooltip-underline,
+.content a.tooltip-underline {
 	color: var( --text-2 );
 	text-decoration: underline;
 	text-decoration-style: dotted;
@@ -555,6 +589,7 @@ a.tooltip {
 	text-underline-offset: 3px;
 	text-decoration-skip-ink: auto;
 }
+
 
 /* Header */
 @media ( min-width: 1200.1px ) {
@@ -681,3 +716,50 @@ ul.project-list .image {
 	position: relative;
 }
 /* End: Projects */
+
+/*
+Tooltip toasts
+These appear on click and dismiss automatically. See main.js -> setup_click_message_popup()
+
+Timeline:
+0.00s - popup appended (hidden)
+0.15s - "reveal" class added (fade in)
+5.00s - "reveal" class removed, "fade-out" class added (fade out)
+5.50s - popup removed
+*/
+.popup-container {
+	position: fixed;
+	bottom: clamp(10px, 8vh, 80px);
+	left: 50%;
+	transform: translateX(-50%);
+	max-width: 50%;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	z-index: 20;
+}
+
+.popup-container .popup {
+	padding: 10px 20px;
+	background: rgba(255,255,255,0.05);
+
+	background: var(--surface-2);
+	border: 1px solid var(--surface-4);
+	border-radius: 100px;
+	box-shadow: 0 3px 10px rgba(0,0,0,0.5);
+}
+
+.popup-container .popup {
+	opacity: 0;
+	transition: opacity 150ms linear;
+}
+
+.popup-container .popup.reveal {
+	opacity: 1;
+}
+
+.popup-container .popup.fade-out {
+	opacity: 0;
+	transition: opacity 500ms linear;
+}
+/* End: Tooltip toasts */

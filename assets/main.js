@@ -50,15 +50,6 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			set_color_mode( HTML.getAttribute('data-theme') !== 'dark' );
 		}
 
-		// When clicking ".tooltip", show the "title" in an alert
-		document.body.addEventListener( 'click', function( e ) {
-			if ( e.target.classList.contains( 'tooltip' ) ) {
-				alert( e.target.title );
-				e.preventDefault();
-				e.stopPropagation();
-			}
-		});
-
 		// When clicking ".color-mode-toggle", toggle the color mode
 		if ( COLOR_BUTTON ) COLOR_BUTTON.addEventListener( 'click', function( e ) {
 			toggle_color_mode();
@@ -315,6 +306,52 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		update_scroll_indicator();
 		activate_sections();
 	};
+	
+	const setup_click_message_popup = function() {
+		// Create a new div to hold each item
+		const POPUP_CONTAINER = document.createElement('div');
+		POPUP_CONTAINER.classList.add('popup-container');
+		document.body.appendChild( POPUP_CONTAINER );
+		
+		// Create a new popup item with this function
+		const create_popup = function( message, type = 'success', duration = null ) {
+			let popup = document.createElement('div');
+			popup.classList.add('popup', type);
+			popup.innerHTML = message;
+			POPUP_CONTAINER.appendChild( popup );
+
+			if ( duration === null ) duration = 3000;
+
+			const fade_in_time = 150; // ms
+			const fade_out_time = 500; // ms
+
+			setTimeout(function() {
+				popup.classList.add('reveal');
+			}, fade_in_time);
+
+			setTimeout(function() {
+				popup.classList.remove('reveal');
+				popup.classList.add('fade-out');
+				setTimeout(function() {
+					POPUP_CONTAINER.removeChild( popup );
+				}, fade_out_time);
+			}, duration);
+		};
+		
+		// When clicking a link with the class "tooltip", show a message popup
+		document.body.addEventListener( 'click', function( e ) {
+			// Get the <a> element from the target, or the closest parent
+			let anchor = e.target.closest('a');
+
+			if ( anchor.classList.contains('tooltip') ) {
+				let message = anchor.title || anchor.innerHTML;
+				let type = anchor.getAttribute('data-type') || 'success';
+				let duration = anchor.getAttribute('data-duration') || null;
+				create_popup( message, type, duration );
+				e.preventDefault();
+			}
+		});
+	};
 
 	setup_color_mode();
 
@@ -323,5 +360,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	setup_nav_menu();
 
 	setup_nav_scroll();
+	
+	setup_click_message_popup();
 
 });

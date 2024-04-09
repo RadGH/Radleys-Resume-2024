@@ -61,7 +61,7 @@ function get_testimonials() { return load_content( 'testimonials' ); }
 function get_projects() { return load_content( 'projects' ); }
 
 function get_formatted_tooltip( $text, $tooltip ) {
-	return '<a href="#" class="tooltip" title="' . $tooltip . '">' . $text . '</a>';
+	return '<a href="#" class="tooltip tooltip-underline" title="' . $tooltip . '">' . $text . '</a>';
 }
 
 // Format as plural or singular and inserts the number as %1$d

@@ -362,6 +362,9 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	};
 
 	function setup_isotope() {
+	}
+
+	function setup_filters() {
 		// Each filter link must have an attribute: data-filter="{tag}"
 		// Each project item should have a corresponding class: "tag-{tag}"
 		let filter_areas = [
@@ -451,5 +454,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	setup_click_message_popup();
 
 	setup_isotope();
+
+	setup_filters();
 
 });

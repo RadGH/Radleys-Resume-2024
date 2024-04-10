@@ -17,27 +17,35 @@ require_once( __DIR__ . '/template/main-nav.php' );
 			<img src="<?php echo RESUME_URL . get_image_url(); ?>" alt="Portrait photo of Radley">
 		</div>
 		
-		<div class="title">
-			<div class="heading">
-				<h1><?php echo get_name(); ?></h1>
-				<h2 class="h-regular"><?php echo get_job_title(); ?></h2>
-			</div>
-		</div>
+		<div class="details">
+			<h1 class="header-title"><?php echo get_name(); ?></h1>
+			
+			<h2 class="header-subtitle h-regular"><?php echo get_job_title(); ?></h2>
 		
-		<div class="links">
-			<ul class="link-list">
-				<?php
-				foreach( get_links() as $link ) {
-					$icon = trim($link['icon_html']);
-					if ( $icon ) $icon = '<span class="icon">' . $icon . '</span>';
-					?>
-					<li>
-						<a href="<?php echo $link['url']; ?>"><?php echo $icon; ?><span class="text"><?php echo $link['label']; ?></span></a>
-					</li>
+			<div class="links">
+				<ul class="link-list">
 					<?php
-				}
-				?>
-			</ul>
+					foreach( get_links() as $link ) {
+						$icon = trim($link['icon_html']);
+						if ( $icon ) $icon = '<span class="icon">' . $icon . '</span>';
+						?>
+						<li>
+							<a href="<?php echo $link['url']; ?>"><?php echo $icon; ?><span class="text"><?php echo $link['label']; ?></span></a>
+						</li>
+						<?php
+					}
+					?>
+				</ul>
+			</div>
+			
+			<div class="agency-list count-2">
+				<div class="agency agency-zingmap">
+					<a href="https://zingmap.com/" title="ZingMap" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/zingmap-2.png'; ?>" alt="ZingMap Logo"></a>
+				</div>
+				<div class="agency agency-alchemyandaim">
+					<a href="https://alchemyandaim.com/" title="Alchemy and Aim" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/alchemy.png'; ?>" alt="ZingMap Logo"></a>
+				</div>
+			</div>
 		</div>
 	
 	</header>
@@ -235,7 +243,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 							
 							$atts = '';
 							$atts .= 'alt="Screenshot of ' . $title . '" ';
-							if ( $image_size[0] > 0 && $image_size[1] > 0 ) {
+							if ( $image_size && $image_size[0] > 0 && $image_size[1] > 0 ) {
 								$atts .= 'width="'. $image_size[0] .'" ';
 								$atts .= 'height="'. $image_size[1] .'" ';
 							}

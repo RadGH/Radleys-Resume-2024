@@ -9,7 +9,6 @@
 		padding: 0;
 	}
 
-	html .controls,
 	html .main-nav {
 		display: none !important;
 	}

@@ -185,7 +185,28 @@ require_once( __DIR__ . '/template/main-nav.php' );
 			
 			<section class="section projects-section" id="projects">
 				<div class="section-heading heading">
-					<h2>Projects</h2>
+					<h2>Projects (<span class="project-count"><?php echo count(get_projects()); ?></span>)</h2>
+					
+					<div class="section-tools hide-if-no-js">
+						<div class="project-filters">
+							<div class="filter-list">
+								<span class="filter-label">Filter: </span>
+								<a href="#projects" data-filter="*" class="filter">All</a>
+								<?php
+								foreach( get_project_tags() as $key => $e ) {
+									if ( isset($e['hide_filter']) && $e['hide_filter'] ) continue;
+									
+									$slug = $key;
+									$title = $e['title'];
+									$description = $e['description'];
+									?>
+									<a href="#projects" data-filter="<?php echo esc_attr($slug); ?>" class="filter" title="<?php echo esc_attr($description); ?>"><?php echo esc_html($title); ?></a>
+									<?php
+								}
+								?>
+							</div>
+						</div>
+					</div>
 				</div>
 				
 				<div class="section-content">
@@ -196,17 +217,32 @@ require_once( __DIR__ . '/template/main-nav.php' );
 							$title = $e['title'];
 							$url = $e['url'] ?? false;
 							$not_available_message = $e['not_available_message'] ?? 'No longer available';
-							$image_url = $e['image_url'];
+							$image = $e['image'];
 							$description = $e['description'];
 							$credits = $e['credits'];
 							// $years = years_since($e['date']);
 							// $years = _n('%d year', '%d years', $years);
 							$time_since = time_since($e['date']);
 							$date_formatted = date( 'F Y', $e['date'] );
+							$tags = $e['tags'];
+							
+							$image_url = $image ? RESUME_URL . '/' . $image : '';
+							$image_path = $image ? RESUME_PATH . '/' . $image : '';
+							$image_size = @getimagesize( $image_path );
+							
+							$classes = array('project');
+							foreach( $tags as $tag ) $classes[] = 'tag-' . $tag;
+							
+							$atts = '';
+							$atts .= 'alt="Screenshot of ' . $title . '" ';
+							if ( $image_size[0] > 0 && $image_size[1] > 0 ) {
+								$atts .= 'width="'. $image_size[0] .'" ';
+								$atts .= 'height="'. $image_size[1] .'" ';
+							}
 							?>
-							<li class="project">
-								<?php if ( $image_url ) { ?>
-									<div class="image"><img src="<?php echo RESUME_URL . '/' . $image_url; ?>" alt=""></div>
+							<li class="<?php echo esc_attr(implode(' ', $classes)); ?>">
+								<?php if ( $image ) { ?>
+									<div class="image"><img src="<?php echo esc_attr($image_url); ?>" <?php echo trim($atts); ?>></div>
 								<?php } ?>
 								
 								<div class="heading">
@@ -238,7 +274,9 @@ require_once( __DIR__ . '/template/main-nav.php' );
 										<?php } ?>
 										
 										<?php if ( $credits ) { ?>
-											<div class="credits"><?php echo $credits; ?></div>
+											<div class="credits">
+												<p><em><?php echo $credits; ?></em></p>
+											</div>
 										<?php } ?>
 									</div>
 								<?php } ?>
@@ -268,32 +306,39 @@ require_once( __DIR__ . '/template/main-nav.php' );
 			
 			if ( $profile && $repos ) {
 				$count = count($repos);
+				
+				$login = '@' . $profile['login'];
+				$name = $profile['name'];
+				$avatar_url = $profile['avatar_url'];
+				$profile_url = $profile['html_url'];
+				$bio = $profile['bio'];
+				$public_repos = $profile['public_repos'];
+				$public_gists = $profile['public_gists'];
+				$followers = $profile['followers'];
+				
+				$gists_url = $profile['gists_url'];
+				$repos_url = $profile['repos_url'];
+				$followers_url = $profile['followers_url'];
 				?>
 				<section class="section github-section" id="github">
 					<div class="section-heading heading">
 						<h2><i class="fab fa-github"></i> GitHub</h2>
+						
+						<div class="section-tools">
+							<div class="github-links">
+								<ul class="stats">
+									<li><a href="<?php echo $profile_url; ?>" class="btn">View Profile</a></li>
+									<li><a href="<?php echo $gists_url; ?>" class="btn btn-text"><i class="fad fa-book-spells"></i> <span class="value"><?php echo $public_repos; ?></span> <span class="label">Repositories</span></a></li>
+									<li><a href="<?php echo $repos_url; ?>" class="btn btn-text"><i class="fad fa-edit"></i> <span class="value"><?php echo $public_gists; ?></span> <span class="label">Gists</span></a></li>
+									<li><a href="<?php echo $followers_url; ?>" class="btn btn-text"><i class="fad fa-user-friends"></i> <span class="value"><?php echo $followers; ?></span> <span class="label">Followers</span></a></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 					
 					<div class="section-content">
 						
-						<div class="content">
-							<p>Here are some of my projects on GitHub. These are mostly WordPress plugins, with an occasional side project thrown in.</p>
-						</div>
-						
 						<?php
-						$login = '@' . $profile['login'];
-						$name = $profile['name'];
-						$avatar_url = $profile['avatar_url'];
-						$profile_url = $profile['html_url'];
-						$bio = $profile['bio'];
-						$public_repos = $profile['public_repos'];
-						$public_gists = $profile['public_gists'];
-						$followers = $profile['followers'];
-						
-						$gists_url = $profile['gists_url'];
-						$repos_url = $profile['repos_url'];
-						$followers_url = $profile['followers_url'];
-						
 						/*
 						?>
 						<div class="github-profile">
@@ -326,15 +371,6 @@ require_once( __DIR__ . '/template/main-nav.php' );
 						</div>
 						*/
 						?>
-						
-						<div class="github-links">
-							<ul class="stats">
-								<li><a href="<?php echo $profile_url; ?>" class="btn">View Profile</a></li>
-								<li><a href="<?php echo $gists_url; ?>" class="btn btn-text"><i class="fad fa-book-spells"></i> <span class="value"><?php echo $public_repos; ?></span> <span class="label">Repositories</span></a></li>
-								<li><a href="<?php echo $repos_url; ?>" class="btn btn-text"><i class="fad fa-edit"></i> <span class="value"><?php echo $public_gists; ?></span> <span class="label">Gists</span></a></li>
-								<li><a href="<?php echo $followers_url; ?>" class="btn btn-text"><i class="fad fa-user-friends"></i> <span class="value"><?php echo $followers; ?></span> <span class="label">Followers</span></a></li>
-							</ul>
-						</div>
 						
 						<ul class="github-list list-cards">
 							<?php

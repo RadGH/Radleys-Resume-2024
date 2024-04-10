@@ -32,7 +32,13 @@
 	<link href="<?php echo RESUME_URL . '/assets/print.css?v=' . get_version(); ?>" rel="stylesheet" media="print" id="print-css">
 	<link href="<?php echo RESUME_URL . '/assets/font-awesome/all.min.css'; ?>" rel="stylesheet">
 	
+	<script src="<?php echo RESUME_URL . '/assets/isotope.pkgd.min.js?v=3.0.6'; ?>"></script>
 	<script src="<?php echo RESUME_URL . '/assets/main.js?v=' . get_version(); ?>"></script>
+	
+	<!-- Used in main.js -->
+	<style id="hide-if-no-js-style" media="all">.hide-if-no-js { display: none !important; }</style>
+	<style id="hide-if-js-style" media="none">.hide-if-js { display: none !important; }</style>
+	<!-- End Used in main.js -->
 	
 	<!-- OG Image -->
 	<meta property="og:url" content="<?php echo RESUME_URL; ?>">

@@ -324,6 +324,11 @@ nav.main-nav {
 	margin-bottom: var( --spacing--medium );
 }
 
+.section-heading h2 {
+	padding-bottom: 0.25em;
+	border-bottom: 2px solid var(--color-primary);
+}
+
 .content > *:not(:first-child) {
 	margin-top: var( --spacing--small );
 }
@@ -506,12 +511,6 @@ li.testimonial .heading {
 }
 /* End: Github - Profile */
 
-/* Github links */
-.github-links {
-	margin: var(--spacing--medium) 0 var(--spacing--large);
-}
-/* End: Github links */
-
 /* Github - Repository List */
 ul.github-list {
 	display: grid;
@@ -612,10 +611,6 @@ ul.project-list .image img {
 }
 
 @media ( min-width: 320.1px ) {
-	ul.project-list li {
-		grid-template-columns: 1fr ;
-	}
-
 	ul.project-list .image {
 		margin: calc(-1.1 * var(--spacing--medium)) calc(-1 * var(--spacing--medium)) 0;
 	}
@@ -633,4 +628,76 @@ ul.project-list .image img {
 	.project-list .heading {
 	}
 }
+
+/* Projects with Isotope filtering loaded */
+ul.project-list.isotope-active {
+	position: relative;
+	display: block;
+}
+
+@media ( min-width: 640.1px ) {
+	ul.project-list.isotope-active .project {
+		position: relative;
+		width: calc( 50% - 2.5vw );
+		margin: 0 1.25vw 40px;
+	}
+}
 /* End: Projects */
+
+/* Section heading - tools drawer */
+.section-heading .section-tools {
+	padding: 10px;
+	margin-bottom: var(--spacing--medium);
+	background: var(--surface-2);
+	border-radius: 0 0 5px 5px;
+	border-top: 2px solid var(--red-7);
+}
+/* End: Section heading - tools drawer */
+
+/* Project Filter strip */
+.section.projects-section .section-heading {
+	padding-bottom: 0;
+	border-bottom: 0;
+}
+
+.project-filters .filter-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.project-filters a {
+	white-space: nowrap;
+}
+
+@media ( max-width: 1024px ) {
+	.project-filters .filter-list {
+	}
+
+	.project-filters .filter-list a.filter {
+		margin-right: 10px;
+	}
+}
+
+@media ( min-width: 1024.1px ) {
+	.project-filters .filter-list {
+		flex-direction: row;
+		justify-content: space-evenly;
+	}
+}
+/* End: Project Filter strip */
+
+/* Floating section headers on large screens */
+@media ( min-width: 1500px ) and ( min-height: 600px ) {
+	.section-heading.heading {
+		position: sticky;
+		top: 0;
+		z-index: 10;
+		background: var(--surface-1);
+	}
+
+	.section {
+		position: relative;
+	}
+}
+/* End: Floating section headers on large screens */

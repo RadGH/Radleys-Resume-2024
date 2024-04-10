@@ -12,6 +12,14 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	const NAV_MENU = document.querySelector('.nav-menu');
 	const NAV_MENU_TOGGLE = document.querySelector('.nav-menu-toggle');
 
+	function setup_js() {
+		// Show all elements with "hide-if-no-js" (by disabling those styles)
+		document.querySelector('#hide-if-no-js-style').setAttribute('media', 'none');
+
+		// Hide all elements with "hide-if-js" (by enabling those styles)
+		document.querySelector('#hide-if-js-style').setAttribute('media', 'all');
+	}
+
 	function set_color_mode( dark = null ) {
 		if ( HTML.classList.contains('print') ) {
 			toggle_print_mode(false);
@@ -343,7 +351,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			// Get the <a> element from the target, or the closest parent
 			let anchor = e.target.closest('a');
 
-			if ( anchor.classList.contains('tooltip') ) {
+			if ( anchor && anchor.classList.contains('tooltip') ) {
 				let message = anchor.title || anchor.innerHTML;
 				let type = anchor.getAttribute('data-type') || 'success';
 				let duration = anchor.getAttribute('data-duration') || null;
@@ -352,6 +360,85 @@ document.addEventListener( 'DOMContentLoaded', function() {
 			}
 		});
 	};
+
+	function setup_isotope() {
+		// Each filter link must have an attribute: data-filter="{tag}"
+		// Each project item should have a corresponding class: "tag-{tag}"
+		let filter_areas = [
+			{
+				'filter_container': '.project-filters .filter-list',
+				'filter_selector': '.filter',
+				'item_container': '.project-list',
+				'item_selector': '.project',
+				'class_prefix': 'tag-',
+				'count_selector': '.project-count',
+			}
+		];
+
+		// on document load
+		for ( let i = 0; i < filter_areas.length; i++ ) {
+			let area = filter_areas[i];
+			let filter_container = document.querySelector( area.filter_container );
+			let all_filter_links = filter_container.querySelectorAll( area.filter_selector );
+			let item_container = document.querySelector( area.item_container );
+			let class_prefix = area.class_prefix || '';
+
+			if ( filter_container && item_container ) {
+				let iso = new Isotope( item_container, {
+					itemSelector: area.item_selector,
+					layoutMode: 'fitRows',
+				});
+
+				// Set the first filter link as active, if not already
+				let first_filter = filter_container.querySelector('.filter');
+				if ( first_filter ) {
+					first_filter.classList.add('active');
+				}
+
+				// When clicking a filter link, filter the items
+				filter_container.addEventListener( 'click', function( e ) {
+					let link = e.target;
+					if ( link.classList.contains('filter') ) {
+						let filter = link.getAttribute('data-filter');
+
+						// Toggle "active" class on the filter links
+						all_filter_links.forEach( function( this_link ) {
+							this_link.classList.toggle('active', this_link === link );
+						});
+
+						let filterFn = function( element, link, c, d, e ) {
+							if ( filter === '*' ) return true;
+							if ( filter === '' ) return false;
+
+							return element.classList.contains( class_prefix + filter );
+						};
+
+						iso.arrange({ filter: filterFn });
+					}
+				});
+
+				// Every time isotope is sorted, count the number of visible items to display in the count_selector element
+				iso.on( 'arrangeComplete', function( filteredItems ) {
+					let count = filteredItems.length;
+					let count_selector = document.querySelector( area.count_selector );
+					if ( count_selector ) {
+						count_selector.innerHTML = count;
+					}
+				});
+
+				// Add container class "isotope-active" to know isotope is ready
+				filter_container.classList.add('isotope-active');
+				item_container.classList.add('isotope-active');
+
+				// Recalculate the layout, fixes grid
+				iso.layout();
+				setTimeout(function() { iso.layout(); }, 500);
+
+			}
+		}
+	}
+
+	setup_js();
 
 	setup_color_mode();
 
@@ -362,5 +449,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	setup_nav_scroll();
 	
 	setup_click_message_popup();
+
+	setup_isotope();
 
 });

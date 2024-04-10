@@ -49,7 +49,7 @@ function get_formatted_content( $content ) {
 }
 
 function get_name() { return load_content( 'name' ); }
-function get_image_url() { return load_content( 'image_url' ); }
+function get_image_url() { return load_content( 'image' ); }
 function get_job_title() { return load_content( 'job_title' ); }
 function get_email() { return load_content( 'email' ); }
 function get_links() { return load_content( 'links' ); }
@@ -59,6 +59,7 @@ function get_profile() { return load_formatted_content( 'profile' ); }
 function get_employment() { return load_content( 'employment' ); }
 function get_testimonials() { return load_content( 'testimonials' ); }
 function get_projects() { return load_content( 'projects' ); }
+function get_project_tags() { return load_content( 'project_tags' ); }
 
 function get_formatted_tooltip( $text, $tooltip ) {
 	return '<a href="#" class="tooltip tooltip-underline" title="' . $tooltip . '">' . $text . '</a>';
@@ -160,4 +161,12 @@ function get_site_description() {
 
 function get_display_url( $url ) {
 	return parse_url($url, PHP_URL_HOST);
+}
+
+function esc_attr( $str ) {
+	return htmlspecialchars( $str, ENT_QUOTES );
+}
+
+function esc_html( $str ) {
+	return htmlspecialchars( $str, ENT_QUOTES );
 }

@@ -384,13 +384,6 @@ ul.nav-menu li.active a {
 		margin: 0 auto;
 	}
 
-	.main-nav {
-		box-shadow:
-			0 0 40px 0 var(--surface-1),
-			0 0 30px 0 var(--surface-1),
-			0 0 20px 0 var(--surface-1);
-	}
-
 	nav.main-nav .scroll-indicator {
 		position: absolute;
 		width: 20px;
@@ -410,7 +403,7 @@ ul.nav-menu li.active a {
 
 		background: var(--text-1);
 		bottom: 0;
-		height: 2px;
+		height: 3px;
 	}
 
 	ul.nav-menu li a:where(:hover,:focus-visible) {
@@ -495,32 +488,33 @@ html[data-theme="light"] {
 	.h-regular, .hr { font-weight: 500; }
 }
 
-.btn-text:where(:not(:focus,:hover,:active)) {
-	color: var(--text-1);
-	outline: none;
-	background: transparent;
+.btn.btn-text {
+	background: none;
 	box-shadow: none;
 	text-shadow: none;
+	border: none;
+	border-radius: 0;
+	color: var(--text-1);
+	padding-inline: var(--size-relative-3);
+}
+
+span.btn.btn-text {
+	border-bottom-color: transparent !important;
+}
+
+.btn.btn-text:where(:not(:focus,:hover,:active)) {
 	--fa-primary-color: var(--text-1);
 	--fa-secondary-color: var(--text-2);
 	--fa-secondary-opacity: 0.5;
-	border: none;
+	outline: none;
 	border-bottom: 2px solid transparent;
 }
 
-.btn-text:where(:focus,:hover,:active) {
+.btn.btn-text:where(:focus,:hover,:active) {
 	--fa-primary-color: var(--surface-0);
 	--fa-secondary-color: var(--surface-0);
 	--fa-secondary-opacity: 1;
-	background: none;
-	box-shadow: none;
-	border-radius: 0;
-	border: none;
 	border-bottom: 2px solid currentColor;
-}
-
-.btn-text {
-	padding-inline: var(--size-relative-3);
 }
 
 .btn-text.btn-narrow {
@@ -571,11 +565,6 @@ Body
 /*
 General
 */
-.section-heading {
-	padding-bottom: 0.5em;
-	border-bottom: 2px solid var(--color-primary);
-}
-
 .content a {
 	text-decoration: underline;
 }
@@ -715,6 +704,18 @@ ul.project-list .image::after {
 ul.project-list .image {
 	position: relative;
 }
+
+.project-list .credits {
+	color: var(--red-5);
+}
+
+.project-list .credits p {
+	font-size: var(--font-size--small);
+}
+
+.project-list .credits a:not(:hover, :focus-visible) {
+	color: var(--red-5);
+}
 /* End: Projects */
 
 /*
@@ -763,3 +764,18 @@ Timeline:
 	transition: opacity 500ms linear;
 }
 /* End: Tooltip toasts */
+
+/* Project filter links */
+.project-filters span.filter-label,
+.project-filters a {
+	display: inline-block;
+	font-weight: 400;
+	padding: 5px 0;
+	text-decoration: none;
+}
+
+.project-filters a.filter.active {
+	font-weight: 700;
+	border-bottom-color: currentColor;
+}
+/* End Project filter links */

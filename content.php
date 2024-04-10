@@ -296,6 +296,7 @@ return array(
 			'description' => 'Uses WooCommerce as an e-commerce store.',
 		),
 		'acf' => array(
+			'hide_filter' => true,
 			'title' => 'Advanced Custom Fields',
 			'description' => 'Includes Advanced Custom Fields Pro to streamline custom built features.',
 		),

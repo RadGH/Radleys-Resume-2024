@@ -728,7 +728,7 @@ html.print .project-list.isotope-active .project {
 @media ( min-width: 1500px ) and ( min-height: 600px ) {
 	.section-heading.heading {
 		position: sticky;
-		top: 0;
+		top: -1px;
 		z-index: 10;
 		background: var(--surface-1);
 	}

@@ -119,3 +119,13 @@ ul.list-cards > li {
 a.tooltip {
 	text-decoration: none;
 }
+
+.project-list .credits a:not(:hover, :focus-visible),
+.project-list .credits,
+.h-regular, .hr {
+	color: var(--gray-8);
+}
+
+.section-heading .section-tools {
+	border-top-color: var(--gray-8);
+}

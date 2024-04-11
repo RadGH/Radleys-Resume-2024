@@ -649,6 +649,11 @@ ul.project-list.isotope-active {
 	display: block;
 }
 
+ul.project-list.isotope-active .project {
+	margin: 0 0 40px;
+	width: 100%;
+}
+
 @media ( min-width: 640.1px ) {
 	ul.project-list.isotope-active {
 		margin-left: calc( -1 * 1.25vw );

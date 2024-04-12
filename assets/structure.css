@@ -738,3 +738,9 @@ html.print .project-list.isotope-active .project {
 	}
 }
 /* End: Floating section headers on large screens */
+
+/* Footer */
+section#contact {
+	min-height: calc(100vh - 60px);
+}
+/* End: Footer */

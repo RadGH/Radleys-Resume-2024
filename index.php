@@ -324,9 +324,9 @@ require_once( __DIR__ . '/template/main-nav.php' );
 				$public_gists = $profile['public_gists'];
 				$followers = $profile['followers'];
 				
-				$gists_url = $profile['gists_url'];
-				$repos_url = $profile['repos_url'];
-				$followers_url = $profile['followers_url'];
+				$gists_url = 'https://gist.github.com/RadGH'; //$profile['gists_url'];
+				$repos_url = 'https://github.com/RadGH?tab=repositories'; // $profile['repos_url'];
+				$followers_url = 'https://github.com/RadGH?tab=followers'; // $profile['followers_url'];
 				?>
 				<section class="section github-section" id="github">
 					<div class="section-heading heading">

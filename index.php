@@ -436,7 +436,9 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									<ul class="stats stats-minor">
 										<li><a href="<?php echo $repo_url; ?>" class="btn btn-secondary"><i class="fab fa-github"></i> Repository</a></li>
 										<li><a class="btn btn-text btn-narrow tooltip" title="Created <?php echo $date_formatted; ?>"><i class="far fa-calendar"></i> <span class="value"><?php echo $time_since; ?></span></a></li>
-										<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></span></li>
+										<?php if ( $language ) { ?>
+											<li><span class="btn-text btn-narrow"><i class="far fa-code"></i> <span class="value"><?php echo $language; ?></span></span></li>
+										<?php } ?>
 										<?php if ( $stars_text ) { ?>
 											<li><span class="btn-text btn-narrow"><i class="fas fa-star"></i> <span class="value"><?php echo $stars_text; ?></span></span></li>
 										<?php } ?>

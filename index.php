@@ -224,6 +224,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 						foreach( get_projects() as $e ) {
 							$title = $e['title'];
 							$url = $e['url'] ?? false;
+							$github_url = $e['github_url'] ?? false;
 							$not_available_message = $e['not_available_message'] ?? 'No longer available';
 							$image = $e['image'];
 							$description = $e['description'];
@@ -292,7 +293,13 @@ require_once( __DIR__ . '/template/main-nav.php' );
 								<ul class="stats stats-minor">
 									<?php if ( $url ) { ?>
 										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">Visit Website</a></li>
-									<?php }else{ ?>
+									<?php } ?>
+									
+									<?php if ( $github_url ) { ?>
+										<li><a href="<?php echo $github_url; ?>" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Repository</a></li>
+									<?php } ?>
+									
+									<?php if ( ! $url && ! $github_url ) { ?>
 										<li><a href="#" class="btn btn-disabled tooltip" title="<?php echo $not_available_message; ?>">Not Available</a></li>
 									<?php } ?>
 									

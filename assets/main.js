@@ -401,6 +401,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				// When clicking a filter link, filter the items
 				filter_container.addEventListener( 'click', function( e ) {
 					let link = e.target;
+
 					if ( link.classList.contains('filter') ) {
 						let filter = link.getAttribute('data-filter');
 
@@ -417,6 +418,8 @@ document.addEventListener( 'DOMContentLoaded', function() {
 						};
 
 						iso.arrange({ filter: filterFn });
+
+						e.preventDefault();
 					}
 				});
 

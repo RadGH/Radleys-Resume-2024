@@ -274,20 +274,25 @@ return array(
 			'title' => 'Design',
 			'description' => 'Theme designed by Radley.',
 		),
-		'developed' => array(
-			'hide_filter' => true,
-			'title' => 'Development',
-			'description' => 'Custom theme and/or plugins developed by Radley.',
-		),
 		'block-theme' => array(
 			'title' => 'Block Theme',
 			'description' => 'Theme is based on the latest WordPress Block Editor.',
 		),
+		'website' => array(
+			'title' => 'Website',
+			'description' => 'This project represents a WordPress website.',
+		),
+		'plugin' => array(
+			'title' => 'Plugin',
+			'description' => 'This project represents a WordPress plugin.',
+		),
 		'theme' => array(
+			'hide_filter' => true,
 			'title' => 'Custom Theme',
 			'description' => 'Includes a custom WordPress theme.',
 		),
 		'plugins' => array(
+			'hide_filter' => true,
 			'title' => 'Custom Plugins',
 			'description' => 'Includes one or more custom WordPress plugins.',
 		),
@@ -317,7 +322,7 @@ return array(
 			'description' => 'Complete website build from a Figma design. Full Site Editor theme based on the Block Editor. Features company reviews with calculated star ratings and average scores based on review form questions. Companies can reply to reviews. All reviews require admin approval and send email notifications to all parties.',
 			'credits' => 'Designed by Phillip DeVita.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['developed', 'agency', 'theme', 'plugins', 'acf', 'block-theme'],
+			'tags' => ['website', 'agency', 'theme', 'plugins', 'acf', 'block-theme'],
 		),
 		array(
 			'title' => 'Great City Medical',
@@ -327,7 +332,7 @@ return array(
 			'description' => 'Complete website rebuild from a Figma design. Multilingual support with TranslatePress. Block theme with many customizable blocks to display icons, ratings, and testimonials.',
 			'credits' => 'Designed by Pavel.',
 			'agency' => false,
-			'tags' => ['designed', 'developed', 'theme', 'plugins', 'acf', 'block-theme'],
+			'tags' => ['website', 'designed', 'theme', 'plugins', 'acf', 'block-theme'],
 		),
 		array(
 			'title' => 'Eugene Area Gleaners',
@@ -337,7 +342,7 @@ return array(
 			'description' => 'Website built with the Divi theme. I especially like the hover effects in the header area. I redesigned the logo, compare to the old version at the bottom of the <a href="https://eugeneareagleaners.com/branding/" target="_blank">Branding</a> page.',
 			'credits' => 'Designed and developed by Radley.',
 			'agency' => false,
-			'tags' => ['designed', 'developed', 'theme', 'acf'],
+			'tags' => ['website', 'designed', 'theme', 'acf'],
 		),
 		array(
 			'title' => 'Concealed Nation',
@@ -347,7 +352,7 @@ return array(
 			'description' => 'Complete website rebuild optimized for thousands of concurrent visitors. Consolidated dozens of plugins into a small list of essentials.',
 			'credits' => 'Designed and developed by Radley.',
 			'agency' => false,
-			'tags' => ['developed', 'theme', 'plugins', 'acf'],
+			'tags' => ['website', 'theme', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Dare to Lead by Brené Brown',
@@ -357,7 +362,7 @@ return array(
 			'description' => 'The largest scale website with the most usage, this custom website is more than just a theme. It includes 32 custom plugins, most built by me and each one serving a different purpose. Includes an e-Commerce store, member account pages, generated PDFs, and over a hundred multi-step forms, many with an admin review process.',
 			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by Upstatement.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['developed', 'theme', 'agency', 'plugins', 'woocommerce', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'plugins', 'woocommerce', 'acf'],
 		),
 		array(
 			'title' => 'Peg Rodrigues',
@@ -368,7 +373,7 @@ return array(
 			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['developed', 'theme', 'agency', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'acf'],
 		),
 		array(
 			'title' => 'Grow Magazine',
@@ -378,7 +383,7 @@ return array(
 			'description' => 'Features WooCommerce store to order magazine issues and a custom retail locator map.',
 			'credits' => 'Developed by Radley.',
 			'agency' => false,
-			'tags' => ['developed', 'theme', 'woocommerce', 'acf'],
+			'tags' => ['website', 'theme', 'woocommerce', 'acf'],
 		),
 		array(
 			'title' => 'Kruggsmash',
@@ -388,7 +393,7 @@ return array(
 			'description' => 'This website was donated to Kruggsmash. He\'s one of my favorite YouTubers and makes excellent Dwarf Fortress videos.',
 			'credits' => 'Designed and developed by Radley.',
 			'agency' => false,
-			'tags' => ['designed', 'developed'],
+			'tags' => ['website', 'designed', 'developed'],
 		),
 		array(
 			'title' => 'ZingMap',
@@ -398,7 +403,7 @@ return array(
 			'description' => 'Radley\'s hosting company website.',
 			'credits' => 'Designed and developed by Radley.',
 			'agency' => false,
-			'tags' => ['designed', 'developed'],
+			'tags' => ['website', 'designed', 'developed'],
 		),
 		array(
 			'title' => 'Tracy O\'Malley',
@@ -409,7 +414,7 @@ return array(
 			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['developed', 'theme', 'agency', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'acf'],
 		),
 		array(
 			'title' => 'Women Cantor\'s Network',
@@ -419,7 +424,7 @@ return array(
 			'description' => 'Membership website with custom member directory and conference signup forms. Custom plugin to edit user profiles that appear on the member directory (must be logged in).',
 			'credits' => 'Designed by Erik Contzius.',
 			'agency' => false,
-			'tags' => ['developed', 'theme', 'plugins', 'acf'],
+			'tags' => ['website', 'theme', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Terra Tech',
@@ -429,7 +434,7 @@ return array(
 			'description' => 'e-Commerce website using WooCommerce. Customized UPS shipping plugin to support products that are already packed to ship along with products that need to be placed into boxes.',
 			'credits' => 'Designed by Tyson Sterling.',
 			'agency' => false,
-			'tags' => ['developed', 'theme', 'plugins', 'woocommerce'],
+			'tags' => ['website', 'theme', 'plugins', 'woocommerce'],
 		),
 		array(
 			'title' => 'Eugene Magazine',
@@ -439,7 +444,7 @@ return array(
 			'description' => 'Magazine website with focus on high quality images. Highly optimized website featuring CDN, cloud hosting, advanced cached, and more.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency', 'woocommerce', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'woocommerce', 'acf'],
 		),
 		array(
 			'title' => 'Steelhead Brewing Company',
@@ -449,7 +454,7 @@ return array(
 			'description' => 'Beer list and restaurant menu with two locations to choose from.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency'],
+			'tags' => ['website', 'theme', 'agency'],
 		),
 		array(
 			'title' => 'The Adrienne St Clair Group',
@@ -459,7 +464,7 @@ return array(
 			'description' => 'Property locator with a unique day/night theme. The front page features several animations.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency'],
+			'tags' => ['website', 'theme', 'agency'],
 		),
 		array(
 			'title' => 'Fight Club 2: Project Mayhem (Dark Horse Comics)',
@@ -469,7 +474,7 @@ return array(
 			'description' => 'Custom map-style interface. Many animations. Contribute & Sightings section managed by custom post types. User submitted content.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'acf'],
 		),
 		array(
 			'title' => 'Willamalane Parks & Recreation District',
@@ -480,7 +485,7 @@ return array(
 			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency', 'plugins', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Bowtech Archery',
@@ -490,7 +495,7 @@ return array(
 			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency', 'plugins', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Gorilla Capital',
@@ -500,7 +505,7 @@ return array(
 			'description' => 'Custom built property locator, Custom advanced search tool, Custom Fix + Flip Calculator.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['developed', 'theme', 'agency', 'plugins', 'acf'],
+			'tags' => ['website', 'theme', 'agency', 'plugins', 'acf'],
 		),
 	),
 );

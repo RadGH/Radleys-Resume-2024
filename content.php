@@ -314,6 +314,16 @@ return array(
 	
 	'projects' => array(
 		array(
+			'title' => 'RS Font Awesome 5',
+			'date' => strtotime('2024-04-19'),
+			'url' => 'https://github.com/RadGH/RS-Font-Awesome-5',
+			'image' => '/assets/websites/rs-font-awesome-5-plugin.png',
+			'description' => 'This WordPress plugin enables you to add icons from Font Awesome 5 using a block or shortcode.',
+			'credits' => false,
+			'agency' => false,
+			'tags' => ['plugin', 'plugins', 'acf', 'block-theme'],
+		),
+		array(
 			'title' => 'SkillBridge Insight',
 			'date' => strtotime('2024-02-01'),
 			'url' => false, // not live yet

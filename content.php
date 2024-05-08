@@ -337,7 +337,7 @@ return array(
 			'description' => 'Complete website build from a Figma design. Full Site Editor theme based on the Block Editor. Features company reviews with calculated star ratings and average scores based on review form questions. Companies can reply to reviews. All reviews require admin approval and send email notifications to all parties.',
 			'credits' => 'Designed by Phillip DeVita.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['website', 'agency', 'theme', 'plugins', 'acf', 'block-theme'],
+			'tags' => ['agency', 'theme', 'plugins', 'acf', 'block-theme'],
 		),
 		array(
 			'title' => 'Great City Medical',
@@ -431,7 +431,7 @@ return array(
 			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
 <a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.',
 			'agency' => 'Alchemy + Aim',
-			'tags' => ['website', 'theme', 'agency', 'acf'],
+			'tags' => ['theme', 'agency', 'acf'],
 		),
 		array(
 			'title' => 'Women Cantor\'s Network',
@@ -472,7 +472,7 @@ return array(
 			'description' => 'Beer list and restaurant menu with two locations to choose from.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['website', 'theme', 'agency'],
+			'tags' => ['theme', 'agency'],
 		),
 		array(
 			'title' => 'The Adrienne St Clair Group',
@@ -482,7 +482,7 @@ return array(
 			'description' => 'Property locator with a unique day/night theme. The front page features several animations.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['website', 'theme', 'agency'],
+			'tags' => ['theme', 'agency'],
 		),
 		array(
 			'title' => 'Fight Club 2: Project Mayhem (Dark Horse Comics)',
@@ -492,7 +492,7 @@ return array(
 			'description' => 'Custom map-style interface. Many animations. Contribute & Sightings section managed by custom post types. User submitted content.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['website', 'theme', 'agency', 'acf'],
+			'tags' => ['theme', 'agency', 'acf'],
 		),
 		array(
 			'title' => 'Willamalane Parks & Recreation District',
@@ -500,20 +500,19 @@ return array(
 			// 'url' => 'http://willamalane.org/',
 			'image' => '/assets/websites/willamalane.png',
 			'description' => 'Custom map locators for Parks, Facilities, and Bird trails. Custom post type for taking classes. Advanced navigation and mobile menus. ADA Section 503c Compliance.',
-			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by
-<a href="https://rachelpesso.com/" target="_blank">Rachel Pesso</a>.',
+			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['website', 'theme', 'agency', 'plugins', 'acf'],
+			'tags' => ['theme', 'agency', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Bowtech Archery',
 			'date' => strtotime('2014-01-01'),
 			// 'url' => 'https://bowtecharchery.com/',
 			'image' => '/assets/websites/bowtech.png',
-			'description' => 'International brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
+			'description' => 'An international brand of hunting bows. Custom bow sorting and comparison utility. Store locator with API.',
 			'credits' => 'Designed by Limelight Department.',
 			'agency' => 'Limelight Department',
-			'tags' => ['website', 'theme', 'agency', 'plugins', 'acf'],
+			'tags' => ['theme', 'agency', 'plugins', 'acf'],
 		),
 		array(
 			'title' => 'Gorilla Capital',

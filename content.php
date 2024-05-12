@@ -228,7 +228,7 @@ return array(
 		array(
 			'content' => 'Radley embodies the best of a partner in development. He really knows his way around databases, WordPress, and has a good design sense to boot. Radley intuits solutions to problems, both anticipated and unexpected. He is patient and more than willing to debug problems that arise. His communication skills are excellent.',
 			'name' => 'Erik Contzius',
-			'company_name' => 'Women Cantors\'s Network',
+			'company_name' => 'Women Cantors\' Network',
 			'image' => 'erik.jpg',
 		),
 		array(

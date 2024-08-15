@@ -371,16 +371,6 @@ return array(
 			'tags' => ['website', 'theme', 'plugins', 'acf'],
 		),
 		array(
-			'title' => 'Dare to Lead by Brené Brown',
-			'date' => strtotime('2018-09-01'),
-			'url' => 'https://daretolead.brenebrown.com/',
-			'image' => '/assets/websites/dare-to-lead.jpg',
-			'description' => 'A large scale website including much more than just a theme. It includes 32 custom plugins, most built by me and each one serving a different purpose. Includes an e-Commerce store, member account pages, generated PDFs, and over a hundred multi-step forms, many with an admin review process.',
-			'credits' => 'Built for <a href="https://alchemyandaim.com/" target="_blank">Alchemy + Aim</a>, designed by Upstatement.',
-			'agency' => 'Alchemy + Aim',
-			'tags' => ['website', 'theme', 'agency', 'plugins', 'woocommerce', 'acf'],
-		),
-		array(
 			'title' => 'Peg Rodrigues',
 			'date' => strtotime('2018-01-01'),
 			'url' => 'https://pegrodrigues.com/',

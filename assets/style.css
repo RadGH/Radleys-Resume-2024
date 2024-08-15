@@ -31,6 +31,12 @@ Global variables
 	--site-width: 1200px;
 }
 
+@media ( max-width: 1600px ) {
+	:where(html) {
+		--site-width: 1000px;
+	}
+}
+
 html[reference="only"] {
 	--gray--reference: #adb5bd;
 	--stone--reference: #b1b6b9;
@@ -343,7 +349,7 @@ ul.nav-menu li.active a {
 }
 
 
-@media ( min-width: 1500.1px ) {
+@media ( min-width: 1400.1px ) {
 	nav.main-nav {
 		position: fixed;
 		right: calc(50% +  (var(--site-width) / 2));

@@ -245,6 +245,7 @@ ul.nav-menu li {
 ul.nav-menu li a {
 	display: block;
 	padding: 10px;
+	white-space: nowrap;
 }
 
 nav.main-nav {

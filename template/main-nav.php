@@ -13,14 +13,27 @@
 	
 	<ul class="nav-menu">
 		<li><a href="#home" class="nav-section">Home</a></li>
+		
 		<li><a href="#profile" class="nav-section">Profile</a></li>
+		
 		<?php /* <li><a href="#skills">Skills</a></li> */ ?>
+		
 		<li><a href="#experience" class="nav-section">Experience</a></li>
-		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
-		<li><a href="#projects" class="nav-section">Projects</a></li>
-		<?php if ( get_github_profile() && get_github_repos() ) { ?>
-			<li><a href="#github" class="nav-section">GitHub</a></li>
-		<?php } ?>
+		
+		<li><a href="#testimonials" class="nav-section">Testimonials (<?php echo count(get_testimonials()); ?>)</a></li>
+		
+		<li><a href="#projects" class="nav-section">Projects (<?php echo count(get_projects()); ?>)</a></li>
+		
+		<?php
+		$profile = get_github_profile();
+		if ( $profile && get_github_repos() ) {
+			$public_repos = $profile['public_repos'];
+			?>
+			<li><a href="#github" class="nav-section">GitHub (<?php echo $public_repos; ?>)</a></li>
+			<?php
+		}
+		?>
+		
 		<li><a href="#contact" class="nav-section">Contact</a></li>
 		
 		<li class="first-control-button">

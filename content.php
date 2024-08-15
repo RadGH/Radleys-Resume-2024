@@ -329,6 +329,16 @@ return array(
 			'tags' => ['plugin', 'github', 'plugins', 'acf', 'block-theme'],
 		),
 		array(
+			'title' => 'ZingMap',
+			'date' => strtotime('2024-04-07'),
+			'url' => 'https://zingmap.com/',
+			'image' => '/assets/websites/zingmap-2.jpg',
+			'description' => 'Radley\'s WordPress web hosting company website. Check out this website to learn more about the services I offer, and take a look at the <a href="https://zingmap.com/plugins/" target="_blank">plugins page</a> too!',
+			'credits' => 'Designed and developed by Radley.',
+			'agency' => false,
+			'tags' => ['website', 'designed', 'developed'],
+		),
+		array(
 			'title' => 'SkillBridge Insight',
 			'date' => strtotime('2024-02-01'),
 			'url' => false, // not live yet
@@ -398,16 +408,6 @@ return array(
 			'url' => 'https://kruggsmash.com/',
 			'image' => '/assets/websites/kruggsmash-2.png',
 			'description' => 'This website was donated to Kruggsmash. He\'s one of my favorite YouTubers and makes excellent Dwarf Fortress videos.',
-			'credits' => 'Designed and developed by Radley.',
-			'agency' => false,
-			'tags' => ['website', 'designed', 'developed'],
-		),
-		array(
-			'title' => 'ZingMap',
-			'date' => strtotime('2017-01-01'),
-			'url' => 'https://zingmap.com/',
-			'image' => '/assets/websites/zingmap.png',
-			'description' => 'Radley\'s hosting company website.',
 			'credits' => 'Designed and developed by Radley.',
 			'agency' => false,
 			'tags' => ['website', 'designed', 'developed'],

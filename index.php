@@ -3,6 +3,12 @@
 // Created 2024-02-20
 // Last updated 2024-02-27
 
+// If the site is accessed via "radgh.com", redirect to "radleysustaire.com"
+if ( str_contains( $_SERVER['HTTP_HOST'], 'radgh.com' ) ) {
+	header( 'Location: https://radleysustaire.com/', true, 301 );
+	exit;
+}
+
 require_once( __DIR__ . '/utility.php' );
 
 require_once( __DIR__ . '/template/header.php' );

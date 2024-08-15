@@ -44,12 +44,15 @@ require_once( __DIR__ . '/template/main-nav.php' );
 				</ul>
 			</div>
 			
-			<div class="agency-list count-2">
+			<div class="agency-list count-3">
 				<div class="agency agency-zingmap">
 					<a href="https://zingmap.com/" title="ZingMap" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/zingmap-2.png'; ?>" alt="ZingMap Logo"></a>
 				</div>
 				<div class="agency agency-alchemyandaim">
-					<a href="https://alchemyandaim.com/" title="Alchemy and Aim" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/alchemy.png'; ?>" alt="ZingMap Logo"></a>
+					<a href="https://alchemyandaim.com/" title="Alchemy and Aim" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/alchemy.png'; ?>" alt="Alchemy + Aim Logo"></a>
+				</div>
+				<div class="agency agency-mac">
+					<a href="https://www.madcollective.com/" title="Madison Ave. Collective" target="_blank"><img src="<?php echo RESUME_URL . '/assets/logos/mac-2.png'; ?>" alt="MAC Logo"></a>
 				</div>
 			</div>
 		</div>

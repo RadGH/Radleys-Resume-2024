@@ -144,6 +144,7 @@ body {
 
 .site-header .agency-list .agency img {
 	max-width: 150px;
+	max-height: 50px;
 	width: 100%;
 	height: auto;
 }
@@ -181,7 +182,7 @@ html.print .site-header .agency-list .agency a img {
 
 @media ( max-width: 768px ) and ( min-width: 550.1px ) {
 	.site-header {
-		grid-template-columns: 1fr 2fr 45px;
+		grid-template-columns: 1fr 2fr;
 		gap: var( --spacing--medium ) var( --spacing--large );
 	}
 
@@ -196,7 +197,7 @@ html.print .site-header .agency-list .agency a img {
 
 @media ( min-width: 768.1px ) {
 	.site-header {
-		grid-template-columns: 1fr 4fr;
+		grid-template-columns: 2fr 5fr;
 		gap: var( --spacing--medium ) var( --spacing--large );
 	}
 
@@ -214,6 +215,16 @@ html.print .site-header .agency-list .agency a img {
 
 	.site-header .links {
 		flex-direction: row;
+	}
+
+	.site-header .agency-list.count-3 {
+		display: grid;
+		grid-template-columns: auto auto auto;
+	}
+
+	.site-header .agency-list.count-4 {
+		display: grid;
+		grid-template-columns: auto auto auto auto;
 	}
 }
 

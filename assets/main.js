@@ -89,11 +89,21 @@ document.addEventListener( 'DOMContentLoaded', function() {
 
 	// When clicking ".nav-menu-toggle", toggle the nav menu
 	const setup_nav_menu = function() {
-		if ( NAV_MENU_TOGGLE ) NAV_MENU_TOGGLE.addEventListener( 'click', function( e ) {
+		if ( ! NAV_MENU_TOGGLE ) return;
+
+		NAV_MENU_TOGGLE.addEventListener( 'click', function( e ) {
 			let active = ! HTML.classList.contains('nav-menu-open');
 			HTML.classList.toggle('nav-menu-open', active);
 			if ( NAV_MENU ) NAV_MENU.classList.toggle('open', active);
 			e.preventDefault();
+		});
+
+		NAV_MENU.addEventListener( 'click', function( e ) {
+			if ( e.target.classList.contains('nav-section') ) {
+				// Close the mobile menu
+				HTML.classList.toggle('nav-menu-open', false);
+				if ( NAV_MENU ) NAV_MENU.classList.toggle('open', false);
+			}
 		});
 	}
 

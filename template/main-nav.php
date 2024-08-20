@@ -20,16 +20,16 @@
 		
 		<li><a href="#experience" class="nav-section">Experience</a></li>
 		
-		<li><a href="#testimonials" class="nav-section">Testimonials (<?php echo count(get_testimonials()); ?>)</a></li>
+		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
 		
-		<li><a href="#projects" class="nav-section">Projects (<?php echo count(get_projects()); ?>)</a></li>
+		<li><a href="#projects" class="nav-section">Projects</a></li>
 		
 		<?php
 		$profile = get_github_profile();
 		if ( $profile && get_github_repos() ) {
-			$public_repos = $profile['public_repos'];
+			// $public_repos = $profile['public_repos'];
 			?>
-			<li><a href="#github" class="nav-section">GitHub (<?php echo $public_repos; ?>)</a></li>
+			<li><a href="#github" class="nav-section">GitHub</a></li>
 			<?php
 		}
 		?>

@@ -134,23 +134,12 @@ body {
 	padding: 20px;
 	height: 100%;
 	place-content: center;
-	background: var(--surface-2);
-	border-radius: 20px;
-}
-
-.site-header .agency-list .agency a:where(:hover, :focus-visible) {
-	background: var(--surface-3);
-}
-
-.site-header .agency-list .agency img {
-	max-width: 150px;
-	max-height: 50px;
-	width: 100%;
-	height: auto;
 }
 
 html[data-theme="light"] .site-header .agency-list .agency a img,
-html.print .site-header .agency-list .agency a img {
+html.print .site-header .agency-list .agency a img,
+html[data-theme="light"] .agency-items .agency-item .logo img,
+html.print .agency-items .agency-item .logo img {
 	filter: invert();
 }
 
@@ -356,7 +345,7 @@ nav.main-nav {
 }
 
 .content > *:not(:first-child) {
-	margin-top: var( --spacing--small );
+	margin-top: var( --spacing--medium );
 }
 
 .content > :not(:first-child):where(h1, h2, h3, h4, h5, h6) {

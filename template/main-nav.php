@@ -18,11 +18,9 @@
 		
 		<?php /* <li><a href="#skills">Skills</a></li> */ ?>
 		
-		<li><a href="#experience" class="nav-section">Experience</a></li>
+		<li><a href="#projects" class="nav-section">Projects</a></li>
 		
 		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
-		
-		<li><a href="#projects" class="nav-section">Projects</a></li>
 		
 		<?php
 		$profile = get_github_profile();
@@ -33,6 +31,8 @@
 			<?php
 		}
 		?>
+		
+		<li><a href="#experience" class="nav-section">Experience</a></li>
 		
 		<li><a href="#contact" class="nav-section">Contact</a></li>
 		

@@ -117,86 +117,6 @@ require_once( __DIR__ . '/template/main-nav.php' );
 		
 		<div class="area wide-area">
 			
-			<section class="section experience-section" id="experience">
-				<div class="section-heading heading">
-					<h2>Experience</h2>
-				</div>
-				
-				<div class="section-content">
-					<ul class="job-list">
-						<?php
-						foreach( get_employment() as $e ) {
-							$company_name = $e['company_name'];
-							$job_title = $e['job_title'];
-							$start = $e['start'];
-							$end = $e['end'];
-							$description = $e['description'];
-							
-							$date_range = date( 'Y', $start ) . ' – ' . ($end ? date( 'Y', $end ) : 'Current');
-							if ( date('Y', $start) === date('Y', $end) ) {
-								$date_range = date( 'Y', $start );
-							}
-							?>
-							<li class="job">
-								<div class="heading">
-									<h3 class="job-title"><?php echo $job_title; ?></h3>
-									<?php if ( $company_name ) { ?>
-										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
-									<?php } ?>
-								</div>
-								
-								<div class="date"><?php echo $date_range; ?></div>
-								
-								<?php if ( $description ) { ?>
-									<div class="content">
-										<?php echo $description; ?>
-									</div>
-								<?php } ?>
-							</li>
-							<?php
-						}
-						?>
-					</ul>
-				</div>
-			</section>
-			
-			<section class="section testimonials-section" id="testimonials">
-				<div class="section-heading heading">
-					<h2>Testimonials</h2>
-				</div>
-				
-				<div class="section-content">
-					
-					<ul class="testimonial-list">
-						<?php
-						foreach( get_testimonials() as $e ) {
-							$name = $e['name'];
-							$content = $e['content'];
-							$company_name = $e['company_name'];
-							$image = $e['image'];
-							?>
-							<li class="testimonial">
-								<?php if ( $image ) { ?>
-									<div class="image"><img src="<?php echo RESUME_URL . '/images/' . $image; ?>" alt=""></div>
-								<?php } ?>
-								
-								<div class="heading">
-									<h3 class="name"><?php echo $name; ?></h3>
-									
-									<?php if ( $company_name ) { ?>
-										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
-									<?php } ?>
-								</div>
-								
-								<div class="content"><p><?php echo $content; ?></p></div>
-							</li>
-							<?php
-						}
-						?>
-					</ul>
-				</div>
-			</section>
-			
 			<section class="section projects-section" id="projects">
 				<div class="section-heading heading">
 					<h2>Projects (<span class="project-count"><?php echo count(get_projects()); ?></span>)</h2>
@@ -313,6 +233,43 @@ require_once( __DIR__ . '/template/main-nav.php' );
 										<li><a class="btn btn-text btn-narrow tooltip" title="Created in <?php echo $date_formatted; ?>"><i class="far fa-calendar"></i> <?php echo $time_since; ?> ago</a></li>
 									<?php } ?>
 								</ul>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+				</div>
+			</section>
+			
+			<section class="section testimonials-section" id="testimonials">
+				<div class="section-heading heading">
+					<h2>Testimonials</h2>
+				</div>
+				
+				<div class="section-content">
+					
+					<ul class="testimonial-list">
+						<?php
+						foreach( get_testimonials() as $e ) {
+							$name = $e['name'];
+							$content = $e['content'];
+							$company_name = $e['company_name'];
+							$image = $e['image'];
+							?>
+							<li class="testimonial">
+								<?php if ( $image ) { ?>
+									<div class="image"><img src="<?php echo RESUME_URL . '/images/' . $image; ?>" alt=""></div>
+								<?php } ?>
+								
+								<div class="heading">
+									<h3 class="name"><?php echo $name; ?></h3>
+									
+									<?php if ( $company_name ) { ?>
+										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
+									<?php } ?>
+								</div>
+								
+								<div class="content"><p><?php echo $content; ?></p></div>
 							</li>
 							<?php
 						}
@@ -467,6 +424,49 @@ require_once( __DIR__ . '/template/main-nav.php' );
 				<?php
 			}
 			?>
+			
+			<section class="section experience-section" id="experience">
+				<div class="section-heading heading">
+					<h2>Experience</h2>
+				</div>
+				
+				<div class="section-content">
+					<ul class="job-list">
+						<?php
+						foreach( get_employment() as $e ) {
+							$company_name = $e['company_name'];
+							$job_title = $e['job_title'];
+							$start = $e['start'];
+							$end = $e['end'];
+							$description = $e['description'];
+							
+							$date_range = date( 'Y', $start ) . ' – ' . ($end ? date( 'Y', $end ) : 'Current');
+							if ( date('Y', $start) === date('Y', $end) ) {
+								$date_range = date( 'Y', $start );
+							}
+							?>
+							<li class="job">
+								<div class="heading">
+									<h3 class="job-title"><?php echo $job_title; ?></h3>
+									<?php if ( $company_name ) { ?>
+										<h4 class="h-regular company"><?php echo $company_name; ?></h4>
+									<?php } ?>
+								</div>
+								
+								<div class="date"><?php echo $date_range; ?></div>
+								
+								<?php if ( $description ) { ?>
+									<div class="content">
+										<?php echo $description; ?>
+									</div>
+								<?php } ?>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+				</div>
+			</section>
 			
 			<section class="section contact-section" id="contact">
 				<div class="section-heading heading">

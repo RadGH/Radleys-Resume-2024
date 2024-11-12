@@ -318,6 +318,17 @@ return array(
 	
 	'projects' => array(
 		array(
+			'title' => 'Impact Truck Repair',
+			'date' => strtotime('2024-11-11'),
+			'url' => 'https://impactrepair.com/',
+			'github_url' => false,
+			'image' => '/assets/websites/impact-repair.png',
+			'description' => 'Complete website built using the Full Site Editor (Block Editor).',
+			'credits' => false,
+			'agency' => false,
+			'tags' => ['theme', 'acf', 'block-theme'],
+		),
+		array(
 			'title' => 'RS Font Awesome 5',
 			'date' => strtotime('2024-04-19'),
 			'url' => false,

@@ -131,15 +131,16 @@ return array(
 	// Employment History
 	'employment' => array(
 		array(
-			'job_title' => 'Front-End Developer and Support Specialist',
+			'job_title' => 'Technical Director / Tech Lead',
 			'company_name' => 'Alchemy + Aim',
-			'start' => strtotime('2017-09-01'),
+			'start' => strtotime('2025-04-01'),
 			'end' => null,
 			'description' => '
 				<ul>
-					<li>Complete custom WordPress builds from a design PSD.</li>
-					<li>Coordinating with team members, designers and clients.</li>
-					<li>Offering customer support through an email ticketing system, and occasional phone/online meetings.</li>
+					<li>Leading technical strategy meetings with prospective clients to discover and understand their needs.</li>
+					<li>Supporting other developers by providing assistance developing plugins, working with Git/GitHub, and ensuring custom plugins are available for automatic updates.</li>
+					<li>Delegating tasks to other developers, acting as a sort-of-project-manager while still doing development as well.</li>
+					<li>Building custom plugins for advanced integrations.</li>
 				</ul>
 			',
 		),
@@ -150,9 +151,22 @@ return array(
 			'end' => null,
 			'description' => '
 				<ul>
-					<li>Sourcing clients, discussing needs, writing estimates and proposals.</li>
-					<li>Web development, hosting, and related services.</li>
-					<li>Developing websites with custom themes, custom plugins, analytics, SEO, and so on.</li>
+					<li>Providing web development, hosting, and related services.</li>
+					<li>Developing websites with custom themes, custom plugins, analytics, and SEO.</li>
+				</ul>
+			',
+		),
+		array(
+			'job_title' => 'Front-End Developer',
+			'company_name' => 'Alchemy + Aim',
+			'start' => strtotime('2017-09-01'),
+			'end' => strtotime('2025-03-31'),
+			'description' => '
+				<ul>
+					<li>Complete custom WordPress builds from a design (PSD or Figma).</li>
+					<li>Coordinating with team members, designers and clients.</li>
+					<li>Offering customer support through an email ticketing system, and occasional phone/online meetings.</li>
+					<li>Built custom plugins for a variety of purposes including for e-Commerce (WooCommerce).</li>
 				</ul>
 			',
 		),

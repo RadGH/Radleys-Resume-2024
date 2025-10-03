@@ -3,7 +3,7 @@
 return array(
 	
 	// Profile
-	'name' => 'Radley Sustaire',
+	'name' => 'Radley Sustaire (@RadGH)',
 	'email' => 'radleygh@gmail.com',
 	'image' => '/assets/radley-sustaire.jpg',
 	'job_title' => 'WordPress Developer',

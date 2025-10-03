@@ -593,7 +593,6 @@ General
 @media ( min-width: 1200.1px ) {
 	.site-header {
 		grid-template-columns: 2fr 4fr;
-		max-width: 950px;
 		margin-left: auto;
 		margin-right: auto;
 	}

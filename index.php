@@ -12,7 +12,6 @@ if ( str_contains( $_SERVER['HTTP_HOST'], 'radgh.com' ) ) {
 require_once( __DIR__ . '/utility.php' );
 
 require_once( __DIR__ . '/template/header.php' );
-require_once( __DIR__ . '/template/main-nav.php' );
 ?>
 
 <div class="site">
@@ -55,6 +54,10 @@ require_once( __DIR__ . '/template/main-nav.php' );
 		</div>
 	
 	</header>
+	
+	<?php
+	require_once( __DIR__ . '/template/main-nav.php' );
+	?>
 	
 	<main class="site-body">
 		

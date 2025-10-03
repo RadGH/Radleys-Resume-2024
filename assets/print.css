@@ -27,7 +27,7 @@
 	.github-list .github-item,
 	.job-list .job,
 	.testimonial-list .testimonial,
-	.project-list .project {
+	.list-cards .list-card-item {
 		page-break-inside: avoid;
 	}
 
@@ -35,6 +35,10 @@
 	section.projects-section,
 	section.github-section {
 		page-break-inside: avoid;
+	}
+
+	.section-heading.heading {
+		background: none;
 	}
 }
 /* End: Only when actually printing the page */

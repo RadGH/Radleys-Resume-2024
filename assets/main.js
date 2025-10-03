@@ -12,6 +12,10 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	const NAV_MENU = document.querySelector('.nav-menu');
 	const NAV_MENU_TOGGLE = document.querySelector('.nav-menu-toggle');
 
+	let api = {
+		update_scroll_indicator: null,
+	};
+
 	function setup_js() {
 		// Show all elements with "hide-if-no-js" (by disabling those styles)
 		document.querySelector('#hide-if-no-js-style').setAttribute('media', 'none');
@@ -323,6 +327,14 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		recalculate_sections();
 		update_scroll_indicator();
 		activate_sections();
+
+		// After a brief delay of loading, update the positioning again
+		setTimeout(function() {
+			update_scroll_indicator();
+		}, 1000);
+
+		// Expose functions for external access
+		api.update_scroll_indicator = update_scroll_indicator;
 	};
 	
 	const setup_click_message_popup = function() {
@@ -462,6 +474,66 @@ document.addEventListener( 'DOMContentLoaded', function() {
 		}
 	}
 
+	const setup_main_nav_scroll = function() {
+
+		// Variables
+		let scrolled_to_body = null;
+		let siteBodyTop = 0;
+
+		// Elements
+		const siteBody = document.querySelector( '.site-body' );
+
+		// If there is no .site-body element, exit
+		if ( !siteBody ) {
+			if ( console && console.warn ) {
+				console.warn('No .site-body element found for setup_main_nav_scroll()');
+			}
+			return;
+		}
+
+		// Callbacks
+		function recalculate_positions() {
+			if ( scrolled_to_body ) {
+				siteBodyTop = siteBody.offsetTop;
+			}else {
+				siteBodyTop = siteBody.getBoundingClientRect().top + window.scrollY;
+			}
+		}
+
+		function check_scroll_position() {
+			const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+			if ( scrollPosition >= siteBodyTop ) {
+				if ( scrolled_to_body !== true ) {
+					scrolled_to_body = true;
+					document.body.classList.add('scrolled-to-body');
+					recalculate_positions();
+				}
+			} else {
+				if ( scrolled_to_body !== false ) {
+					document.body.classList.remove('scrolled-to-body');
+					scrolled_to_body = false;
+					recalculate_positions();
+
+					// Update scroll indicator because the positioning might change
+					if ( !! api.update_scroll_indicator ) {
+						api.update_scroll_indicator();
+					}
+				}
+			}
+		}
+
+		// Setup
+		recalculate_positions();
+		check_scroll_position();
+
+		// Event listeners
+		window.addEventListener( 'resize', recalculate_positions );
+
+		window.addEventListener( 'scroll', check_scroll_position );
+		window.addEventListener( 'resize', check_scroll_position );
+	};
+
 	setup_js();
 
 	setup_color_mode();
@@ -477,5 +549,7 @@ document.addEventListener( 'DOMContentLoaded', function() {
 	setup_isotope();
 
 	setup_filters();
+
+	setup_main_nav_scroll();
 
 });

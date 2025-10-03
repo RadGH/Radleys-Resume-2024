@@ -20,6 +20,8 @@
 		
 		<li><a href="#projects" class="nav-section">Projects</a></li>
 		
+		<li><a href="#plugins" class="nav-section">Plugins</a></li>
+		
 		<li><a href="#testimonials" class="nav-section">Testimonials</a></li>
 		
 		<?php

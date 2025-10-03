@@ -698,7 +698,7 @@ ul.list-cards > li {
 /* End: Github repos list */
 
 /* Projects */
-ul.project-list .image::after {
+ul.list-cards .image::after {
 	content: '';
 	display: block;
 	position: absolute;
@@ -710,19 +710,19 @@ ul.project-list .image::after {
 	z-index: 2;
 }
 
-ul.project-list .image {
+ul.list-cards .image {
 	position: relative;
 }
 
-.project-list .credits {
+.list-cards .credits {
 	color: var(--red-5);
 }
 
-.project-list .credits p {
+.list-cards .credits p {
 	font-size: var(--font-size--small);
 }
 
-.project-list .credits a:not(:hover, :focus-visible) {
+.list-cards .credits a:not(:hover, :focus-visible) {
 	color: var(--red-5);
 }
 /* End: Projects */
@@ -775,15 +775,15 @@ Timeline:
 /* End: Tooltip toasts */
 
 /* Project filter links */
-.project-filters span.filter-label,
-.project-filters a {
+.filter-group span.filter-label,
+.filter-group a {
 	display: inline-block;
 	font-weight: 400;
 	padding: 5px 0;
 	text-decoration: none;
 }
 
-.project-filters a.filter.active {
+.filter-group a.filter.active {
 	font-weight: 700;
 	border-bottom-color: currentColor;
 }

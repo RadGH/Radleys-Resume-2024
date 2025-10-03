@@ -596,72 +596,72 @@ ul.stats li .btn {
 /* End: Stats List */
 
 /* Projects */
-ul.project-list,
-ul.project-list li {
+ul.list-cards,
+ul.list-cards li {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
-ul.project-list {
+ul.list-cards {
 	display: grid;
 	gap: var( --spacing--x-large ) var( --spacing--large );
 	align-items: flex-start;
 }
 
-ul.project-list li {
+ul.list-cards li {
 	display: grid;
 	gap: var( --spacing--medium );
 }
 
-ul.project-list .image img {
+ul.list-cards .image img {
 	width: 100%;
 	height: auto;
 }
 
 @media ( min-width: 640.1px ) {
-	ul.project-list {
+	ul.list-cards {
 		grid-template-columns: 1fr 1fr;
 	}
 }
 
 @media ( min-width: 320.1px ) {
-	ul.project-list .image {
+	ul.list-cards .image {
 		margin: calc(-1.1 * var(--spacing--medium)) calc(-1 * var(--spacing--medium)) 0;
 	}
 
-	ul.project-list .heading {
+	ul.list-cards .heading {
 		/*grid-column: 1 / 3;*/
 		align-content: center;
 		display: grid;
 	}
 
-	ul.project-list .content {
+	ul.list-cards .content {
 		/*grid-column: 1 / 3;*/
 	}
 
-	.project-list .heading {
+	.list-cards .heading {
 	}
 }
 
 /* Projects with Isotope filtering loaded */
-ul.project-list.isotope-active {
+ul.list-cards.isotope-active {
 	position: relative;
 	display: block;
 }
 
-ul.project-list.isotope-active .project {
+ul.list-cards.isotope-active .list-card-item {
 	margin: 0 0 40px;
 	width: 100%;
 }
 
 @media ( min-width: 640.1px ) {
-	ul.project-list.isotope-active {
+	ul.list-cards.isotope-active {
 		margin-left: calc( -1 * 1.25vw );
 		margin-right: calc( -1 * 1.25vw );
 	}
 
-	ul.project-list.isotope-active .project {
+	ul.list-cards.isotope-active .list-card-item {
 		position: relative;
 		width: calc( 50% - 2.5vw );
 		margin: 0 1.25vw 40px;
@@ -669,14 +669,14 @@ ul.project-list.isotope-active .project {
 }
 
 /* Print view */
-html.print .project-list.isotope-active {
+html.print .list-cards.isotope-active {
 	height: auto !important;
 	display: grid !important;
 	gap: 0;
 	grid-template-columns: 1fr 1fr;
 }
 
-html.print .project-list.isotope-active .project {
+html.print .list-cards.isotope-active .list-card-item {
 	position: static !important;
 	width: auto;
 }
@@ -698,27 +698,27 @@ html.print .project-list.isotope-active .project {
 	border-bottom: 0;
 }
 
-.project-filters .filter-list {
+.filter-group .filter-list {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 10px;
 }
 
-.project-filters a {
+.filter-group a {
 	white-space: nowrap;
 }
 
 @media ( max-width: 1024px ) {
-	.project-filters .filter-list {
+	.filter-group .filter-list {
 	}
 
-	.project-filters .filter-list a.filter {
+	.filter-group .filter-list a.filter {
 		margin-right: 10px;
 	}
 }
 
 @media ( min-width: 1024.1px ) {
-	.project-filters .filter-list {
+	.filter-group .filter-list {
 		flex-direction: row;
 		justify-content: space-evenly;
 	}

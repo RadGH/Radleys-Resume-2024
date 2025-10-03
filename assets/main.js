@@ -385,6 +385,14 @@ document.addEventListener( 'DOMContentLoaded', function() {
 				'item_selector': '.project',
 				'class_prefix': 'tag-',
 				'count_selector': '.project-count',
+			},
+			{
+				'filter_container': '.plugin-filters .filter-list',
+				'filter_selector': '.filter',
+				'item_container': '.plugin-list',
+				'item_selector': '.plugin',
+				'class_prefix': 'tag-',
+				'count_selector': '.plugin-count',
 			}
 		];
 

@@ -122,7 +122,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 					<h2>Projects (<span class="project-count"><?php echo count(get_projects()); ?></span>)</h2>
 					
 					<div class="section-tools hide-if-no-js">
-						<div class="project-filters">
+						<div class="project-filters filter-group">
 							<div class="filter-list">
 								<span class="filter-label">Filter: </span>
 								<a href="#projects" data-filter="*" class="filter">All</a>
@@ -166,6 +166,7 @@ require_once( __DIR__ . '/template/main-nav.php' );
 							$image_size = @getimagesize( $image_path );
 							
 							$classes = array('project');
+							$classes[] = 'list-card-item';
 							foreach( $tags as $tag ) $classes[] = 'tag-' . $tag;
 							
 							$atts = '';
@@ -227,6 +228,99 @@ require_once( __DIR__ . '/template/main-nav.php' );
 									
 									<?php if ( ! $url && ! $github_url ) { ?>
 										<li><a href="#" class="btn btn-disabled tooltip" title="<?php echo $not_available_message; ?>">Not Available</a></li>
+									<?php } ?>
+									
+									<?php if ( $time_since ) { ?>
+										<li><a class="btn btn-text btn-narrow tooltip" title="Created in <?php echo $date_formatted; ?>"><i class="far fa-calendar"></i> <?php echo $time_since; ?> ago</a></li>
+									<?php } ?>
+								</ul>
+							</li>
+							<?php
+						}
+						?>
+					</ul>
+				</div>
+			</section>
+			
+			<section class="section plugins-section" id="plugins">
+				<div class="section-heading heading">
+					<h2>Plugins (<span class="plugin-count"><?php echo count(get_plugins()); ?></span>)</h2>
+					
+					<div class="section-tools hide-if-no-js">
+						<div class="plugin-filters filter-group">
+							<div class="filter-list">
+								<span class="filter-label">Filter: </span>
+								<a href="#plugins" data-filter="*" class="filter">All</a>
+								<?php
+								foreach( get_plugin_tags() as $key => $tag ) {
+									if ( isset($tag['hide_filter']) && $tag['hide_filter'] ) continue;
+									
+									$slug = $tag['slug'];
+									$title = $tag['name'];
+									?>
+									<a href="#plugins" data-filter="<?php echo esc_attr($slug); ?>" class="filter"><?php echo esc_html($title); ?></a>
+									<?php
+								}
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="section-content">
+					
+					<ul class="plugin-list list-cards">
+						<?php
+						foreach( get_plugins() as $p ) {
+							
+							$title = $p['title']['rendered'];
+							$url = $p['link'];
+							$image_url = $p['zingmap_plugin']['featured_image_url'];
+							$github_url = $p['zingmap_plugin']['github_url'];
+							$description = $p['zingmap_plugin']['summary'] ?: $p['content']['rendered'];
+							$date = $p['zingmap_plugin']['release_date'] ?: $p['date'];
+							$tags = $p['zingmap_plugin']['tags'];
+							
+							if ( $date ) {
+								$ts = strtotime( $date );
+								$date_formatted = date( 'F Y', $ts );
+								$time_since = time_since( $ts );
+							}else{
+								$date_formatted = '';
+								$time_since = '';
+							}
+							
+							$classes = array('plugin');
+							$classes[] = 'list-card-item';
+							foreach( $tags as $tag ) $classes[] = 'tag-' . $tag['slug'];
+							
+							$atts = '';
+							$atts .= 'alt="Featured image for plugin ' . $title . '" ';
+							?>
+							<li class="<?php echo esc_attr(implode(' ', $classes)); ?>">
+								<?php if ( $image_url ) { ?>
+									<div class="image"><img src="<?php echo esc_attr($image_url); ?>" <?php echo trim($atts); ?>></div>
+								<?php } ?>
+								
+								<div class="heading">
+									<h3 class="h2b name"><?php echo $title; ?></h3>
+								</div>
+								
+								<?php if ( $description ) { ?>
+									<div class="content">
+										<div class="description">
+											<p><?php echo $description; ?></p>
+										</div>
+									</div>
+								<?php } ?>
+								
+								<ul class="stats stats-minor">
+									<?php if ( $url ) { ?>
+										<li><a href="<?php echo $url; ?>" class="btn" target="_blank">Visit Website</a></li>
+									<?php } ?>
+									
+									<?php if ( $github_url ) { ?>
+										<li><a href="<?php echo $github_url; ?>" class="btn btn-secondary" target="_blank"><i class="fab fa-github"></i> Repository</a></li>
 									<?php } ?>
 									
 									<?php if ( $time_since ) { ?>

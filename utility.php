@@ -4,6 +4,7 @@ define( 'RESUME_PATH', __DIR__ );
 define( 'RESUME_URL', 'https://' . $_SERVER['HTTP_HOST'] . '/resume' );
 
 require_once( RESUME_PATH . '/github.php' );
+require_once( RESUME_PATH . '/plugins.php' );
 
 // Get the version based on the last modified date of the files
 function get_version() {
@@ -85,7 +86,7 @@ function get_year( $time ) {
 	return date( 'Y', $time );
 }
 
-// Convert a date to a human-readable format such as "3 days ago"
+// Convert a numeric timestamp to a human-readable format such as "3 days ago"
 function time_since( $time ) {
 	$diff = time() - $time;
 	
@@ -169,4 +170,12 @@ function esc_attr( $str ) {
 
 function esc_html( $str ) {
 	return htmlspecialchars( $str, ENT_QUOTES );
+}
+
+function get_plugins() {
+	return Plugins::get_plugins();
+}
+
+function get_plugin_tags() {
+	return Plugins::get_plugin_tags();
 }
